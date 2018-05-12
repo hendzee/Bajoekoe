@@ -53,9 +53,9 @@
               <dt>Subtotal</dt>
               <dd><strong>Rp.<?=$this->cart->total()?></strong></dd>
               <dt>Shipping</dt>
-              <dd>$20.00</dd>
+              <dd>-</dd>
               <dt class="total-price">Order total</dt>
-              <dd class="total-price"><strong>$109.00</strong></dd>
+              <dd class="total-price"><strong>Rp.<?=$this->cart->total()?></strong></dd>
           </dl>
           </section>
         </div>
@@ -92,8 +92,7 @@
               
               <p>
                   email: <?=$dt_email?><br/>
-                  telepon: <?=$dt_phone?><br/>
-                  <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dab0b5b2b4f4beb5bf9abdb7bbb3b6f4b9b5b7">[email&#160;protected]</a><br>                  
+                  telepon: <?=$dt_phone?><br/>                  
               </p>
           </section>                      
           <section class="checkout checkout-step-3 checkout-step-current element-emphasis-strong clearfix">

@@ -96,66 +96,7 @@
                                     <td class="text-right">
                                         <strong>Rp.<?=$this->cart->total()?></strong>
                                     </td>
-                                </tr>
-                                <tr>
-                                    <th>Shipping</th>
-                                    <td class="text-right">
-                                        <button type="button" class="btn btn-link shipment-calc-toggle">Calculate</button>
-                                    </td>
-                                </tr>
-                                <tr class="shipment-calc">
-                                    <td colspan="2">
-                                        <div class="form-group">
-                                            <label for="country" class="sr-only">Country</label>
-                                            <select class="chosen chosen-select-deselect form-control" id="country" data-placeholder="Select your country" tabindex="1">
-                                                <option value=""> </option>
-                                                <option value="United Kingdom">United Kingdom</option>
-                                                <option value="United States">United States</option>
-                                                <option value="Afghanistan">Afghanistan</option>
-                                                <option value="Aland Islands">Aland Islands</option>
-                                                <option value="Albania">Albania</option>
-                                                <option value="Algeria">Algeria</option>
-                                                <option value="American Samoa">American Samoa</option>
-                                                <option value="Andorra">Andorra</option>
-                                                <option value="Angola">Angola</option>
-                                                <option value="Anguilla">Anguilla</option>
-                                                <option value="Antarctica">Antarctica</option>
-                                                <option value="Antigua and Barbuda">Antigua and Barbuda</option>
-                                                <option value="Argentina">Argentina</option>
-                                                <option value="Armenia">Armenia</option>
-                                                <option value="Aruba">Aruba</option>
-                                            </select>
-                                            <label for="state" class="sr-only">State</label>
-                                            <select class="chosen chosen-select-deselect form-control" id="state" data-placeholder="Select your state" tabindex="1">
-                                                <option value=""> </option>
-                                                <option value="">Alaska</option>
-                                                <option value="">Arizona</option>
-                                                <option value="">Arkansas</option>
-                                                <option value="">California</option>
-                                                <option value="">Colorado</option>
-                                                <option value="">Connecticut</option>
-                                                <option value="">Delaware</option>
-                                                <option value="">Florida</option>
-                                                <option value="">Georgia</option>
-                                                <option value="">Hawaii</option>
-                                                <option value="">Idaho</option>
-                                                <option value="">Illinois</option>
-                                                <option value="">Indiana</option>
-                                                <option value="">Iowa</option>
-                                                <option value="">Kansas</option>
-                                                <option value="">Kentucky</option>
-                                            </select>
-                                            <label for="postal-code" class="sr-only">Postal code / Zip code</label>
-                                            <input type="text" class="form-control" id="postal-code" placeholder="Postal code / Zip code">
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr class="order-total">
-                                    <th>Total Pembayaran</th>
-                                    <td class="text-right">
-                                        $89.00
-                                    </td>
-                                </tr>
+                                </tr>                                
                             </tbody>
                         </table>
                     </div>

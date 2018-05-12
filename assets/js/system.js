@@ -16,7 +16,7 @@ $(document).ready(function(){
         const color = $("#color-selector").val();
         const id_item = $("#id-selector").val();                                 
                         
-        let halo = "";        
+        let data_combo = "";        
 
         $.ajax({
             url: method_url,
@@ -33,11 +33,11 @@ $(document).ready(function(){
                 $("#size-selector").empty()
 
                 for(let counter=0; counter < response['size'].length; counter++){
-                    halo = $('<option></option>')
+                    data_combo = $('<option></option>')
                         .attr("value", response['size'][counter]['size'])
                         .text(response['size'][counter]['size']);
 
-                    $("#size-selector").append(halo)
+                    $("#size-selector").append(data_combo)
                 }
                                 
                 $("#size-selector").trigger("chosen:updated");                
@@ -57,5 +57,6 @@ $(document).ready(function(){
 
             alert("Password tidak sama dengan konfirmasi password");
         }        
-    })
+    });
+   
 })

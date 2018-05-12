@@ -45,8 +45,8 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <td class="width20"> Order No. </td>
-                                <td> Order Date </td>
+                                <td class="width20"> ID Pesan </td>
+                                <td> Tanggal Pesan </td>
                                 <td> Total </td>
                                 <td> Status </td>
                                 <td class="text-right width13"> Details </td>

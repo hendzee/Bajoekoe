@@ -1,4 +1,4 @@
-<section id="Content" role="main">
+<section id="Content" class="shiping" role="main">
     <div class="container">
 
         <!-- SECTION EMPHASIS 1 -->
@@ -61,9 +61,9 @@
                         <dt>Subtotal</dt>
                         <dd><strong>Rp.<?=$this->cart->total()?></strong></dd>
                         <dt>Shipping</dt>
-                        <dd>$20.00</dd>
+                        <dd>-</dd>
                         <dt class="total-price">Order total</dt>
-                        <dd class="total-price"><strong>$109.00</strong></dd>
+                        <dd class="total-price"><strong>Rp.<?=$this->cart->total()?></strong></dd>
                     </dl>
                 </section>
             </div>
@@ -93,7 +93,7 @@
                             <input type="email" class="form-control" id="email" name="email" required>
                         </div>
                         <div class="form-group">
-                            <label for="phone">Phone</label>
+                            <label for="phone">Telepon</label>
                             <input type="text" class="form-control" id="phone" name="phone" required>
                         </div>
                         <div class="form-group">
@@ -352,19 +352,19 @@
                                 <option value="Zambia">Zambia</option>
                                 <option value="Zimbabwe">Zimbabwe</option>
                             </select>
-                        </div>                        
+                        </div>
                         <div class="form-group">
-                            <label for="street-address">Alamat</label>
-                            <input type="text" class="form-control" id="street-address" name="address" placeholder="Street address" required>                            
+                            <label for="region">Provinsi <small class="explanation"></small></label>
+                            <input type="text" class="form-control" id="region" name="province" required>                            
                         </div>
                         <div class="form-group">
                             <label for="city">Kota</label>
                             <input type="text" class="form-control" id="city" name="city" required>
-                        </div>
+                        </div>                                                
                         <div class="form-group">
-                            <label for="region">Provinsi <small class="explanation"></small></label>
-                            <input type="text" class="form-control" id="region" name="province" required>
-                        </div>
+                            <label for="street-address">Alamat</label>
+                            <input type="text" class="form-control" id="street-address" name="address" placeholder="Street address" required>                            
+                        </div>                        
                         <div class="form-group">
                             <label for="zip-code">Kode Pos</label>
                             <input type="text" class="form-control" id="zip-code" name="zip-code" required>

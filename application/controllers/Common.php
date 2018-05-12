@@ -475,9 +475,9 @@ class Common extends CI_Controller {
         $this->load->view('footer/footer_script');
     }    
 
-    // ============
+    // ==============================
     // create order
-    // ============
+    // ==============================
     public function create_order(){        
         $id_order = $this->Database->create_id('order_list');
         $id_customer = '';
@@ -699,9 +699,9 @@ class Common extends CI_Controller {
         redirect('Common/page_select/home');
     }
 
-    // =================
+    // ==============================
     // register customer
-    // =================
+    // ==============================
     public function member_register(){
         $id_customer = $this->Database->create_id('customer_member');
         $email = $this->input->post('email');
@@ -818,5 +818,5 @@ class Common extends CI_Controller {
         $this->session->set_flashdata('msg', $msg);
         redirect('Common/page_select/account_profile');
         
-    }
+    }   
 }
