@@ -34,7 +34,7 @@
       <!-- !FLEXSLIDER SLIDE -->
       <!-- FLEXSLIDER SLIDE -->
       <li style="background-image: url(<?=base_url()?>assets/images/demo-content/home-slider-1.jpg); min-height: 560px">
-          <div class="container">
+          <!-- <div class="container">
               <div class="row">
                   <div class="col-sm-5 col-sm-offset-7">
                       <br><br>
@@ -48,7 +48,7 @@
                       </div>
                   </div>
               </div>
-          </div>
+          </div> -->
       </li>
       <!-- !FLEXSLIDER SLIDE -->
 

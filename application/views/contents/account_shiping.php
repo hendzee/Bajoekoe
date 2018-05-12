@@ -35,7 +35,7 @@
                         <li><a href="<?=base_url()?>index.php/Common/page_select/account_profile">Profil</a></li>
                         <li><a href="<?=base_url()?>index.php/Common/page_select/account_order">Pesananku</a></li>
                         <li class="active"><span>Alamat Pengiriman</span></li>          
-                        <li><a href="index-2.html">Logout</a></li>
+                        <li><a href="<?=base_url()?>index.php/Common/logout">Logout</a></li>
                     </ul>
                 </nav>
             </div>
