@@ -67,7 +67,7 @@
 
     <div class="navbar-collapse navbar-main-collapse" role="navigation">
       <ul class="nav navbar-nav">
-        <li class="active dropdown">
+        <li class="<?if($active_nav == 'product')echo'active'?> dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Produk <b class="caret"></b></a>
           <ul class="dropdown-menu">            
             <li>
@@ -83,7 +83,7 @@
             <li><a href="<?=base_url()?>index.php/Common/page_select/product_list">Semua</a></li>
           </ul>
         </li>
-        <li class="dropdown">
+        <li class="<?if($active_nav == 'brand')echo'active'?> dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Brand <b class="caret"></b></a>
           <ul class="dropdown-menu">            
             <?foreach($nav_brand as $val):?>
@@ -95,7 +95,7 @@
             <?endforeach?>
           </ul>
         </li>        
-        <li class="dropdown">
+        <li class="<?if($active_nav == 'category')echo'active'?> dropdown">
           <a href="11-a-portfolio-4-columns.html" class="dropdown-toggle" data-toggle="dropdown">Jenis <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <?foreach($nav_category as $val):?>
@@ -107,7 +107,7 @@
             <?endforeach?>
           </ul>
         </li>      
-        <li>
+        <li class="<?if($active_nav == 'sale')echo'active'?>">
           <a href="<?=base_url()?>index.php/Common/product_list_param/sale/100">
             Sale
           </a>

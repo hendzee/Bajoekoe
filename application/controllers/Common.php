@@ -8,11 +8,15 @@ class Common extends CI_Controller {
 	{
 		$this->page_select('home');
     }
-    
+
+    // =====================
+    // selecting normal page
+    // =====================
     public function page_select($page){
         $data = array();
         $nav_brand = array();
         $nav_category = array();
+        $active_nav = 'product';
 
         $nav_brand = $this->Database->get_data('brand_table');
         $nav_category = $this->Database->get_data('categories_table');
@@ -24,7 +28,7 @@ class Common extends CI_Controller {
                 $data = $this->Database->all_query($query);
                 break;
             
-            case 'product_list':                                
+            case 'product_list':                                                
                 $query = "SELECT * FROM items_table INNER JOIN image_item using (id_item)";
                 
                 $data['data_items'] = $this->Database->all_query($query);
@@ -32,7 +36,7 @@ class Common extends CI_Controller {
                 $data['data_colors'] = $this->Database->get_data('colors_table');
                 break;
 
-            case 'shoping_cart':
+            case 'shoping_cart':                
                 if ($this->cart->total_items() < 1){
                     $page = 'empty_cart';
                 }
@@ -141,35 +145,44 @@ class Common extends CI_Controller {
         $this->load->view('header/header_script');
         $this->load->view('header/header', array(
             'nav_brand' => $nav_brand,
-            'nav_category' => $nav_category));
+            'nav_category' => $nav_category,
+            'active_nav' => $active_nav));
         $this->load->view('contents/'.$page, array('data_content' => $data));
         $this->load->view('footer/footer');
         $this->load->view('footer/footer_script');
     }
 
+    // =======================================
+    // selecting product lis based on category, 
+    // brand or gender
+    // =======================================
     public function product_list_param($param, $value){
         $data = array();
         $nav_brand = array();
         $nav_category = array();
+        $active_nav = 'product';
         $query = "";
 
         $nav_brand = $this->Database->get_data('brand_table');
         $nav_category = $this->Database->get_data('categories_table');
 
         switch($param){
-            case 'gender':
+            case 'gender':            
             $query = "SELECT * FROM items_table INNER JOIN image_item using (id_item) WHERE gender='$value'";
             break;
 
             case 'brand':
+            $active_nav = 'brand';
             $query = "SELECT * FROM items_table INNER JOIN image_item using (id_item) WHERE brand='$value'";
             break;
 
             case 'category':
+            $active_nav = 'category';
             $query = "SELECT * FROM items_table INNER JOIN image_item using (id_item) WHERE category='$value'";
             break;
 
             case 'sale':
+            $active_nav = 'sale';
             $query = "SELECT * FROM items_table INNER JOIN image_item using (id_item) WHERE discount > 0";
             break;            
         }                
@@ -181,16 +194,22 @@ class Common extends CI_Controller {
         $this->load->view('header/header_script');
         $this->load->view('header/header', array(
             'nav_brand' => $nav_brand,
-            'nav_category' => $nav_category));
+            'nav_category' => $nav_category,
+            'active_nav' => $active_nav));
         $this->load->view('contents/product_list', array('data_content' => $data));
         $this->load->view('footer/footer');
         $this->load->view('footer/footer_script');
     }
 
+    // =========================================
+    // searching product list based on category, 
+    // brand or gender
+    // =========================================
     public function search_product_list(){
         $data = array();
         $nav_brand = array();
         $nav_category = array();
+        $active_nav = 'product';
         $query = "";
         $value = $this->input->post('value');
 
@@ -205,17 +224,22 @@ class Common extends CI_Controller {
         $this->load->view('header/header_script');
         $this->load->view('header/header', array(
             'nav_brand' => $nav_brand,
-            'nav_category' => $nav_category));
+            'nav_category' => $nav_category,
+            'active_nav' => $active_nav));
         $this->load->view('contents/product_list', array('data_content' => $data));
         $this->load->view('footer/footer');
         $this->load->view('footer/footer_script');
     }
 
+    // ====================
+    // preview product list
+    // ====================
     public function page_single_product($id_item, $color){
         $data = array();
         $data_color = array();
         $data_size = array();
         $nav_brand = array();
+        $active_nav = 'product';
         $nav_category = array();
         $first_color = $color;
 
@@ -237,7 +261,8 @@ class Common extends CI_Controller {
         $this->load->view('header/header_script');
         $this->load->view('header/header', array(
             'nav_brand' => $nav_brand,
-            'nav_category' => $nav_category));
+            'nav_category' => $nav_category,
+            'active_nav' => $active_nav));
         $this->load->view('contents/single_product', array(
             'first_color' => $first_color,
             'data_content' => $data,
@@ -247,6 +272,9 @@ class Common extends CI_Controller {
         $this->load->view('footer/footer_script');
     }
 
+    // =====================
+    // insert item into cart
+    // =====================
     public function insert_cart(){
         $id = $this->input->post('id-item');
         $name = $this->input->post('item-name');
@@ -324,6 +352,9 @@ class Common extends CI_Controller {
         }        
     }
 
+    // ===================================
+    // remove selected item list from cart    
+    // ===================================
     public function remove_item_cart($rowid, $from){
         $this->cart->update(array(
             'rowid' => $rowid,
@@ -338,6 +369,10 @@ class Common extends CI_Controller {
 
     }
 
+    // =================================
+    // change size and color combobox on 
+    // single page (preview item page)
+    // =================================
     public function ajax_single_product(){
         $id_item = $this->input->post('id_item');
         $color = $this->input->post('color');
@@ -352,6 +387,9 @@ class Common extends CI_Controller {
         echo json_encode($data);
     }
 
+    // ============================
+    // change quantity item on cart
+    // ============================
     public function update_cart(){
         $rowid = $this->input->post('rowid');
         $qty = $this->input->post('qty');
@@ -390,10 +428,15 @@ class Common extends CI_Controller {
         redirect('Common/page_select/shoping_cart');
     }
 
+    // ====================================
+    // handle page shiping_payment data and
+    // edit_shiping_address data
+    // ====================================
     public function page_data_shiping(){
         $data_content = array();
         $nav_brand = array();
-        $nav_category = array();        
+        $nav_category = array();
+        $active_nav = 'product';        
         $page = $this->input->post('page');
         $first_name = $this->input->post('first-name');
         $last_name = $this->input->post('last-name');
@@ -425,12 +468,16 @@ class Common extends CI_Controller {
         $this->load->view('header/header_script');
         $this->load->view('header/header', array(
             'nav_brand' => $nav_brand,
-            'nav_category' => $nav_category));
+            'nav_category' => $nav_category,
+            'active_nav' => $active_nav));
         $this->load->view('contents/'.$page, $data_content);
         $this->load->view('footer/footer');
         $this->load->view('footer/footer_script');
     }    
 
+    // ============
+    // create order
+    // ============
     public function create_order(){        
         $id_order = $this->Database->create_id('order_list');
         $date = date('Y-m-d H:i:s');
@@ -500,10 +547,14 @@ class Common extends CI_Controller {
         redirect('Common/page_order_received/'.$id_order.'/'.date('Y-m-d', strtotime($date)).'/'.$this->cart->total());
     }    
 
+    // =========================================
+    // information that order successful created
+    // =========================================
     public function page_order_received($id_order, $date_order, $total_payment){
         $data = array();
         $nav_brand = array();
         $nav_category = array();
+        $active_nav = 'product';
 
         $nav_brand = $this->Database->get_data('brand_table');
         $nav_category = $this->Database->get_data('categories_table');
@@ -516,7 +567,8 @@ class Common extends CI_Controller {
             $this->load->view('header/header_script');
             $this->load->view('header/header', array(
                 'nav_brand' => $nav_brand,
-                'nav_category' => $nav_category));
+                'nav_category' => $nav_category,
+                'active_nav' => $active_nav));
             $this->load->view('contents/order_received', array(
                 'data_id' => $id_order,
                 'data_date' => $date_order,
@@ -526,6 +578,9 @@ class Common extends CI_Controller {
         }
     }
 
+    // =============================
+    // upload payment check transfer
+    // =============================
     public function payment_check(){
         $id_order = $this->input->post('id-order');
         $transfer_bank = $this->input->post('transfer-bank');
@@ -595,6 +650,9 @@ class Common extends CI_Controller {
         redirect('Common/page_select/payment');
     }
 
+    // =====
+    // login
+    // =====
     public function check_auth(){
         $email = $this->input->post('email');
         $password = $this->input->post('password');        
@@ -628,6 +686,9 @@ class Common extends CI_Controller {
         redirect('Common/page_select/home');
     }
 
+    // =================
+    // register customer
+    // =================
     public function member_register(){
         $email = $this->input->post('email');
         $password = $this->input->post('password');
@@ -667,6 +728,9 @@ class Common extends CI_Controller {
         }
     }
 
+    // =========================================
+    // udate addreess of customer member shiping
+    // =========================================
     public function update_account_shiping(){        
         $member_id = $this->session->userdata('member_id');
         $phone = $this->input->post('phone');
@@ -697,6 +761,9 @@ class Common extends CI_Controller {
         redirect('Common/page_select/account_shiping');
     }
 
+    // ===========================================
+    // update member data profile (name and email)
+    // ===========================================
     public function update_account_profile(){
         $member_id = $this->session->userdata('member_id');
         $first_name = $this->input->post('first-name');
