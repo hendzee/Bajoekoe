@@ -119,11 +119,11 @@
     <!-- SHOP HIGHLIGHT -->
     <!-- VERSION 1 -->
     <div class="shop-item-highlight shop-item-highlight-version-1">
-      <a href="04-shop-product-single.html">
+      <a href="<?=base_url()?>index.php/Common/product_list_param/gender/M">
         <img src="<?=base_url()?>assets/images/demo-content/new_arrival.jpg" alt="Highlighted shop item">
       </a>
 
-      <a href="04-shop-product-single.html" class="item-info-name-data" display="none">
+      <a href="<?=base_url()?>index.php/Common/product_list_param/gender/M" class="item-info-name-data" display="none">
         <div class="item-info-name-data-wrapper">
           <h4>Knit dress with seaming detail</h4>          
         </div>
@@ -138,11 +138,11 @@
     <!-- SHOP HIGHLIGHT -->
     <!-- VERSION 1 -->
     <div class="shop-item-highlight shop-item-highlight-version-1">
-      <a href="04-shop-product-single.html">
+      <a href="<?=base_url()?>index.php/Common/product_list_param/gender/M">
         <img src="<?=base_url()?>assets/images/demo-content/new_arrival2.jpg" alt="Highlighted shop item">
       </a>
 
-      <a href="04-shop-product-single.html" class="item-info-name-data">
+      <a href="<?=base_url()?>index.php/Common/product_list_param/gender/M" class="item-info-name-data">
         <div class="item-info-name-data-wrapper">
           <h4>Midi dress in tapestry print</h4>          
         </div>
@@ -157,11 +157,11 @@
     <!-- SHOP HIGHLIGHT -->
     <!-- VERSION 1 -->
     <div class="shop-item-highlight shop-item-highlight-version-1">
-      <a href="04-shop-product-single.html">
+      <a href="<?=base_url()?>index.php/Common/product_list_param/gender/M">
         <img src="<?=base_url()?>assets/images/demo-content/new_arrival3.jpg" alt="Highlighted shop item">
       </a>
 
-      <a href="04-shop-product-single.html" class="item-info-name-data">
+      <a href="<?=base_url()?>index.php/Common/product_list_param/gender/M" class="item-info-name-data">
         <div class="item-info-name-data-wrapper">
           <h4>Denim overall in dark wash</h4>          
         </div>
