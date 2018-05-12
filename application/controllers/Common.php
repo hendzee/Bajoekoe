@@ -47,8 +47,8 @@ class Common extends CI_Controller {
                     $page = 'empty_cart';
                 }else{
                     if ($this->session->userdata('logged_in') == TRUE){
-                        $member_id = $this->session->userdata('member_id');
-                        $query = "SELECT * FROM customer_member WHERE email = '$member_id'";
+                        $member_email = $this->session->userdata('member_email');
+                        $query = "SELECT * FROM customer_member WHERE email = '$member_email'";
                         $data = $this->Database->all_query($query);
                         $page = 'checkout_logged';
                     }else{
@@ -85,11 +85,11 @@ class Common extends CI_Controller {
                 if($this->session->userdata('logged_in') == TRUE){
                     $member_id = $this->session->userdata('member_id');
 
-                    $query = "SELECT * FROM customer_member WHERE email = '$member_id'";
+                    $query = "SELECT * FROM customer_member WHERE id_customer = '$member_id'";
                     $data['account'] = $this->Database->all_query($query);
 
                     $query = "SELECT *, SUM(price * number_item) AS total_pay FROM order_list INNER JOIN 
-                        order_item USING(id_order) WHERE email_buyer = '$member_id' GROUP BY order_item.id_order";
+                        order_item USING(id_order) WHERE id_customer = '$member_id' GROUP BY order_item.id_order";
                     $data['order_history'] = $this->Database->all_query($query);
 
                     $page = 'account_dashboard';
@@ -102,7 +102,7 @@ class Common extends CI_Controller {
                 if($this->session->userdata('logged_in') == TRUE){
                     $member_id = $this->session->userdata('member_id');
 
-                    $query = "SELECT * FROM customer_member WHERE email = '$member_id'";
+                    $query = "SELECT * FROM customer_member WHERE id_customer = '$member_id'";
                     $data = $this->Database->all_query($query);
 
                     $page = 'account_profile';
@@ -116,7 +116,7 @@ class Common extends CI_Controller {
                     $member_id = $this->session->userdata('member_id');
 
                     $query = "SELECT *, SUM(price * number_item) AS total_pay FROM order_list INNER JOIN 
-                        order_item USING(id_order) WHERE email_buyer = '$member_id' GROUP BY order_item.id_order";
+                        order_item USING(id_order) WHERE id_customer = '$member_id' GROUP BY order_item.id_order";
                     $data = $this->Database->all_query($query);
                     
                     $page = 'account_order';
@@ -129,7 +129,7 @@ class Common extends CI_Controller {
                 if($this->session->userdata('logged_in') == TRUE){
                     $member_id = $this->session->userdata('member_id');
 
-                    $query = "SELECT * FROM customer_member WHERE email = '$member_id'";
+                    $query = "SELECT * FROM customer_member WHERE id_customer = '$member_id'";
                     $data = $this->Database->all_query($query);
                     
                     $page = 'account_shiping';
@@ -480,6 +480,7 @@ class Common extends CI_Controller {
     // ============
     public function create_order(){        
         $id_order = $this->Database->create_id('order_list');
+        $id_customer = '';
         $date = date('Y-m-d H:i:s');
         $first_name = $this->input->post('first-name');
         $last_name = $this->input->post('last-name');
@@ -493,8 +494,16 @@ class Common extends CI_Controller {
         $ship_info = $country.', '.$city.', '.$province.', '.$address.', '.$zip_code;
         $valid = TRUE;
 
+        if($this->session->userdata('logged_in') == TRUE){
+            $member_id = $this->session->userdata('member_id');
+            $id_customer = $this->session->userdata('member_id');
+        }else{
+            $id_customer = 'GUEST';
+        }
+
         $data_order_list = array(
             'id_order' => $id_order,
+            'id_customer' => $id_customer,
             'order_date' => $date,            
             'email_buyer' => $email,
             'first_name' => $first_name,
@@ -650,10 +659,12 @@ class Common extends CI_Controller {
         redirect('Common/page_select/payment');
     }
 
-    // =====
+    // =======================================
     // login
-    // =====
+    // =======================================
     public function check_auth(){
+        $member_id = '';
+        $member_name = '';
         $email = $this->input->post('email');
         $password = $this->input->post('password');        
         $data = array();
@@ -666,17 +677,19 @@ class Common extends CI_Controller {
         if (count($data) > 0){
             foreach($data as $val){
                 $member_name = $val['first_name'];
+                $member_id = $val['id_customer'];
             }
 
             $this->session->set_userdata(array(
                 'logged_in' => TRUE,
-                'member_id' => $email,
+                'member_id' => $member_id,
+                'member_email' => $email,
                 'member_name' => $member_name
             ));
 
             redirect('Common/page_select/home');
         }else{
-            echo 'Who are You ?';
+            redirect('Common/page_select/login');
         }
     }
 
@@ -690,6 +703,7 @@ class Common extends CI_Controller {
     // register customer
     // =================
     public function member_register(){
+        $id_customer = $this->Database->create_id('customer_member');
         $email = $this->input->post('email');
         $password = $this->input->post('password');
         $first_name = $this->input->post('first-name');
@@ -711,6 +725,7 @@ class Common extends CI_Controller {
             redirect('Common/page_select/register');
         }else{
             $this->Database->create_data('customer_member', array(
+                'id_customer' => $id_customer,
                 'email' => $email,
                 'first_name' => $first_name,
                 'last_name' => $last_name,
@@ -720,7 +735,7 @@ class Common extends CI_Controller {
 
             $this->session->set_userdata(array(
                 'logged_in' => TRUE,
-                'member_id' => $email,
+                'member_email' => $email,
                 'member_name' => $first_name
             ));
 
@@ -749,7 +764,7 @@ class Common extends CI_Controller {
             'zip_code' => $zip_code
         );
 
-        $this->Database->update_data('customer_member', $data, array('email' => $member_id));
+        $this->Database->update_data('customer_member', $data, array('id_customer' => $member_id));
 
         $msg =  '<div class="col-xs-12">'                    
                 .'<div class="alert alert-info alert-dismissable">'                    
@@ -766,6 +781,7 @@ class Common extends CI_Controller {
     // ===========================================
     public function update_account_profile(){
         $member_id = $this->session->userdata('member_id');
+        $member_email = $this->session->userdata('member_email');
         $first_name = $this->input->post('first-name');
         $last_name = $this->input->post('last-name');
         $email = $this->input->post('email');
@@ -773,7 +789,7 @@ class Common extends CI_Controller {
         $data = array();
         $msg = '';
 
-        $query = "SELECT * FROM customer_member WHERE email <> '$member_id' AND email = '$email'";
+        $query = "SELECT * FROM customer_member WHERE email <> '$member_email' AND email = '$email'";
         $get_account = $this->Database->all_query($query);
 
         if (count($get_account) > 0){
@@ -789,7 +805,8 @@ class Common extends CI_Controller {
                 'last_name' => $last_name,
             );
 
-            $this->Database->update_data('customer_member', $data, array('email' => $member_id));
+            $this->Database->update_data('customer_member', $data, array('id_customer' => $member_id));
+            $this->session->set_userdata(array('member_email' => $email));
 
             $msg =  '<div class="col-xs-12">'                    
                 .'<div class="alert alert-info alert-dismissable">'                    

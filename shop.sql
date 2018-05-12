@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 12, 2018 at 08:17 AM
+-- Generation Time: May 12, 2018 at 11:17 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -95,6 +95,7 @@ INSERT INTO `colors_table` (`color`, `color_code`) VALUES
 --
 
 CREATE TABLE `customer_member` (
+  `id_customer` varchar(15) NOT NULL,
   `email` varchar(100) NOT NULL,
   `first_name` varchar(45) DEFAULT NULL,
   `last_name` varchar(45) DEFAULT NULL,
@@ -112,9 +113,8 @@ CREATE TABLE `customer_member` (
 -- Dumping data for table `customer_member`
 --
 
-INSERT INTO `customer_member` (`email`, `first_name`, `last_name`, `password`, `member_status`, `country`, `province`, `city`, `address`, `phone`, `zip_code`) VALUES
-('hendras@gmail.com', 'Hendras', 'Prawira', '12345', 'ACTIVE', 'Indonesia', 'Jawa Timur', 'Malang', 'Jl.Dawuan No.15', '085655427339', '65412'),
-('shania.maureen@gmail.com', 'Shania', 'Maureen', 'shanshan', 'ACTIVE', NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `customer_member` (`id_customer`, `email`, `first_name`, `last_name`, `password`, `member_status`, `country`, `province`, `city`, `address`, `phone`, `zip_code`) VALUES
+('mem_001498', 'bakekok@gmail.com', 'Virginia', 'Hendras', '12345', 'ACTIVE', 'Indonesia', 'Jawa Timur', 'Malang', 'Jl.Harapan', '08565542339', '65432');
 
 -- --------------------------------------------------------
 
@@ -201,9 +201,14 @@ CREATE TABLE `order_item` (
 --
 
 INSERT INTO `order_item` (`id_order`, `id_item`, `name`, `color`, `size`, `price`, `number_item`) VALUES
-('order_001662', 'item_002', 'Baju Cewek Kekinian', 'Biru', 'S', 200000, 1),
-('order_001662', 'item_002', 'Baju Cewek Kekinian', 'Biru', 'X', 245000, 1),
-('order_001940', 'item_005', 'Bra', 'Hitam', 'L', 250000, 2);
+('order_002034', 'item_001', '3Second Men Shoes', 'Hijau', 'L', 300000, 2),
+('order_002078', 'item_001', '3Second Men Shoes', 'Hijau', 'XL', 300000, 1),
+('order_002078', 'item_004', '3Second Wave Men', 'Putih', 'XL', 272000, 3),
+('order_002310', 'item_004', '3Second Wave Men', 'Biru', 'L', 272000, 1),
+('order_002576', 'item_001', '3Second Men Shoes', 'Hitam', 'XL', 300000, 1),
+('order_002576', 'item_004', '3Second Wave Men', 'Putih', 'XL', 272000, 3),
+('order_00653', 'item_001', '3Second Men Shoes', 'Hijau', 'XL', 300000, 1),
+('order_00653', 'item_004', '3Second Wave Men', 'Putih', 'XL', 272000, 3);
 
 -- --------------------------------------------------------
 
@@ -213,6 +218,7 @@ INSERT INTO `order_item` (`id_order`, `id_item`, `name`, `color`, `size`, `price
 
 CREATE TABLE `order_list` (
   `id_order` varchar(20) NOT NULL,
+  `id_customer` varchar(15) DEFAULT NULL,
   `order_date` datetime DEFAULT NULL,
   `email_buyer` varchar(75) DEFAULT NULL,
   `first_name` varchar(45) DEFAULT NULL,
@@ -220,16 +226,20 @@ CREATE TABLE `order_list` (
   `phone_buyer` varchar(15) DEFAULT NULL,
   `ship_info` text,
   `bill_info` text,
-  `order_status` varchar(15) DEFAULT NULL
+  `order_status` varchar(15) DEFAULT NULL,
+  `order_listcol` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `order_list`
 --
 
-INSERT INTO `order_list` (`id_order`, `order_date`, `email_buyer`, `first_name`, `last_name`, `phone_buyer`, `ship_info`, `bill_info`, `order_status`) VALUES
-('order_001662', '2018-05-11 01:18:16', 'hendras@gmail.com', 'Rosa', 'Bakekok', '085655427339', 'United States, shania, Jawa Timur, Jl. Foodirman, 870865', NULL, 'NEW ORDER'),
-('order_001940', '2018-05-11 12:50:11', 'hendras@gmail.com', 'Virginia', 'Hendras', '085655427339', 'Indonesia, Malang, Jawa Timur, Jl.Dawuan Tegalgondo, 65412', NULL, 'NEW ORDER');
+INSERT INTO `order_list` (`id_order`, `id_customer`, `order_date`, `email_buyer`, `first_name`, `last_name`, `phone_buyer`, `ship_info`, `bill_info`, `order_status`, `order_listcol`) VALUES
+('order_002034', 'GUEST', '2018-05-12 15:51:04', 'brian@gmail.com', 'Brian', 'Angkasa', '08123380867', 'Indonesia, Malang, Jawa Timur, Rampal Jaya Blok A, No.15, 65412', NULL, 'NEW ORDER', NULL),
+('order_002078', 'mem_001498', '2018-05-12 16:14:40', 'hendras@gmail.com', 'Virginia', 'Hendras', '08565542339', 'Indonesia, Malang, Jawa Timur, Jl.Harapan, 65432', NULL, 'NEW ORDER', NULL),
+('order_002310', 'mem_001498', '2018-05-12 16:16:06', 'hendras@gmail.com', 'Virginia', 'Hendras', '08565542339', 'Indonesia, Malang, Jawa Timur, Jl.Harapan, 65432', NULL, 'NEW ORDER', NULL),
+('order_002576', 'GUEST', '2018-05-12 16:08:48', 'hendras@gmail.com', 'Virginia', 'Hendras', '08565542339', 'Indonesia, Malang, Jawa Timur, Jl.Harapan, 65432', NULL, 'NEW ORDER', NULL),
+('order_00653', 'GUEST', '2018-05-12 16:12:18', 'hendras@gmail.com', 'Virginia', 'Hendras', '08565542339', 'Indonesia, Malang, Jawa Timur, Jl.Harapan, 65432', NULL, 'NEW ORDER', NULL);
 
 -- --------------------------------------------------------
 
@@ -239,6 +249,7 @@ INSERT INTO `order_list` (`id_order`, `order_date`, `email_buyer`, `first_name`,
 
 CREATE TABLE `payment_report` (
   `id_order` varchar(20) NOT NULL,
+  `id_buyer` varchar(15) DEFAULT NULL,
   `transfer_bank` varchar(45) DEFAULT NULL,
   `token_image` varchar(45) DEFAULT NULL,
   `report_date` varchar(45) DEFAULT NULL
@@ -248,8 +259,8 @@ CREATE TABLE `payment_report` (
 -- Dumping data for table `payment_report`
 --
 
-INSERT INTO `payment_report` (`id_order`, `transfer_bank`, `token_image`, `report_date`) VALUES
-('order_004018', 'BCA', 'tok_120.png', '2018-05-08 22:40:32');
+INSERT INTO `payment_report` (`id_order`, `id_buyer`, `transfer_bank`, `token_image`, `report_date`) VALUES
+('order_004018', NULL, 'BCA', 'tok_120.png', '2018-05-08 22:40:32');
 
 -- --------------------------------------------------------
 
@@ -270,19 +281,19 @@ CREATE TABLE `stock_table` (
 --
 
 INSERT INTO `stock_table` (`id_item`, `color`, `size`, `stock`, `add_date`) VALUES
-('item_004', 'Biru', 'L', '10', '2018-03-10 07:07:56'),
+('item_004', 'Biru', 'L', '9', '2018-03-10 07:07:56'),
 ('item_002', 'Biru', 'X', '2', '2015-03-10 07:07:56'),
 ('item_002', 'Biru', 'XL', '10', '2016-05-10 07:07:56'),
-('item_001', 'Hijau', 'L', '4', '2018-12-10 07:07:45'),
-('item_001', 'Hijau', 'XL', '44', '2013-10-10 07:07:56'),
+('item_001', 'Hijau', 'L', '2', '2018-12-10 07:07:45'),
+('item_001', 'Hijau', 'XL', '42', '2013-10-10 07:07:56'),
 ('item_005', 'Hitam', 'L', '2', '2012-10-10 07:07:56'),
 ('item_006', 'Hitam', 'None', '2', '2011-10-10 07:07:56'),
-('item_001', 'Hitam', 'S', '19', '2016-05-10 07:07:56'),
+('item_001', 'Hitam', 'S', '18', '2016-05-10 07:07:56'),
 ('item_005', 'Hitam', 'S', '3', '2016-05-10 07:07:56'),
-('item_001', 'Hitam', 'XL', '20', '2016-05-10 07:07:56'),
+('item_001', 'Hitam', 'XL', '19', '2016-05-10 07:07:56'),
 ('item_003', 'Hitam', 'XL', '5', '2016-05-10 07:07:56'),
 ('item_005', 'Hitam', 'XL', '3', '2016-05-10 07:07:56'),
-('item_004', 'Putih', 'XL', '16', '2016-05-10 07:07:56');
+('item_004', 'Putih', 'XL', '7', '2016-05-10 07:07:56');
 
 --
 -- Indexes for dumped tables
@@ -310,7 +321,9 @@ ALTER TABLE `colors_table`
 -- Indexes for table `customer_member`
 --
 ALTER TABLE `customer_member`
-  ADD PRIMARY KEY (`email`);
+  ADD PRIMARY KEY (`email`,`id_customer`),
+  ADD UNIQUE KEY `email_UNIQUE` (`email`),
+  ADD UNIQUE KEY `customer_id_UNIQUE` (`id_customer`);
 
 --
 -- Indexes for table `image_item`

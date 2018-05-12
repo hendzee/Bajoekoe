@@ -27,17 +27,23 @@ class Database extends CI_Model {
         $preword = '';
         $code_item = rand(120, 4050);
         $get_id = '';        
-        $get_data = array();
+        $get_data = array();        
+        $id = '';
 
         switch($table){
             case 'order_list':
             $preword = 'order_00';
+            $id = 'id_order';
             break;
+
+            case 'customer_member':
+            $preword = 'mem_00';
+            $id = 'id_customer';
         }
 
         do{
             $get_id = $preword.$code_item;
-            $query = "SELECT * FROM order_list WHERE id_order = '$get_id'";
+            $query = "SELECT * FROM $table WHERE $id = '$get_id'";
             $get_data = $this->all_query($query);
 
             if(count($get_data) < 1){

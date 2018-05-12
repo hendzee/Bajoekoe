@@ -42,7 +42,7 @@
             <div class="clearfix visible-xs space-30"></div>
             <div class="col-md-6 col-sm-9 space-left-30">
                 <h2 class="strong-header large-header">Perbaruhi Informasi AKun</h2>
-                <?=form_open('Common/update_account_shiping', 'role="form"')?>
+                <?=form_open('Common/update_account_shiping', 'role="form"')?>                    
                     <?foreach($data_content as $val):?>
                         <div class="form-group">
                             <label for="phone">Telepon</label>
@@ -321,7 +321,7 @@
                             <label for="zip-code">Kode Pos</label>
                             <input type="text" class="form-control" id="zip-code" name="zip-code" value="<?=$val['zip_code']?>" required>
                         </div>                   
-                    <?endforeach?>
+                    <?endforeach?>                    
                     <button type="submit" class="btn btn-primary">Save</button>
                 </form>
             </div>
