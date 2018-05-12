@@ -27,11 +27,12 @@
         <!-- !SECTION EMPHASIS 1 -->
 
         <section class="row">
+            <?=$this->session->flashdata('msg')?>
             <div class="col-sm-3">
                 <nav class="shop-section-navigation element-emphasis-weak">
                     <ul class="list-unstyled">
                         <li><a href="<?=base_url()?>index.php/Common/page_select/account_dashboard">Dashboard</a></li>
-                        <li><a href="<?=base_url()?>index.php/Common/page_select/account_shiping">Profil</a></li>
+                        <li><a href="<?=base_url()?>index.php/Common/page_select/account_profile">Profil</a></li>
                         <li><a href="<?=base_url()?>index.php/Common/page_select/account_order">Pesananku</a></li>
                         <li class="active"><span>Alamat Pengiriman</span></li>          
                         <li><a href="index-2.html">Logout</a></li>
@@ -41,10 +42,10 @@
             <div class="clearfix visible-xs space-30"></div>
             <div class="col-md-6 col-sm-9 space-left-30">
                 <h2 class="strong-header large-header">Perbaruhi Informasi AKun</h2>
-                <form role="form" action="http://decima.html.themewoodmen.com/09-a-shop-account-dashboard.html" method="post" novalidate>
+                <?=form_open('Common/update_account_shiping', 'role="form"')?>
                     <?foreach($data_content as $val):?>
                         <div class="form-group">
-                            <label for="phone">Phone</label>
+                            <label for="phone">Telepon</label>
                             <input type="text" class="form-control" id="phone" name="phone" value="<?=$val['phone']?>" required>
                         </div>
                         <div class="form-group">

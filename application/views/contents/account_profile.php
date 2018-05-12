@@ -27,6 +27,7 @@
         <!-- !SECTION EMPHASIS 1 -->
 
         <section class="row">
+            <?=$this->session->flashdata('msg')?>
             <div class="col-sm-3">
                 <nav class="shop-section-navigation element-emphasis-weak">
                     <ul class="list-unstyled">
@@ -41,19 +42,19 @@
             <div class="clearfix visible-xs space-30"></div>
             <div class="col-md-6 col-sm-9 space-left-30">
                 <h2 class="strong-header large-header">Perbaruhi Informasi AKun</h2>
-                <form role="form" action="http://decima.html.themewoodmen.com/09-a-shop-account-dashboard.html" method="post" novalidate>
+                <?=form_open('Common/update_account_profile', 'role="form"')?>
                     <?foreach($data_content as $val):?>
                         <div class="form-group">
                             <label for="first-name">Nama Depan</label>
-                            <input type="text" class="form-control" id="first-name" value="<?=$val['first_name']?>" required>
+                            <input type="text" class="form-control" id="first-name" name="first-name" value="<?=$val['first_name']?>" required>
                         </div>
                         <div class="form-group">
                             <label for="last-name">Nama Belakang</label>
-                            <input type="text" class="form-control" id="last-name" value="<?=$val['last_name']?>" required>
+                            <input type="text" class="form-control" id="last-name" name="last-name" value="<?=$val['last_name']?>" required>
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" value="<?=$val['email']?>" required>
+                            <input type="email" class="form-control" id="email" name="email" value="<?=$val['email']?>" required>
                         </div>                        
                     <?endforeach?>
                     <button type="submit" class="btn btn-primary">Save</button>

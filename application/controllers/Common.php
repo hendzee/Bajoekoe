@@ -666,4 +666,73 @@ class Common extends CI_Controller {
             redirect('Common/page_select/home');
         }
     }
+
+    public function update_account_shiping(){        
+        $member_id = $this->session->userdata('member_id');
+        $phone = $this->input->post('phone');
+        $country = $this->input->post('country');
+        $city = $this->input->post('city');
+        $province = $this->input->post('province');
+        $address = $this->input->post('address');
+        $zip_code = $this->input->post('zip-code');
+
+        $data = array(            
+            'phone' => $phone,
+            'country' => $country,
+            'city' => $city,
+            'province' => $province,
+            'address' => $address,
+            'zip_code' => $zip_code
+        );
+
+        $this->Database->update_data('customer_member', $data, array('email' => $member_id));
+
+        $msg =  '<div class="col-xs-12">'                    
+                .'<div class="alert alert-info alert-dismissable">'                    
+                .'Data alamat pengiriman anda berhasil diperbaruhi.'
+                .'</div>'    
+                .'</div>';
+            
+        $this->session->set_flashdata('msg', $msg);
+        redirect('Common/page_select/account_shiping');
+    }
+
+    public function update_account_profile(){
+        $member_id = $this->session->userdata('member_id');
+        $first_name = $this->input->post('first-name');
+        $last_name = $this->input->post('last-name');
+        $email = $this->input->post('email');
+        $get_account = array();
+        $data = array();
+        $msg = '';
+
+        $query = "SELECT * FROM customer_member WHERE email <> '$member_id' AND email = '$email'";
+        $get_account = $this->Database->all_query($query);
+
+        if (count($get_account) > 0){
+            $msg =  '<div class="col-xs-12">'                    
+                .'<div class="alert alert-warning alert-dismissable">'                    
+                .'Email baru yang anda gunakan sudah terdaftar.'
+                .'</div>'    
+                .'</div>';
+        }else{
+            $data = array(
+                'email' => $email,
+                'first_name' => $first_name,
+                'last_name' => $last_name,
+            );
+
+            $this->Database->update_data('customer_member', $data, array('email' => $member_id));
+
+            $msg =  '<div class="col-xs-12">'                    
+                .'<div class="alert alert-info alert-dismissable">'                    
+                .'Profil anda berhasil diperbaruhi.'
+                .'</div>'    
+                .'</div>';
+        }
+
+        $this->session->set_flashdata('msg', $msg);
+        redirect('Common/page_select/account_profile');
+        
+    }
 }
