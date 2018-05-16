@@ -6,26 +6,26 @@
     <section class="row">
       <div class="col-md-3 col-sm-6">
         <h3 class="strong-header">
-          Company
+          Perusahaan
         </h3>
 
         <div class="link-widget">
           <ul class="list-unstyled">
-            <li><a href="13-pages-about.html">About us</a></li>
+            <li><a href="13-pages-about.html">Tentang Kami</a></li>
             <li><a href="#">Jobs</a></li>
             <li><a href="#">Affiliates</a></li>
-            <li><a href="16-pages-contact.html">Contact</a></li>
+            <li><a href="16-pages-contact.html">Kontak</a></li>
           </ul>
         </div>
       </div>
       <div class="col-md-3 col-sm-6">
         <h3 class="strong-header">
-          Help
+          Bantuan
         </h3>
 
         <div class="link-widget">
           <ul class="list-unstyled">
-            <li><a href="10-a-shop-customer-service-track-order.html">Track order</a></li>
+            <li><a href="10-a-shop-customer-service-track-order.html">Pembayaran</a></li>
             <li><a href="10-b-shop-customer-service-faq.html">FAQs</a></li>
             <li><a href="#">Shipping info</a></li>
             <li><a href="#">Payment</a></li>
@@ -35,13 +35,13 @@
       </div>
       <div class="col-md-3 col-sm-6">
         <h3 class="strong-header">
-          Quick links
+          Navigasi
         </h3>
 
         <div class="link-widget">
           <ul class="list-unstyled">
             <li><a href="#">Size guide</a></li>
-            <li><a href="09-a-shop-account-dashboard.html">My account</a></li>
+            <li><a href="09-a-shop-account-dashboard.html">Akunku</a></li>
             <li><a href="09-e-shop-account-my-wishlist.html">Wishlist</a></li>
           </ul>
         </div>
@@ -65,7 +65,7 @@
     <hr>
     <section class="row">
       <div class="col-md-12">
-        <span class="copyright pull-left">&copy; 2014 Decima Store</span>
+        <span class="copyright pull-left">&copy; 2018 Hendzee</span>
         <ul class="payment-methods list-inline pull-right">
           <li>
             <span class="payment-visa"><span class="sr-only">Visa</span></span>

@@ -114,22 +114,12 @@
                     <input type="checkbox" class="sr-only" id="filters-size-all">
                     <label for="filters-size-all" data-option-value="" class="selected isotopeFilter"><abbr title="All">All</abbr></label>
                   </div>
+                  <?foreach($data_content['data_size'] as $val):?>
                   <div class="form-group">
                     <input type="checkbox" class="sr-only" id="filters-size-s">
-                    <label for="filters-size-s" data-option-value=".size1" class="isotopeFilter"><abbr title="Small">S</abbr></label>
+                    <label for="filters-size-s" data-option-value=".<?='size_'.$val['size_val']?>" class="isotopeFilter"><abbr title="Small"><?=$val['size_val']?></abbr></label>
                   </div>
-                  <div class="form-group">
-                    <input type="checkbox" class="sr-only" id="filters-size-m">
-                    <label for="filters-size-m" data-option-value=".size2" class="isotopeFilter"><abbr title="Medium">M</abbr></label>
-                  </div>
-                  <div class="form-group">
-                    <input type="checkbox" class="sr-only" id="filters-size-l">
-                    <label for="filters-size-l" data-option-value=".size3" class="isotopeFilter"><abbr title="Large">L</abbr></label>
-                  </div>
-                  <div class="form-group">
-                    <input type="checkbox" class="sr-only" id="filters-size-xl">
-                    <label for="filters-size-xl" data-option-value=".size4" class="isotopeFilter"><abbr title="Extra Large">XL</abbr></label>
-                  </div>
+                  <?endforeach?>                  
                 </div>
               </div>
             </div>
@@ -208,18 +198,7 @@
     $get_color = $this->Database->all_query($query);
   
     foreach($get_color as $sizedata){
-      $size_temp = '';
-
-      if($sizedata['size'] == 'S'){
-        $size_temp = 'size1';
-      }elseif($sizedata['size'] == 'M'){
-        $size_temp = 'size2';
-      }elseif($sizedata['size'] == 'L'){
-        $size_temp = 'size3';
-      }elseif($sizedata['size'] == 'XL'){
-        $size_temp = 'size4';
-      }
-      $size_arr .= $size_temp.' ';
+      $size_arr .= 'size_'.$sizedata['size'].' ';
       
     }
 

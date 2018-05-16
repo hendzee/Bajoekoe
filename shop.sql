@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 12, 2018 at 11:17 AM
+-- Generation Time: May 17, 2018 at 01:10 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -236,9 +236,9 @@ CREATE TABLE `order_list` (
 
 INSERT INTO `order_list` (`id_order`, `id_customer`, `order_date`, `email_buyer`, `first_name`, `last_name`, `phone_buyer`, `ship_info`, `bill_info`, `order_status`, `order_listcol`) VALUES
 ('order_002034', 'GUEST', '2018-05-12 15:51:04', 'brian@gmail.com', 'Brian', 'Angkasa', '08123380867', 'Indonesia, Malang, Jawa Timur, Rampal Jaya Blok A, No.15, 65412', NULL, 'NEW ORDER', NULL),
-('order_002078', 'mem_001498', '2018-05-12 16:14:40', 'hendras@gmail.com', 'Virginia', 'Hendras', '08565542339', 'Indonesia, Malang, Jawa Timur, Jl.Harapan, 65432', NULL, 'NEW ORDER', NULL),
+('order_002078', 'mem_001498', '2018-04-12 16:14:40', 'hendras@gmail.com', 'Virginia', 'Hendras', '08565542339', 'Indonesia, Malang, Jawa Timur, Jl.Harapan, 65432', NULL, 'NEW ORDER', NULL),
 ('order_002310', 'mem_001498', '2018-05-12 16:16:06', 'hendras@gmail.com', 'Virginia', 'Hendras', '08565542339', 'Indonesia, Malang, Jawa Timur, Jl.Harapan, 65432', NULL, 'NEW ORDER', NULL),
-('order_002576', 'GUEST', '2018-05-12 16:08:48', 'hendras@gmail.com', 'Virginia', 'Hendras', '08565542339', 'Indonesia, Malang, Jawa Timur, Jl.Harapan, 65432', NULL, 'NEW ORDER', NULL),
+('order_002576', 'GUEST', '2018-05-12 16:08:48', 'hendras@gmail.com', 'Virginia', 'Hendras', '08565542339', 'Indonesia, Malang, Jawa Timur, Jl.Harapan, 65432', NULL, 'SHIPPED', NULL),
 ('order_00653', 'GUEST', '2018-05-12 16:12:18', 'hendras@gmail.com', 'Virginia', 'Hendras', '08565542339', 'Indonesia, Malang, Jawa Timur, Jl.Harapan, 65432', NULL, 'NEW ORDER', NULL);
 
 -- --------------------------------------------------------
@@ -265,6 +265,29 @@ INSERT INTO `payment_report` (`id_order`, `id_buyer`, `transfer_bank`, `token_im
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `size_table`
+--
+
+CREATE TABLE `size_table` (
+  `size_val` varchar(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `size_table`
+--
+
+INSERT INTO `size_table` (`size_val`) VALUES
+('20'),
+('30'),
+('40'),
+('L'),
+('M'),
+('S'),
+('XL');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `stock_table`
 --
 
@@ -286,8 +309,8 @@ INSERT INTO `stock_table` (`id_item`, `color`, `size`, `stock`, `add_date`) VALU
 ('item_002', 'Biru', 'XL', '10', '2016-05-10 07:07:56'),
 ('item_001', 'Hijau', 'L', '2', '2018-12-10 07:07:45'),
 ('item_001', 'Hijau', 'XL', '42', '2013-10-10 07:07:56'),
+('item_006', 'Hitam', '40', '2', '2011-10-10 07:07:56'),
 ('item_005', 'Hitam', 'L', '2', '2012-10-10 07:07:56'),
-('item_006', 'Hitam', 'None', '2', '2011-10-10 07:07:56'),
 ('item_001', 'Hitam', 'S', '18', '2016-05-10 07:07:56'),
 ('item_005', 'Hitam', 'S', '3', '2016-05-10 07:07:56'),
 ('item_001', 'Hitam', 'XL', '19', '2016-05-10 07:07:56'),
@@ -354,6 +377,12 @@ ALTER TABLE `order_list`
 --
 ALTER TABLE `payment_report`
   ADD PRIMARY KEY (`id_order`);
+
+--
+-- Indexes for table `size_table`
+--
+ALTER TABLE `size_table`
+  ADD PRIMARY KEY (`size_val`);
 
 --
 -- Indexes for table `stock_table`

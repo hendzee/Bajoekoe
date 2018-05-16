@@ -34,6 +34,7 @@ class Common extends CI_Controller {
                 $data['data_items'] = $this->Database->all_query($query);
                 $data['data_category'] = $this->Database->get_data('categories_table');
                 $data['data_colors'] = $this->Database->get_data('colors_table');
+                $data['data_size'] = $this->Database->get_data('size_table');
                 break;
 
             case 'shoping_cart':                
@@ -190,6 +191,7 @@ class Common extends CI_Controller {
         $data['data_items'] = $this->Database->all_query($query);
         $data['data_category'] = $this->Database->get_data('categories_table');
         $data['data_colors'] = $this->Database->get_data('colors_table');
+        $data['data_size'] = $this->Database->get_data('size_table');
 
         $this->load->view('header/header_script');
         $this->load->view('header/header', array(
