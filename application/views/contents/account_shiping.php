@@ -3,7 +3,8 @@
 
         <!-- SECTION EMPHASIS 1 -->
         <!-- FULL WIDTH -->
-    </div><!-- !container -->
+    </div>
+    <!-- !container -->
     <div class="full-width section-emphasis-1 page-header">
         <div class="container">
             <header class="row">
@@ -13,44 +14,49 @@
                     </h1>
                     <!-- BREADCRUMBS -->
                     <ul class="breadcrumbs list-inline pull-right">
-                        <li><a href="index-2.html">Home</a></li><!--
-                        --><li><a href="03-shop-products.html">Shop</a></li><!--
-                        --><li>Checkout</li>
+                        <li><a href="index-2.html">Home</a></li>
+                        <!--
+                        -->
+                        <li><a href="03-shop-products.html">Shop</a></li>
+                        <!--
+                        -->
+                        <li>Checkout</li>
                     </ul>
                     <!-- !BREADCRUMBS -->
                 </div>
             </header>
         </div>
-    </div><!-- !full-width -->
+    </div>
+    <!-- !full-width -->
     <div class="container">
         <!-- !FULL WIDTH -->
         <!-- !SECTION EMPHASIS 1 -->
 
         <section class="row">
             <?=$this->session->flashdata('msg')?>
-            <div class="col-sm-3">
-                <nav class="shop-section-navigation element-emphasis-weak">
-                    <ul class="list-unstyled">
-                        <li><a href="<?=base_url()?>index.php/Common/page_select/account_dashboard">Dashboard</a></li>
-                        <li><a href="<?=base_url()?>index.php/Common/page_select/account_profile">Profil</a></li>
-                        <li><a href="<?=base_url()?>index.php/Common/page_select/account_order">Pesananku</a></li>
-                        <li class="active"><span>Alamat Pengiriman</span></li>          
-                        <li><a href="<?=base_url()?>index.php/Common/logout">Logout</a></li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="clearfix visible-xs space-30"></div>
-            <div class="col-md-6 col-sm-9 space-left-30">
-                <h2 class="strong-header large-header">Perbaruhi Informasi AKun</h2>
-                <?=form_open('Common/update_account_shiping', 'role="form"')?>                    
-                    <?foreach($data_content as $val):?>
-                        <div class="form-group">
-                            <label for="phone">Telepon</label>
-                            <input type="text" class="form-control" id="phone" name="phone" value="<?=$val['phone']?>" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="country">Negara</label>
-                            <select class="chosen chosen-select-deselect form-control" name="country" id="country" data-placeholder=" " tabindex="1">
+                <div class="col-sm-3">
+                    <nav class="shop-section-navigation element-emphasis-weak">
+                        <ul class="list-unstyled">
+                            <li><a href="<?=base_url()?>index.php/Common/page_select/account_dashboard">Dashboard</a></li>
+                            <li><a href="<?=base_url()?>index.php/Common/page_select/account_profile">Profil</a></li>
+                            <li><a href="<?=base_url()?>index.php/Common/page_select/account_order">Pesananku</a></li>
+                            <li class="active"><span>Alamat Pengiriman</span></li>
+                            <li><a href="<?=base_url()?>index.php/Common/logout">Logout</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="clearfix visible-xs space-30"></div>
+                <div class="col-md-6 col-sm-9 space-left-30">
+                    <h2 class="strong-header large-header">Perbaruhi Informasi AKun</h2>
+                    <?=form_open('Common/update_account_shiping', 'role="form"')?>
+                        <?foreach($data_content as $val):?>
+                            <div class="form-group">
+                                <label for="phone">Telepon</label>
+                                <input type="text" class="form-control" id="phone" name="phone" value="<?=$val['phone']?>" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="country">Negara</label>
+                                <select class="chosen chosen-select-deselect form-control" name="country" id="country" data-placeholder=" " tabindex="1">
                                 <option value="<?=$val['country']?>"><?=$val['country']?></option>
                                 <option value="United Kingdom">United Kingdom</option>
                                 <option value="United States">United States</option>
@@ -304,27 +310,27 @@
                                 <option value="Zambia">Zambia</option>
                                 <option value="Zimbabwe">Zimbabwe</option>
                             </select>
-                        </div>                        
-                        <div class="form-group">
-                            <label for="street-address">Alamat</label>
-                            <input type="text" class="form-control" id="street-address" name="address" placeholder="Street address" value="<?=$val['address']?>" required>                            
-                        </div>
-                        <div class="form-group">
-                            <label for="city">Kota</label>
-                            <input type="text" class="form-control" id="city" name="city" value="<?=$val['city']?>" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="region">Provinsi <small class="explanation"></small></label>
-                            <input type="text" class="form-control" id="region" name="province" value="<?=$val['province']?>" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="zip-code">Kode Pos</label>
-                            <input type="text" class="form-control" id="zip-code" name="zip-code" value="<?=$val['zip_code']?>" required>
-                        </div>                   
-                    <?endforeach?>                    
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </form>
-            </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="street-address">Alamat</label>
+                                <input type="text" class="form-control" id="street-address" name="address" placeholder="Street address" value="<?=$val['address']?>" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="city">Kota</label>
+                                <input type="text" class="form-control" id="city" name="city" value="<?=$val['city']?>" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="region">Provinsi <small class="explanation"></small></label>
+                                <input type="text" class="form-control" id="region" name="province" value="<?=$val['province']?>" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="zip-code">Kode Pos</label>
+                                <input type="text" class="form-control" id="zip-code" name="zip-code" value="<?=$val['zip_code']?>" required>
+                            </div>
+                        <?endforeach?>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </form>
+                </div>
         </section>
     </div>
 </section>

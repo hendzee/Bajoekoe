@@ -3,7 +3,8 @@
 
         <!-- SECTION EMPHASIS 1 -->
         <!-- FULL WIDTH -->
-    </div><!-- !container -->
+    </div>
+    <!-- !container -->
     <div class="full-width section-emphasis-1 page-header">
         <div class="container">
             <header class="row">
@@ -13,15 +14,20 @@
                     </h1>
                     <!-- BREADCRUMBS -->
                     <ul class="breadcrumbs list-inline pull-right">
-                        <li><a href="index-2.html">Home</a></li><!--
-                        --><li><a href="03-shop-products.html">Shop</a></li><!--
-                        --><li>Checkout</li>
+                        <li><a href="index-2.html">Home</a></li>
+                        <!--
+                        -->
+                        <li><a href="03-shop-products.html">Shop</a></li>
+                        <!--
+                        -->
+                        <li>Checkout</li>
                     </ul>
                     <!-- !BREADCRUMBS -->
                 </div>
             </header>
         </div>
-    </div><!-- !full-width -->
+    </div>
+    <!-- !full-width -->
     <div class="container">
         <!-- !FULL WIDTH -->
         <!-- !SECTION EMPHASIS 1 -->
@@ -33,7 +39,7 @@
                         <li><a href="<?=base_url()?>index.php/Common/page_select/account_dashboard">Dashboard</a></li>
                         <li><a href="<?=base_url()?>index.php/Common/page_select/account_profile">Profil</a></li>
                         <li class="active"><span>Pesananku</span></li>
-                        <li><a href="<?=base_url()?>index.php/Common/page_select/account_shiping">Alamat Pengiriman</a></li>          
+                        <li><a href="<?=base_url()?>index.php/Common/page_select/account_shiping">Alamat Pengiriman</a></li>
                         <li><a href="<?=base_url()?>index.php/Common/logout">Logout</a></li>
                     </ul>
                 </nav>
@@ -56,12 +62,18 @@
                             <?foreach($data_content as $val):?>
                                 <tr>
                                     <td><a href="#"><strong><?=$val['id_order']?></strong></a></td>
-                                    <td><?=date('F j, Y, H:i:s', strtotime($val['order_date']))?></td>
-                                    <td>Rp.<?=$val['total_pay']?></td>
-                                    <td><?=$val['order_status']?></td>
+                                    <td>
+                                        <?=date('F j, Y, H:i:s', strtotime($val['order_date']))?>
+                                    </td>
+                                    <td>Rp.
+                                        <?=$val['total_pay']?>
+                                    </td>
+                                    <td>
+                                        <?=$val['order_status']?>
+                                    </td>
                                     <td class="text-right"> <a href="#">Lihat</a></td>
                                 </tr>
-                            <?endforeach?>                               
+                            <?endforeach?>
                         </tbody>
                     </table>
                 </div>

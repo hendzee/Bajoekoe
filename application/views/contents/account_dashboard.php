@@ -3,7 +3,8 @@
 
         <!-- SECTION EMPHASIS 1 -->
         <!-- FULL WIDTH -->
-    </div><!-- !container -->
+    </div>
+    <!-- !container -->
     <div class="full-width section-emphasis-1 page-header">
         <div class="container">
             <header class="row">
@@ -13,15 +14,20 @@
                     </h1>
                     <!-- BREADCRUMBS -->
                     <ul class="breadcrumbs list-inline pull-right">
-                        <li><a href="index-2.html">Home</a></li><!--
-                        --><li><a href="03-shop-products.html">Shop</a></li><!--
-                        --><li>My account</li>
+                        <li><a href="index-2.html">Home</a></li>
+                        <!--
+                        -->
+                        <li><a href="03-shop-products.html">Shop</a></li>
+                        <!--
+                        -->
+                        <li>My account</li>
                     </ul>
                     <!-- !BREADCRUMBS -->
                 </div>
             </header>
         </div>
-    </div><!-- !full-width -->
+    </div>
+    <!-- !full-width -->
     <div class="container">
         <!-- !FULL WIDTH -->
         <!-- !SECTION EMPHASIS 1 -->
@@ -33,7 +39,7 @@
                         <li class="active"><span>Dashboard</span></li>
                         <li><a href="<?=base_url()?>index.php/Common/page_select/account_profile">Profil</a></li>
                         <li><a href="<?=base_url()?>index.php/Common/page_select/account_order">Pesananku</a></li>
-                        <li><a href="<?=base_url()?>index.php/Common/page_select/account_shiping">Alamat Pengiriman</a></li>          
+                        <li><a href="<?=base_url()?>index.php/Common/page_select/account_shiping">Alamat Pengiriman</a></li>
                         <li><a href="<?=base_url()?>index.php/Common/logout">Logout</a></li>
                     </ul>
                 </nav>
@@ -42,42 +48,40 @@
             <div class="col-sm-9 space-left-30">
                 <h2 class="strong-header large-header">Dashboard</h2>
                 <p>
-                    Pada halaman ini anda dapat melihat rangkuman data diri anda, informasi alamat shiping 
-                    (apabila anda melakukan pembelian) dan juga history aktivitas belanja anda pada toko
-                    kami.
-                </p>                
+                    Pada halaman ini anda dapat melihat rangkuman data diri anda, informasi alamat shiping (apabila anda melakukan pembelian) dan juga history aktivitas belanja anda pada toko kami.
+                </p>
                 <hr>
                 <div class="row">
-                    <div class="col-sm-6">                        
+                    <div class="col-sm-6">
                         <h3 class="strong-header">Informasi Akun</h3>
                         <?foreach($data_content['account'] as $val):?>
-                        <p>
-                            <br>
-                            <?=$val['first_name'].' '.$val['last_name']?><br>
-                            <?=$val['email']?><br>                    
-                            <br>
-                        </p>
+                            <p>
+                                <br>
+                                <?=$val['first_name'].' '.$val['last_name']?><br>
+                                    <?=$val['email']?><br>
+                                        <br>
+                            </p>
                         <?endforeach?>
-                        <a href="<?=base_url()?>index.php/Common/page_select/account_profile" class="btn btn-primary btn-small">
+                                <a href="<?=base_url()?>index.php/Common/page_select/account_profile" class="btn btn-primary btn-small">
                             Edit
                         </a>
-                        <hr class="visible-xs">
+                                <hr class="visible-xs">
                     </div>
                     <div class="col-sm-6">
                         <h3 class="strong-header">Alamat Pengiriman</h3>
                         <?foreach($data_content['account'] as $val):?>
-                        <p>
-                            <br>                            
-                            <?=$val['country']?><br>
-                            <?=$val['province']?><br>
-                            <?=$val['city']?><br>
-                            <?=$val['address']?><br>
-                            <?=$val['zip_code']?><br>
-                            <?=$val['phone']?><br>
-                            <br>
-                        </p>
-                        <?endforeach?>
-                        <a href="<?=base_url()?>index.php/Common/page_select/account_shiping" class="btn btn-primary btn-small">
+                            <p>
+                                <br>
+                                <?=$val['country']?><br>
+                                <?=$val['province']?><br>
+                                <?=$val['city']?><br>
+                                <?=$val['address']?><br>
+                                <?=$val['zip_code']?><br>
+                                <?=$val['phone']?><br>
+                                <br>
+                            </p>
+                            <?endforeach?>
+                                <a href="<?=base_url()?>index.php/Common/page_select/account_shiping" class="btn btn-primary btn-small">
                             Edit
                         </a>
                     </div>
@@ -99,12 +103,18 @@
                             <?foreach($data_content['order_history'] as $val):?>
                                 <tr>
                                     <td><a href="#"><strong><?=$val['id_order']?></strong></a></td>
-                                    <td><?=date('F j, Y, H:i:s', strtotime($val['order_date']))?></td>
-                                    <td>Rp.<?=$val['total_pay']?></td>
-                                    <td><?=$val['order_status']?></td>
+                                    <td>
+                                        <?=date('F j, Y, H:i:s', strtotime($val['order_date']))?>
+                                    </td>
+                                    <td>Rp.
+                                        <?=$val['total_pay']?>
+                                    </td>
+                                    <td>
+                                        <?=$val['order_status']?>
+                                    </td>
                                     <td class="text-right"> <a href="#">Lihat</a></td>
                                 </tr>
-                            <?endforeach?>                            
+                            <?endforeach?>
                         </tbody>
                     </table>
                 </div>
@@ -114,4 +124,4 @@
             </div>
         </section>
     </div>
-  </section>
+</section>

@@ -3,25 +3,31 @@
 
         <!-- SECTION EMPHASIS 1 -->
         <!-- FULL WIDTH -->
-    </div><!-- !container -->
+    </div>
+    <!-- !container -->
     <div class="full-width section-emphasis-1 page-header">
         <div class="container">
-            <header class="row">                
+            <header class="row">
                 <div class="col-md-12">
                     <h1 class="strong-header pull-left">
                         Daftar
                     </h1>
                     <!-- BREADCRUMBS -->
                     <ul class="breadcrumbs list-inline pull-right">
-                        <li><a href="index-2.html">Home</a></li><!--
-                        --><li><a href="03-shop-products.html">Shop</a></li><!--
-                        --><li>Register</li>
+                        <li><a href="index-2.html">Home</a></li>
+                        <!--
+                        -->
+                        <li><a href="03-shop-products.html">Shop</a></li>
+                        <!--
+                        -->
+                        <li>Register</li>
                     </ul>
                     <!-- !BREADCRUMBS -->
                 </div>
             </header>
         </div>
-    </div><!-- !full-width -->
+    </div>
+    <!-- !full-width -->
     <div class="container">
         <!-- !FULL WIDTH -->
         <!-- !SECTION EMPHASIS 1 -->
@@ -34,8 +40,8 @@
                         Sudah terdaftar ?
                     </h2>
                     <a href="<?=base_url()?>index.php/Common/page_select/login" class="btn btn-default">
-                        Login
-                    </a>
+                    Login
+                </a>
                 </section>
             </div>
             <div class="col-md-6 space-left-20">

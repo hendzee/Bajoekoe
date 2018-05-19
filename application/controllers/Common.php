@@ -1,18 +1,20 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 date_default_timezone_set('Asia/Jakarta');
 
-class Common extends CI_Controller {
+class Common extends CI_Controller
+{
 
-	public function index()
-	{
-		$this->page_select('home');
+    public function index()
+    {
+        $this->page_select('home');
     }
 
     // =====================
     // selecting normal page
     // =====================
-    public function page_select($page){
+    public function page_select($page)
+    {
         $data = array();
         $nav_brand = array();
         $nav_category = array();
@@ -20,121 +22,121 @@ class Common extends CI_Controller {
 
         $nav_brand = $this->Database->get_data('brand_table');
         $nav_category = $this->Database->get_data('categories_table');
-        
+
         switch ($page) {
             case 'home':
                 $query = "SELECT * FROM items_table INNER JOIN image_item using (id_item) ORDER BY publish_date DESC LIMIT 0, 8";
-                
+
                 $data = $this->Database->all_query($query);
                 break;
-            
-            case 'product_list':                                                
+
+            case 'product_list':
                 $query = "SELECT * FROM items_table INNER JOIN image_item using (id_item)";
-                
+
                 $data['data_items'] = $this->Database->all_query($query);
                 $data['data_category'] = $this->Database->get_data('categories_table');
                 $data['data_colors'] = $this->Database->get_data('colors_table');
                 $data['data_size'] = $this->Database->get_data('size_table');
                 break;
 
-            case 'shoping_cart':                
-                if ($this->cart->total_items() < 1){
+            case 'shoping_cart':
+                if ($this->cart->total_items() < 1) {
                     $page = 'empty_cart';
                 }
-            break;
+                break;
 
             case 'checkout_shiping':
-                if ($this->cart->total_items() < 1){
+                if ($this->cart->total_items() < 1) {
                     $page = 'empty_cart';
-                }else{
-                    if ($this->session->userdata('logged_in') == TRUE){
+                } else {
+                    if ($this->session->userdata('logged_in') == true) {
                         $member_email = $this->session->userdata('member_email');
                         $query = "SELECT * FROM customer_member WHERE email = '$member_email'";
                         $data = $this->Database->all_query($query);
                         $page = 'checkout_logged';
-                    }else{
+                    } else {
                         $page = 'checkout_shiping';
                     }
-                }            
-            break;                        
+                }
+                break;
 
             case 'empty_cart':
                 $page = 'empty_cart';
                 break;
 
             case 'login':
-                if($this->session->userdata('logged_in') == TRUE){
+                if ($this->session->userdata('logged_in') == true) {
                     $page = 'home';
-                }else{
+                } else {
                     $page = 'login';
                 }
                 break;
 
             case 'register':
-                if($this->session->userdata('logged_in') == TRUE){
+                if ($this->session->userdata('logged_in') == true) {
                     $page = 'home';
-                }else{                    
+                } else {
                     $page = 'register';
                 }
                 break;
 
-            case'payment':
+            case 'payment':
                 $page = 'payment';
-                break;     
-                
+                break;
+
             case 'account_dashboard':
-                if($this->session->userdata('logged_in') == TRUE){
+                if ($this->session->userdata('logged_in') == true) {
                     $member_id = $this->session->userdata('member_id');
 
                     $query = "SELECT * FROM customer_member WHERE id_customer = '$member_id'";
                     $data['account'] = $this->Database->all_query($query);
 
-                    $query = "SELECT *, SUM(price * number_item) AS total_pay FROM order_list INNER JOIN 
+                    $query = "SELECT *, SUM(price * number_item) AS total_pay FROM order_list INNER JOIN
                         order_item USING(id_order) WHERE id_customer = '$member_id' GROUP BY order_item.id_order";
                     $data['order_history'] = $this->Database->all_query($query);
 
                     $page = 'account_dashboard';
-                }else{
+                } else {
                     $page = 'NOT_FOUND';
                 }
                 break;
 
             case 'account_profile':
-                if($this->session->userdata('logged_in') == TRUE){
+                if ($this->session->userdata('logged_in') == true) {
                     $member_id = $this->session->userdata('member_id');
 
                     $query = "SELECT * FROM customer_member WHERE id_customer = '$member_id'";
                     $data = $this->Database->all_query($query);
 
                     $page = 'account_profile';
-                }else{
+                } else {
                     $page = 'NOT_FOUND';
                 }
                 break;
 
             case 'account_order':
-                if($this->session->userdata('logged_in') == TRUE){
+                if ($this->session->userdata('logged_in') == true) {
                     $member_id = $this->session->userdata('member_id');
 
-                    $query = "SELECT *, SUM(price * number_item) AS total_pay FROM order_list INNER JOIN 
+                    $query = "SELECT *, SUM(price * number_item) AS total_pay FROM order_list INNER JOIN
                         order_item USING(id_order) WHERE id_customer = '$member_id' GROUP BY order_item.id_order";
                     $data = $this->Database->all_query($query);
-                    
+
                     $page = 'account_order';
-                }else{
+                } else {
                     $page = 'NOT_FOUND';
                 }
                 break;
 
             case 'account_shiping':
-                if($this->session->userdata('logged_in') == TRUE){
+                if ($this->session->userdata('logged_in') == true) {
                     $member_id = $this->session->userdata('member_id');
 
                     $query = "SELECT * FROM customer_member WHERE id_customer = '$member_id'";
                     $data = $this->Database->all_query($query);
-                    
+
                     $page = 'account_shiping';
-                }else{
+                } else {
                     $page = 'NOT_FOUND';
                 }
                 break;
@@ -148,16 +150,17 @@ class Common extends CI_Controller {
             'nav_brand' => $nav_brand,
             'nav_category' => $nav_category,
             'active_nav' => $active_nav));
-        $this->load->view('contents/'.$page, array('data_content' => $data));
+        $this->load->view('contents/' . $page, array('data_content' => $data));
         $this->load->view('footer/footer');
         $this->load->view('footer/footer_script');
     }
 
     // =======================================
-    // selecting product lis based on category, 
+    // selecting product lis based on category,
     // brand or gender
     // =======================================
-    public function product_list_param($param, $value){
+    public function product_list_param($param, $value)
+    {
         $data = array();
         $nav_brand = array();
         $nav_category = array();
@@ -167,26 +170,26 @@ class Common extends CI_Controller {
         $nav_brand = $this->Database->get_data('brand_table');
         $nav_category = $this->Database->get_data('categories_table');
 
-        switch($param){
-            case 'gender':            
-            $query = "SELECT * FROM items_table INNER JOIN image_item using (id_item) WHERE gender='$value'";
-            break;
+        switch ($param) {
+            case 'gender':
+                $query = "SELECT * FROM items_table INNER JOIN image_item using (id_item) WHERE gender='$value'";
+                break;
 
             case 'brand':
-            $active_nav = 'brand';
-            $query = "SELECT * FROM items_table INNER JOIN image_item using (id_item) WHERE brand='$value'";
-            break;
+                $active_nav = 'brand';
+                $query = "SELECT * FROM items_table INNER JOIN image_item using (id_item) WHERE brand='$value'";
+                break;
 
             case 'category':
-            $active_nav = 'category';
-            $query = "SELECT * FROM items_table INNER JOIN image_item using (id_item) WHERE category='$value'";
-            break;
+                $active_nav = 'category';
+                $query = "SELECT * FROM items_table INNER JOIN image_item using (id_item) WHERE category='$value'";
+                break;
 
             case 'sale':
-            $active_nav = 'sale';
-            $query = "SELECT * FROM items_table INNER JOIN image_item using (id_item) WHERE discount > 0";
-            break;            
-        }                
+                $active_nav = 'sale';
+                $query = "SELECT * FROM items_table INNER JOIN image_item using (id_item) WHERE discount > 0";
+                break;
+        }
 
         $data['data_items'] = $this->Database->all_query($query);
         $data['data_category'] = $this->Database->get_data('categories_table');
@@ -204,10 +207,11 @@ class Common extends CI_Controller {
     }
 
     // =========================================
-    // searching product list based on category, 
+    // searching product list based on category,
     // brand or gender
     // =========================================
-    public function search_product_list(){
+    public function search_product_list()
+    {
         $data = array();
         $nav_brand = array();
         $nav_category = array();
@@ -217,7 +221,7 @@ class Common extends CI_Controller {
 
         $nav_brand = $this->Database->get_data('brand_table');
         $nav_category = $this->Database->get_data('categories_table');
-        
+
         $query = "SELECT * FROM items_table INNER JOIN image_item using (id_item) WHERE items_table.name LIKE '%$value%' OR brand LIKE '%$value%'";
         $data['data_items'] = $this->Database->all_query($query);
         $data['data_category'] = $this->Database->get_data('categories_table');
@@ -236,7 +240,8 @@ class Common extends CI_Controller {
     // ====================
     // preview product list
     // ====================
-    public function page_single_product($id_item, $color){
+    public function page_single_product($id_item, $color)
+    {
         $data = array();
         $data_color = array();
         $data_size = array();
@@ -249,8 +254,8 @@ class Common extends CI_Controller {
         $nav_category = $this->Database->get_data('categories_table');
 
         $query = "SELECT * FROM items_table INNER JOIN image_item using (id_item) WHERE id_item = '$id_item' AND color='$color'";
-        
-        $data = $this->Database->all_query($query);        
+
+        $data = $this->Database->all_query($query);
 
         $query = "SELECT * FROM stock_table WHERE id_item = '$id_item' AND color != '$color' AND stock > 0 GROUP BY color ";
 
@@ -277,7 +282,8 @@ class Common extends CI_Controller {
     // =====================
     // insert item into cart
     // =====================
-    public function insert_cart(){
+    public function insert_cart()
+    {
         $id = $this->input->post('id-item');
         $name = $this->input->post('item-name');
         $qty = $this->input->post('quantity');
@@ -285,7 +291,7 @@ class Common extends CI_Controller {
         $size = $this->input->post('size-chosen');
         $price = $this->input->post('price');
         $image = $this->input->post('image');
-        $get_update = FALSE;
+        $get_update = false;
         $r_id = '';
         $query = "SELECT * FROM stock_table WHERE id_item = '$id' AND color = '$color' AND size='$size'";
         $get_stock = $this->Database->all_query($query);
@@ -293,89 +299,91 @@ class Common extends CI_Controller {
         $num_stock_oncart = 0;
         $stock_amount = 0;
 
-        foreach($get_stock as $val){
+        foreach ($get_stock as $val) {
             $num_stock = $val['stock'];
         }
 
-        foreach($this->cart->contents() as $items){
-            if ($items['options']['size'] == $size && $items['options']['color'] && 
-            $items['id'] == $id){
+        foreach ($this->cart->contents() as $items) {
+            if ($items['options']['size'] == $size && $items['options']['color'] &&
+                $items['id'] == $id) {
                 $num_stock_oncart = $items['qty'];
             }
         }
 
-        $stock_amount = $num_stock - ($num_stock_oncart + $qty);        
+        $stock_amount = $num_stock - ($num_stock_oncart + $qty);
 
-        if($stock_amount >= 0){
+        if ($stock_amount >= 0) {
             $data = array(
                 'id' => $id,
-                'qty' => (int)$qty,
-                'price' => (int)$price,
+                'qty' => (int) $qty,
+                'price' => (int) $price,
                 'name' => $name,
                 'image' => $image,
-                'options' => array('size' => $size, 'color' => $color)
-            );        
-    
-            if($this->cart->total_items() > 0){            
-                foreach($this->cart->contents() as $items){        
+                'options' => array('size' => $size, 'color' => $color),
+            );
+
+            if ($this->cart->total_items() > 0) {
+                foreach ($this->cart->contents() as $items) {
                     $r_id = $items['rowid'];
-                    
-                    if($size == $items['options']['size'] && $color == $items['options']['color']){
-                        $get_update = TRUE;
+
+                    if ($size == $items['options']['size'] && $color == $items['options']['color']) {
+                        $get_update = true;
                         break;
-                    } 
+                    }
                 }
-                if ($get_update == TRUE){
-                    $new_quantity = $items['qty'] + (int)$qty;                    
+                if ($get_update == true) {
+                    $new_quantity = $items['qty'] + (int) $qty;
                     $new_data = array(
                         'rowid' => $r_id,
-                        'qty' => (int)$new_quantity
-                    );                
+                        'qty' => (int) $new_quantity,
+                    );
                     $this->cart->update($new_data);
-                }else{                
+                } else {
                     $this->cart->insert($data);
                 }
-            }else{
+            } else {
                 $this->cart->insert($data);
-            }                
-    
+            }
+
             redirect('Common/page_select/product_list');
-            
-        }else{
-            $msg =  '<div class="col-md-7">'                    
-                    .'<div class="alert alert-warning alert-dismissable">'                    
-                    .'maaf stock barang yang tersedia tinggal '.$num_stock.' buah'
-                    .'</div>'    
-                    .'</div>';
+
+        } else {
+            $msg = '<div class="col-md-7">'
+                . '<div class="alert alert-warning alert-dismissable">'
+                . 'maaf stock barang yang tersedia tinggal ' . $num_stock . ' buah'
+                . '</div>'
+                . '</div>';
 
             $this->session->set_flashdata('msg', $msg);
 
-            redirect('Common/page_single_product/'.$id.'/'.$color);
-        }        
+            redirect('Common/page_single_product/' . $id . '/' . $color);
+        }
     }
 
     // ===================================
-    // remove selected item list from cart    
+    // remove selected item list from cart
     // ===================================
-    public function remove_item_cart($rowid, $from){
+    public function remove_item_cart($rowid, $from)
+    {
         $this->cart->update(array(
             'rowid' => $rowid,
-            'qty' => 0
+            'qty' => 0,
         ));
 
-        if ($from == 'shop'){
+        if ($from == 'shop') {
             redirect('Common/page_select/product_list');
-        }else{
+        } else {
             redirect('Common/page_select/shoping_cart');
         }
 
     }
 
     // =================================
-    // change size and color combobox on 
+    // change size and color combobox on
     // single page (preview item page)
     // =================================
-    public function ajax_single_product(){
+    public function ajax_single_product()
+    {
         $id_item = $this->input->post('id_item');
         $color = $this->input->post('color');
         $data = array();
@@ -392,7 +400,8 @@ class Common extends CI_Controller {
     // ============================
     // change quantity item on cart
     // ============================
-    public function update_cart(){
+    public function update_cart()
+    {
         $rowid = $this->input->post('rowid');
         $qty = $this->input->post('qty');
         $id_item = $this->input->post('id_item');
@@ -406,26 +415,26 @@ class Common extends CI_Controller {
 
         $get_stock = $this->Database->all_query($query);
 
-        foreach($get_stock as $val){
+        foreach ($get_stock as $val) {
             $stock = $val['stock'];
         }
 
         $amount = $stock - $qty;
 
-        if ($amount >= 0){
+        if ($amount >= 0) {
             $this->cart->update(array(
                 'rowid' => $rowid,
-                'qty' => $qty
-            ));            
-        }else{ 
-            $msg =  '<div class="col-md-7">'                    
-            .'<div class="alert alert-warning alert-dismissable">'                    
-            .'maaf stock barang yang tersedia tinggal '.$stock.' buah'
-            .'</div>'    
-            .'</div>';
+                'qty' => $qty,
+            ));
+        } else {
+            $msg = '<div class="col-md-7">'
+                . '<div class="alert alert-warning alert-dismissable">'
+                . 'maaf stock barang yang tersedia tinggal ' . $stock . ' buah'
+                . '</div>'
+                . '</div>';
 
-            $this->session->set_flashdata('msg', $msg);                       
-        }        
+            $this->session->set_flashdata('msg', $msg);
+        }
 
         redirect('Common/page_select/shoping_cart');
     }
@@ -434,11 +443,12 @@ class Common extends CI_Controller {
     // handle page shiping_payment data and
     // edit_shiping_address data
     // ====================================
-    public function page_data_shiping(){
+    public function page_data_shiping()
+    {
         $data_content = array();
         $nav_brand = array();
         $nav_category = array();
-        $active_nav = 'product';        
+        $active_nav = 'product';
         $page = $this->input->post('page');
         $first_name = $this->input->post('first-name');
         $last_name = $this->input->post('last-name');
@@ -449,7 +459,7 @@ class Common extends CI_Controller {
         $province = $this->input->post('province');
         $address = $this->input->post('address');
         $zip_code = $this->input->post('zip-code');
-        $ship_info = $country.', '.$city.', '.$province.', '.$address.', '.$zip_code;        
+        $ship_info = $country . ', ' . $city . ', ' . $province . ', ' . $address . ', ' . $zip_code;
 
         $nav_brand = $this->Database->get_data('brand_table');
         $nav_category = $this->Database->get_data('categories_table');
@@ -464,7 +474,7 @@ class Common extends CI_Controller {
             'dt_province' => $province,
             'dt_address' => $address,
             'dt_zip_code' => $zip_code,
-            'dt_ship_info' => $ship_info
+            'dt_ship_info' => $ship_info,
         );
 
         $this->load->view('header/header_script');
@@ -472,15 +482,16 @@ class Common extends CI_Controller {
             'nav_brand' => $nav_brand,
             'nav_category' => $nav_category,
             'active_nav' => $active_nav));
-        $this->load->view('contents/'.$page, $data_content);
+        $this->load->view('contents/' . $page, $data_content);
         $this->load->view('footer/footer');
         $this->load->view('footer/footer_script');
-    }    
+    }
 
     // ==============================
     // create order
     // ==============================
-    public function create_order(){        
+    public function create_order()
+    {
         $id_order = $this->Database->create_id('order_list');
         $id_customer = '';
         $date = date('Y-m-d H:i:s');
@@ -493,31 +504,31 @@ class Common extends CI_Controller {
         $province = $this->input->post('province');
         $address = $this->input->post('address');
         $zip_code = $this->input->post('zip-code');
-        $ship_info = $country.', '.$city.', '.$province.', '.$address.', '.$zip_code;
-        $valid = TRUE;
+        $ship_info = $country . ', ' . $city . ', ' . $province . ', ' . $address . ', ' . $zip_code;
+        $valid = true;
 
-        if($this->session->userdata('logged_in') == TRUE){
+        if ($this->session->userdata('logged_in') == true) {
             $member_id = $this->session->userdata('member_id');
             $id_customer = $this->session->userdata('member_id');
-        }else{
+        } else {
             $id_customer = 'GUEST';
         }
 
         $data_order_list = array(
             'id_order' => $id_order,
             'id_customer' => $id_customer,
-            'order_date' => $date,            
+            'order_date' => $date,
             'email_buyer' => $email,
             'first_name' => $first_name,
             'last_name' => $last_name,
             'phone_buyer' => $phone,
             'ship_info' => $ship_info,
-            'order_status' => 'NEW ORDER'
+            'order_status' => 'NEW ORDER',
         );
 
         $this->Database->create_data('order_list', $data_order_list);
 
-        foreach ($this->cart->contents() as $items){
+        foreach ($this->cart->contents() as $items) {
             $data_list_item = array(
                 'id_order' => $id_order,
                 'id_item' => $items['id'],
@@ -525,22 +536,22 @@ class Common extends CI_Controller {
                 'color' => $items['options']['color'],
                 'size' => $items['options']['size'],
                 'price' => $items['price'],
-                'number_item' => $items['qty']
+                'number_item' => $items['qty'],
             );
             $id_item_temp = $items['id'];
             $color_temp = $items['options']['color'];
             $size_temp = $items['options']['size'];
             $num_stock = 0;
 
-            $query = "SELECT * FROM stock_table WHERE id_item = '$id_item_temp' AND color = '$color_temp' 
+            $query = "SELECT * FROM stock_table WHERE id_item = '$id_item_temp' AND color = '$color_temp'
                 AND size = '$size_temp'";
 
             $get_stock = $this->Database->all_query($query);
 
-            foreach($get_stock as $val){
+            foreach ($get_stock as $val) {
                 $num_stock = $val['stock'];
             }
-            
+
             //update stock qty
             $this->Database->update_data(
                 'stock_table',
@@ -548,20 +559,21 @@ class Common extends CI_Controller {
                 array(
                     'id_item' => $items['id'],
                     'color' => $items['options']['color'],
-                    'size' => $items['options']['size']
+                    'size' => $items['options']['size'],
                 )
             );
 
             $this->Database->create_data('order_item', $data_list_item);
-        }        
+        }
 
-        redirect('Common/page_order_received/'.$id_order.'/'.date('Y-m-d', strtotime($date)).'/'.$this->cart->total());
-    }    
+        redirect('Common/page_order_received/' . $id_order . '/' . date('Y-m-d', strtotime($date)) . '/' . $this->cart->total());
+    }
 
     // =========================================
     // information that order successful created
     // =========================================
-    public function page_order_received($id_order, $date_order, $total_payment){
+    public function page_order_received($id_order, $date_order, $total_payment)
+    {
         $data = array();
         $nav_brand = array();
         $nav_category = array();
@@ -570,9 +582,9 @@ class Common extends CI_Controller {
         $nav_brand = $this->Database->get_data('brand_table');
         $nav_category = $this->Database->get_data('categories_table');
 
-        if ($this->cart->total_items() < 1){
+        if ($this->cart->total_items() < 1) {
             redirect('Common/page_select/empty_cart');
-        }else{
+        } else {
             $this->cart->destroy();
 
             $this->load->view('header/header_script');
@@ -585,76 +597,77 @@ class Common extends CI_Controller {
                 'data_date' => $date_order,
                 'data_payment' => $total_payment));
             $this->load->view('footer/footer');
-            $this->load->view('footer/footer_script');            
+            $this->load->view('footer/footer_script');
         }
     }
 
     // =============================
     // upload payment check transfer
     // =============================
-    public function payment_check(){
+    public function payment_check()
+    {
         $id_order = $this->input->post('id-order');
         $transfer_bank = $this->input->post('transfer-bank');
         $data = array();
-        $image_name = '';                
+        $image_name = '';
         $msg = '';
-            
+
         $query = "SELECT * FROM order_list WHERE id_order = '$id_order' ";
 
-        $data = $this->Database->all_query($query);        
+        $data = $this->Database->all_query($query);
 
-        if(count($data) < 1){
-            $msg =  '<div class="col-md-7">'                    
-            .'<div class="alert alert-warning alert-dismissable">'                    
-            .'Order ID tidak terdaftar dalam pesanan kami.'
-            .'</div>'    
-            .'</div>';                               
+        if (count($data) < 1) {
+            $msg = '<div class="col-md-7">'
+                . '<div class="alert alert-warning alert-dismissable">'
+                . 'Order ID tidak terdaftar dalam pesanan kami.'
+                . '</div>'
+                . '</div>';
 
-        }else{
-            do{
+        } else {
+            do {
                 $random_code = rand(0, 1000);
-                $image_name = 'tok_'.$random_code;
-                $query = "SELECT * FROM payment_report WHERE token_image = '$image_name'";            
-    
+                $image_name = 'tok_' . $random_code;
+                $query = "SELECT * FROM payment_report WHERE token_image = '$image_name'";
+
                 $data = $this->Database->all_query($query);
-    
-                if(count($data) < 1){
+
+                if (count($data) < 1) {
                     break;
                 }
-            }while(TRUE);
-    
+            } while (true);
+
             $config = array(
                 'file_name' => $image_name,
                 'upload_path' => './assets/images/token_images/',
                 'allowed_types' => 'jpg|png|jpeg',
-                'max_size' => 100
+                'max_size' => 100,
             );
 
-            $this->load->library('upload', $config);                        
-    
-            if (!$this->upload->do_upload('token-img')){
-                $msg =  '<div class="col-md-7">'                    
-                    .'<div class="alert alert-warning alert-dismissable">'                    
-                    .$this->upload->display_errors()
-                    .'</div>'    
-                    .'</div>';
-                        
-            }else{
+            $this->load->library('upload', $config);
+
+            if (!$this->upload->do_upload('token-img')) {
+                $msg = '<div class="col-md-7">'
+                . '<div class="alert alert-warning alert-dismissable">'
+                . $this->upload->display_errors()
+                    . '</div>'
+                    . '</div>';
+
+            } else {
                 $data_image = $this->upload->data();
 
                 $this->Database->create_data('payment_report', array(
                     'id_order' => $id_order,
                     'transfer_bank' => $transfer_bank,
                     'token_image' => $data_image['file_name'],
-                    'report_date' => date('Y-m-d H:i:s')
+                    'report_date' => date('Y-m-d H:i:s'),
                 ));
 
-                $msg =  '<div class="col-md-7">'                    
-                .'<div class="alert alert-info alert-dismissable">'                    
-                .'Terimakasih, kami akan segera melakukan pengecekkan.'
-                .'</div>'    
-                .'</div>';                                       
-            }                                   
+                $msg = '<div class="col-md-7">'
+                    . '<div class="alert alert-info alert-dismissable">'
+                    . 'Terimakasih, kami akan segera melakukan pengecekkan.'
+                    . '</div>'
+                    . '</div>';
+            }
         }
 
         $this->session->set_flashdata('msg', $msg);
@@ -664,11 +677,12 @@ class Common extends CI_Controller {
     // =======================================
     // login
     // =======================================
-    public function check_auth(){
+    public function check_auth()
+    {
         $member_id = '';
         $member_name = '';
         $email = $this->input->post('email');
-        $password = $this->input->post('password');        
+        $password = $this->input->post('password');
         $data = array();
         $msg = '';
 
@@ -676,26 +690,27 @@ class Common extends CI_Controller {
 
         $data = $this->Database->all_query($query);
 
-        if (count($data) > 0){
-            foreach($data as $val){
+        if (count($data) > 0) {
+            foreach ($data as $val) {
                 $member_name = $val['first_name'];
                 $member_id = $val['id_customer'];
             }
 
             $this->session->set_userdata(array(
-                'logged_in' => TRUE,
+                'logged_in' => true,
                 'member_id' => $member_id,
                 'member_email' => $email,
-                'member_name' => $member_name
+                'member_name' => $member_name,
             ));
 
             redirect('Common/page_select/home');
-        }else{
+        } else {
             redirect('Common/page_select/login');
         }
     }
 
-    public function logout(){
+    public function logout()
+    {
         $this->session->sess_destroy();
 
         redirect('Common/page_select/home');
@@ -704,7 +719,8 @@ class Common extends CI_Controller {
     // ==============================
     // register customer
     // ==============================
-    public function member_register(){
+    public function member_register()
+    {
         $id_customer = $this->Database->create_id('customer_member');
         $email = $this->input->post('email');
         $password = $this->input->post('password');
@@ -716,29 +732,29 @@ class Common extends CI_Controller {
 
         $get_user = $this->Database->all_query($query);
 
-        if(count($get_user) > 0){
-            $msg =  '<div class="col-md-7">'                    
-                .'<div class="alert alert-warning alert-dismissable">'                    
-                .'Email yang anda gunakan sudah terdaftar, silahkan login / gunakan email lain untuk register.'
-                .'</div>'    
-                .'</div>';
-            
+        if (count($get_user) > 0) {
+            $msg = '<div class="col-md-7">'
+                . '<div class="alert alert-warning alert-dismissable">'
+                . 'Email yang anda gunakan sudah terdaftar, silahkan login / gunakan email lain untuk register.'
+                . '</div>'
+                . '</div>';
+
             $this->session->set_flashdata('msg', $msg);
             redirect('Common/page_select/register');
-        }else{
+        } else {
             $this->Database->create_data('customer_member', array(
                 'id_customer' => $id_customer,
                 'email' => $email,
                 'first_name' => $first_name,
                 'last_name' => $last_name,
                 'password' => $password,
-                'member_status' => 'ACTIVE'
+                'member_status' => 'ACTIVE',
             ));
 
             $this->session->set_userdata(array(
-                'logged_in' => TRUE,
+                'logged_in' => true,
                 'member_email' => $email,
-                'member_name' => $first_name
+                'member_name' => $first_name,
             ));
 
             redirect('Common/page_select/home');
@@ -748,7 +764,8 @@ class Common extends CI_Controller {
     // =========================================
     // udate addreess of customer member shiping
     // =========================================
-    public function update_account_shiping(){        
+    public function update_account_shiping()
+    {
         $member_id = $this->session->userdata('member_id');
         $phone = $this->input->post('phone');
         $country = $this->input->post('country');
@@ -757,23 +774,23 @@ class Common extends CI_Controller {
         $address = $this->input->post('address');
         $zip_code = $this->input->post('zip-code');
 
-        $data = array(            
+        $data = array(
             'phone' => $phone,
             'country' => $country,
             'city' => $city,
             'province' => $province,
             'address' => $address,
-            'zip_code' => $zip_code
+            'zip_code' => $zip_code,
         );
 
         $this->Database->update_data('customer_member', $data, array('id_customer' => $member_id));
 
-        $msg =  '<div class="col-xs-12">'                    
-                .'<div class="alert alert-info alert-dismissable">'                    
-                .'Data alamat pengiriman anda berhasil diperbaruhi.'
-                .'</div>'    
-                .'</div>';
-            
+        $msg = '<div class="col-xs-12">'
+            . '<div class="alert alert-info alert-dismissable">'
+            . 'Data alamat pengiriman anda berhasil diperbaruhi.'
+            . '</div>'
+            . '</div>';
+
         $this->session->set_flashdata('msg', $msg);
         redirect('Common/page_select/account_shiping');
     }
@@ -781,7 +798,8 @@ class Common extends CI_Controller {
     // ===========================================
     // update member data profile (name and email)
     // ===========================================
-    public function update_account_profile(){
+    public function update_account_profile()
+    {
         $member_id = $this->session->userdata('member_id');
         $member_email = $this->session->userdata('member_email');
         $first_name = $this->input->post('first-name');
@@ -794,13 +812,13 @@ class Common extends CI_Controller {
         $query = "SELECT * FROM customer_member WHERE email <> '$member_email' AND email = '$email'";
         $get_account = $this->Database->all_query($query);
 
-        if (count($get_account) > 0){
-            $msg =  '<div class="col-xs-12">'                    
-                .'<div class="alert alert-warning alert-dismissable">'                    
-                .'Email baru yang anda gunakan sudah terdaftar.'
-                .'</div>'    
-                .'</div>';
-        }else{
+        if (count($get_account) > 0) {
+            $msg = '<div class="col-xs-12">'
+                . '<div class="alert alert-warning alert-dismissable">'
+                . 'Email baru yang anda gunakan sudah terdaftar.'
+                . '</div>'
+                . '</div>';
+        } else {
             $data = array(
                 'email' => $email,
                 'first_name' => $first_name,
@@ -810,15 +828,15 @@ class Common extends CI_Controller {
             $this->Database->update_data('customer_member', $data, array('id_customer' => $member_id));
             $this->session->set_userdata(array('member_email' => $email));
 
-            $msg =  '<div class="col-xs-12">'                    
-                .'<div class="alert alert-info alert-dismissable">'                    
-                .'Profil anda berhasil diperbaruhi.'
-                .'</div>'    
-                .'</div>';
+            $msg = '<div class="col-xs-12">'
+                . '<div class="alert alert-info alert-dismissable">'
+                . 'Profil anda berhasil diperbaruhi.'
+                . '</div>'
+                . '</div>';
         }
 
         $this->session->set_flashdata('msg', $msg);
         redirect('Common/page_select/account_profile');
-        
-    }   
+
+    }
 }

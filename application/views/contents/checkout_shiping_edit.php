@@ -3,7 +3,8 @@
 
         <!-- SECTION EMPHASIS 1 -->
         <!-- FULL WIDTH -->
-    </div><!-- !container -->
+    </div>
+    <!-- !container -->
     <div class="full-width section-emphasis-1 page-header">
         <div class="container">
             <header class="row">
@@ -13,20 +14,25 @@
                     </h1>
                     <!-- BREADCRUMBS -->
                     <ul class="breadcrumbs list-inline pull-right">
-                        <li><a href="index-2.html">Home</a></li><!--
-                        --><li><a href="03-shop-products.html">Shop</a></li><!--
-                        --><li>Checkout</li>
+                        <li><a href="index-2.html">Home</a></li>
+                        <!--
+                        -->
+                        <li><a href="03-shop-products.html">Shop</a></li>
+                        <!--
+                        -->
+                        <li>Checkout</li>
                     </ul>
                     <!-- !BREADCRUMBS -->
                 </div>
             </header>
         </div>
-    </div><!-- !full-width -->
+    </div>
+    <!-- !full-width -->
     <div class="container">
         <!-- !FULL WIDTH -->
         <!-- !SECTION EMPHASIS 1 -->
 
-        <div class="row">            
+        <div class="row">
             <div class="clearfix space-30"></div>
             <div class="col-sm-5 col-sm-push-7 space-left-30">
                 <section class="order-summary element-emphasis-weak">
@@ -38,17 +44,21 @@
                     </a>
                     <div class="clearfix"></div>
                     <?foreach ($this->cart->contents() as $items):?>
-                    <!-- SHOP SUMMARY ITEM -->
-                    <article class="shop-summary-item">
-                        <img src="<?=base_url()?>assets/images/item_image/<?=$items['image']?>"  alt="Shop item in cart">
-                        <header class="item-info-name-features-price">
-                            <h4><a href="04-shop-product-single.html"><?=$items['name']?></a></h4>
-                            <span class="features"><?=$items['options']['color']?>, <?=$items['options']['size']?></span><br>
-                            <span class="quantity"><?=$items['qty']?></span><b>&times;</b><span class="price">Rp.<?=$items['price']?></span>
-                        </header>
-                    </article>
+                        <!-- SHOP SUMMARY ITEM -->
+                        <article class="shop-summary-item">
+                            <img src="<?=base_url()?>assets/images/item_image/<?=$items['image']?>" alt="Shop item in cart">
+                            <header class="item-info-name-features-price">
+                                <h4>
+                                    <a href="04-shop-product-single.html">
+                                        <?=$items['name']?>
+                                    </a>
+                                </h4>
+                                <span class="features"><?=$items['options']['color']?>, <?=$items['options']['size']?></span><br>
+                                <span class="quantity"><?=$items['qty']?></span><b>&times;</b><span class="price">Rp.<?=$items['price']?></span>
+                            </header>
+                        </article>
                     <?endforeach?>
-                    <!-- !SHOP SUMMARY ITEM -->                    
+                    <!-- !SHOP SUMMARY ITEM -->
                     <dl class="order-summary-price">
                         <dt>Subtotal</dt>
                         <dd><strong>Rp.<?=$this->cart->total()?></strong></dd>
@@ -65,7 +75,7 @@
                     <h2 class="strong-header element-header">
                         Alamat Pengiriman
                     </h2>
-                    <?=form_open('Common/page_data_shiping', 'role="form"')?>                    
+                    <?=form_open('Common/page_data_shiping', 'role="form"')?>
                         <div class="row">
                             <div class="col-xs-6">
                                 <div class="form-group">
@@ -352,20 +362,20 @@
                         <div class="form-group">
                             <label for="city">Kota</label>
                             <input type="text" class="form-control" id="city" name="city" value="<?=$dt_city?>" required>
-                        </div>                                                
+                        </div>
                         <div class="form-group">
                             <label for="street-address">Alamat</label>
-                            <input type="text" class="form-control" id="street-address" name="address" placeholder="Street address" value="<?=$dt_address?>" required>                            
-                        </div>                        
+                            <input type="text" class="form-control" id="street-address" name="address" placeholder="Street address" value="<?=$dt_address?>" required>
+                        </div>
                         <div class="form-group">
                             <label for="zip-code">Kode Pos</label>
                             <input type="text" class="form-control" id="zip-code" name="zip-code" value="<?=$dt_zip_code?>" required>
-                        </div>                      
-                        <input type="hidden" name="page" value="checkout_payment">  
+                        </div>
+                        <input type="hidden" name="page" value="checkout_payment">
                         <button type="submit" class="btn btn-primary pull-right">Berikutnya</button>
                         <div class="clearfix"></div>
                     </form>
-                </section>                                
+                </section>
                 <section class="checkout checkout-step-2 checkout-step-next element-emphasis-weak">
                     <h2 class="strong-header element-header">
                         2. Pembayaran
@@ -373,6 +383,5 @@
                 </section>
             </div>
         </div>
-
     </div>
 </section>
