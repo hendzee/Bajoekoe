@@ -56,6 +56,26 @@ class Admin extends CI_Controller
 
                 break;
 
+            case 'table_order':
+                $page = 'table_order';
+
+                $data = $this->Database->get_data('order_list');
+            break;
+
+            case 'table_neworder':
+                $page = 'table_neworder';
+
+                $query = "SELECT * FROM order_list WHERE order_status = 'NEW ORDER'";
+                $data = $this->Database->all_query($query);
+            break;
+
+            case 'table_successorder':
+                $page = 'table_successorder';
+
+                $query = "SELECT * FROM order_list WHERE order_status = 'SHIPPED'";
+                $data = $this->Database->all_query($query);
+            break;
+
             default:
                 echo "NOT FOUND";
                 break;
