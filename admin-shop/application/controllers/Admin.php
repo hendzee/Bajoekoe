@@ -104,7 +104,7 @@ class Admin extends CI_Controller
 
                         $config = array(
                             'file_name' => $image_name,
-                            'upload_path' => './assets/item_image/',
+                            'upload_path' => '../assets/images/common_image/',
                             'max_size' => 100,
                             'allowed_types' => 'jpg|png|jpeg',
                         );

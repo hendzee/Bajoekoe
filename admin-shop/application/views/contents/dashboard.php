@@ -283,7 +283,7 @@
                 <?foreach($data_content['recent_stock'] as $val):?>
                 <li class="item">
                   <div class="product-img">
-                    <img src="<?=base_url()?>assets/item_image/<?=$val['image_one']?>" alt="Product Image">
+                    <img src="<?=base_url()?>../assets/images/item_image/<?=$val['image_one']?>" alt="Product Image">
                   </div>
                   <div class="product-info">
                     <a href="javascript:void(0)" class="product-title"><?=$val['name']?>
