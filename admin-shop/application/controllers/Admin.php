@@ -60,21 +60,21 @@ class Admin extends CI_Controller
                 $page = 'table_order';
 
                 $data = $this->Database->get_data('order_list');
-            break;
+                break;
 
             case 'table_neworder':
                 $page = 'table_neworder';
 
                 $query = "SELECT * FROM order_list WHERE order_status = 'NEW ORDER'";
                 $data = $this->Database->all_query($query);
-            break;
+                break;
 
             case 'table_successorder':
                 $page = 'table_successorder';
 
                 $query = "SELECT * FROM order_list WHERE order_status = 'SHIPPED'";
                 $data = $this->Database->all_query($query);
-            break;
+                break;
 
             default:
                 echo "NOT FOUND";
@@ -279,7 +279,7 @@ class Admin extends CI_Controller
                 'dimension' => $dimension,
                 'note' => $note,
                 'description' => $description,
-                'publish_date' => date('Y-m-d H:i:s')
+                'publish_date' => date('Y-m-d H:i:s'),
 
             ));
 
@@ -295,4 +295,38 @@ class Admin extends CI_Controller
         redirect('Admin/page_select/product');
 
     }
+
+    public function page_invoice($id_order)
+    {        
+        $data = array();
+
+        $query = "SELECT * FROM order_list WHERE id_order = '$id_order'";
+        $data['order_list'] = $this->Database->all_query($query);
+
+        $query = "SELECT *, (price * number_item) AS subtotal FROM order_item WHERE id_order = '$id_order'";
+        $data['order_item'] = $this->Database->all_query($query);
+
+        $query = "SELECT * FROM payment_report WHERE id_order = '$id_order'";
+        $data['payment_report'] = $this->Database->all_query($query);
+
+
+        $this->load->view('header/header_script');
+        $this->load->view('header/header_menu');
+        $this->load->view('contents/main_sidebar');
+        $this->load->view('contents/invoice', array('data_content' => $data));
+        $this->load->view('footer/footer_content');
+        $this->load->view('footer/footer_script');
+
+    }
+
+    public function update_order_status(){
+        $id_order = $this->input->post('id-order');
+        $order_status = $this->input->post('order-status');
+
+        $this->Database->update_data('order_list', array('order_status' => $order_status), 
+            array('id_order' => $id_order));
+
+        echo 'sukses';
+    }
 }
+

@@ -38,7 +38,7 @@
                                 <?foreach($data_content as $val):?>
                                     <tr>
                                         <td>
-                                            <a href="#">
+                                            <a href="<?=base_url()?>index.php/Admin/page_invoice/<?=$val['id_order']?>">
                                                 <?=$val['id_order']?>
                                             </a>
                                         </td>
