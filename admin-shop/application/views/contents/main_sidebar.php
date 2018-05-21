@@ -60,12 +60,14 @@
             <ul class="treeview-menu">
             <li><a href="<?=base_url()?>index.php/Admin/page_select/table_order"><i class="fa fa-circle-o"></i> Semua</a></li>
             <li><a href="<?=base_url()?>index.php/Admin/page_select/table_neworder"><i class="fa fa-circle-o"></i> Baru</a></li>
-            <li><a href="<?=base_url()?>index.php/Admin/page_select/table_successorder"><i class="fa fa-circle-o"></i> Sukses</a></li>
+            <li><a href="<?=base_url()?>index.php/Admin/page_select/table_payorder"><i class="fa fa-circle-o"></i> Lunas</a></li>
+            <li><a href="<?=base_url()?>index.php/Admin/page_select/table_successorder"><i class="fa fa-circle-o"></i> Terkirim</a></li>
+            <li><a href="<?=base_url()?>index.php/Admin/page_select/table_cancelorder"><i class="fa fa-circle-o"></i> Dibatalkan</a></li>
             </ul>
         </li>
         <li class="treeview">
             <a href="#">
-            <i class="fa fa-table"></i> <span>Tables</span>
+            <i class="fa fa-table"></i> <span>Refund</span>
             <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
             </span>

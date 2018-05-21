@@ -8,7 +8,7 @@
         <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
             <li><a href="#">Tables</a></li>
-            <li class="active">Daftar Pesanan</li>
+            <li class="active">Daftar Pesanan Baru</li>
         </ol>
     </section>
 
@@ -19,7 +19,7 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Daftar Semua Pesanan</h3>
+                        <h3 class="box-title">Daftar Lunas</h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">                       
@@ -38,15 +38,9 @@
                                 <?foreach($data_content as $val):?>
                                     <tr>
                                         <td>
-                                            <?if($val['order_status'] == 'CANCELED'):?>
-                                            <a href="<?=base_url()?>index.php/Admin/readonly_invoice/<?=$val['id_order']?>">
-                                                <?=$val['id_order']?>
-                                            </a>
-                                            <?else:?>
                                             <a href="<?=base_url()?>index.php/Admin/page_invoice/<?=$val['id_order']?>">
                                                 <?=$val['id_order']?>
                                             </a>
-                                            <?endif?>
                                         </td>
                                         <td><?=$val['email_buyer']?></td>
                                         <td><?=$val['phone_buyer']?></td>

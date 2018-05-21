@@ -69,10 +69,24 @@ class Admin extends CI_Controller
                 $data = $this->Database->all_query($query);
                 break;
 
+            case 'table_payorder':
+                $page = 'table_payorder';
+
+                $query = "SELECT * FROM order_list WHERE order_status = 'PAID OFF'";
+                $data = $this->Database->all_query($query);
+                break;
+
             case 'table_successorder':
                 $page = 'table_successorder';
 
                 $query = "SELECT * FROM order_list WHERE order_status = 'SHIPPED'";
+                $data = $this->Database->all_query($query);
+                break;
+
+            case 'table_cancelorder':
+                $page = 'table_cancelorder';
+
+                $query = "SELECT * FROM order_list WHERE order_status = 'CANCELED'";
                 $data = $this->Database->all_query($query);
                 break;
 
@@ -297,7 +311,7 @@ class Admin extends CI_Controller
     }
 
     public function page_invoice($id_order)
-    {        
+    {
         $data = array();
 
         $query = "SELECT * FROM order_list WHERE id_order = '$id_order'";
@@ -309,7 +323,6 @@ class Admin extends CI_Controller
         $query = "SELECT * FROM payment_report WHERE id_order = '$id_order'";
         $data['payment_report'] = $this->Database->all_query($query);
 
-
         $this->load->view('header/header_script');
         $this->load->view('header/header_menu');
         $this->load->view('contents/main_sidebar');
@@ -319,14 +332,84 @@ class Admin extends CI_Controller
 
     }
 
-    public function update_order_status(){
+     public function readonly_invoice($id_order)
+    {
+        $data = array();
+
+        $query = "SELECT * FROM order_list WHERE id_order = '$id_order'";
+        $data['order_list'] = $this->Database->all_query($query);
+
+        $query = "SELECT *, (price * number_item) AS subtotal FROM order_item WHERE id_order = '$id_order'";
+        $data['order_item'] = $this->Database->all_query($query);
+
+        $query = "SELECT * FROM payment_report WHERE id_order = '$id_order'";
+        $data['payment_report'] = $this->Database->all_query($query);
+
+        $this->load->view('header/header_script');
+        $this->load->view('header/header_menu');
+        $this->load->view('contents/main_sidebar');
+        $this->load->view('contents/readonly_invoice', array('data_content' => $data));
+        $this->load->view('footer/footer_content');
+        $this->load->view('footer/footer_script');
+
+    }
+
+    public function update_order_status()
+    {
         $id_order = $this->input->post('id-order');
         $order_status = $this->input->post('order-status');
+        $page = '';
 
-        $this->Database->update_data('order_list', array('order_status' => $order_status), 
+        if ($order_status == 'CANCELED') {
+            $page = 'table_cancelorder';
+            $query = "SELECT * FROM order_item WHERE id_order = '$id_order'";
+            $get_data = $this->Database->all_query($query);
+
+            foreach ($get_data as $val) {
+                $id_item = $val['id_item'];
+                $color = $val['color'];
+                $size = $val['size'];
+                $number_item = $val['number_item'];
+
+                $check_query = "SELECT * FROM stock_table WHERE id_item = '$id_item' AND
+                    color = '$color' AND size = '$size'";
+                $get_stock = $this->Database->all_query($check_query);
+
+                if (count($get_stock) > 0) {
+                    $current_stock = 0;
+
+                    foreach ($get_stock as $val_stock) {
+                        $current_stock = $val_stock['stock'];
+                    }
+
+                    $this->Database->update_data('stock_table',
+                        array('stock' => ($current_stock + $number_item)),
+                        array(
+                            'id_item' => $id_item,
+                            'color' => $color,
+                            'size' => $size,
+                        ));
+                } else {
+                    $this->Database->create_data('stock_table',
+                        array(
+                            'id_item' => $id_item,
+                            'color' => $color,
+                            'size' => $size,
+                            'stock' => $number_item,
+                            'add_date' => date('Y-m-d H:i:s'),
+                        ));
+                }
+            }
+
+        } elseif ($order_status == 'PAID OFF') {
+            $page = 'table_payorder';
+        } elseif ($order_status == 'SHIPPED') {
+            $page = 'table_successorder';
+        }
+
+        $this->Database->update_data('order_list', array('order_status' => $order_status),
             array('id_order' => $id_order));
 
-        echo 'sukses';
+        redirect('Admin/page_select/' . $page);
     }
 }
-

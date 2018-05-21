@@ -3,7 +3,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Invoice
+            Read Only Invoice
             <?foreach($data_content['order_list'] as $val):?>
                 <small><?=$val['id_order']?></small>
                 <?endforeach?>
@@ -167,36 +167,7 @@
         <!-- this row will not appear when printing -->
         <div class="row no-print">
             <div class="col-xs-12">
-                <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
-                <?if($valid == TRUE):?>
-                <?=form_open('Admin/update_order_status', 'class="pull-right"')?>                
-                    <?foreach($data_content['order_list'] as $val):?>
-                        <input type="hidden" name="id-order" value="<?=$val['id_order']?>" />                        
-                    <?endforeach?>
-                    <input type="hidden" name="order-status" value="SHIPPED" />
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fa fa-truck"></i> Konfirmasi Pengiriman
-                    </button>
-                </form>
-                <?=form_open('Admin/update_order_status', 'class="pull-right"')?>                
-                    <?foreach($data_content['order_list'] as $val):?>
-                        <input type="hidden" name="id-order" value="<?=$val['id_order']?>" />                        
-                    <?endforeach?>
-                    <input type="hidden" name="order-status" value="PAID OFF" />
-                    <button type="submit" class="btn btn-default" style="margin-right: 5px;">
-                        <i class="fa fa-credit-card"></i> Konfirmasi Pembayaran
-                    </button>
-                </form>
-                <?endif?>
-                <?=form_open('Admin/update_order_status', 'class="pull-right"')?>
-                    <?foreach($data_content['order_list'] as $val):?>
-                        <input type="hidden" name="id-order" value="<?=$val['id_order']?>" />                        
-                    <?endforeach?>
-                    <input type="hidden" name="order-status" value="CANCELED" />
-                    <button type="submit" class="btn btn-default" style="margin-right: 5px;">
-                        <i class="fa fa-close"></i> Batalkan
-                    </button>
-                </form>
+                <a href="invoice-print.html" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>                
             </div>
         </div>
     </section>
