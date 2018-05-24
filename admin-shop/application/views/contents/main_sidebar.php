@@ -47,7 +47,7 @@
             </a>
             <ul class="treeview-menu">
             <li><a href="<?=base_url()?>index.php/Admin/page_select/product"><i class="fa fa-circle-o"></i> Katalog</a></li>
-            <li><a href="pages/UI/icons.html"><i class="fa fa-circle-o"></i> Stock</a></li>            
+            <li><a href="<?=base_url()?>index.php/Admin/page_select/table_stock"><i class="fa fa-circle-o"></i> Stock</a></li>            
             </ul>
         </li>
         <li class="treeview">

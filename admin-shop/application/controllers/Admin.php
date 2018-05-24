@@ -56,6 +56,12 @@ class Admin extends CI_Controller
 
                 break;
 
+            case 'table_stock':
+                $page = 'table_stock';
+
+                $data = $this->Database->get_data('items_table');
+                break;
+
             case 'table_order':
                 $page = 'table_order';
 
@@ -310,6 +316,103 @@ class Admin extends CI_Controller
 
     }
 
+    public function page_add_stock($id_item)
+    {
+        $data = array();
+
+        $query = "SELECT * FROM stock_table INNER JOIN items_table using(id_item)
+            WHERE id_item = '$id_item'";
+        $data['data_stock'] = $this->Database->all_query($query);
+
+        $data['data_size'] = $this->Database->get_data('size_table');
+        $data['data_color'] = $this->Database->get_data('colors_table');
+
+        $this->load->view('header/header_script');
+        $this->load->view('header/header_menu');
+        $this->load->view('contents/main_sidebar');
+        $this->load->view('contents/add_stock', array('data_content' => $data));
+        $this->load->view('footer/footer_content');
+        $this->load->view('footer/footer_script');
+
+    }
+
+    public function add_stock_data()
+    {
+        $id_item = $this->input->post('id_item');
+        $color = $this->input->post('color');
+        $size = $this->input->post('size');
+        $stock = $this->input->post('stock');
+        $valid = true;
+        $flashdata = '';
+
+        $query = "SELECT * FROM stock_table WHERE id_item = '$id_item' AND color = '$color'
+            AND size = '$size'";
+        $check_data = $this->Database->all_query($query);
+
+        if (count($check_data) > 0) {
+            $flashdata = '
+                <div class="callout callout-warning">
+                <h4>Gagal!</h4>
+                Data yang dimasukkan sudah ada dalam database.
+                </div>';
+
+            $this->session->set_flashdata('msg', $flashdata);
+
+            redirect('Admin/page_add_stock/' . $id_item);
+
+        } else {
+            if ($_FILES['image_one']['size'] > 200000) {
+                $valid = false;
+                $flashdata = '
+                <div class="callout callout-warning">
+                <h4>Gagal!</h4>
+                Gambar terlalu besar.
+                </div>';
+                $this->session->set_flashdata('msg', $flashdata);
+
+                redirect('Admin/page_add_stock/' . $id_item);
+            }
+
+            if ($_FILES['image_two']['size'] > 200000) {
+                $valid = false;
+                $flashdata = '
+                <div class="callout callout-warning">
+                <h4>Gagal!</h4>
+                Gambar terlalu besar.
+                </div>';
+                $this->session->set_flashdata('msg', $flashdata);
+
+                redirect('Admin/page_add_stock/' . $id_item);
+            }
+
+            if ($_FILES['image_three']['size'] > 200000) {
+                $valid = false;
+                $flashdata = '
+                <div class="callout callout-warning">
+                <h4>Gagal!</h4>
+                Gambar terlalu besar.
+                </div>';
+                $this->session->set_flashdata('msg', $flashdata);
+
+                redirect('Admin/page_add_stock/' . $id_item);
+            }
+
+            if ($_FILES['image_four']['size'] > 200000) {
+                $valid = false;
+                $flashdata = '
+                <div class="callout callout-warning">
+                <h4>Gagal!</h4>
+                Gambar terlalu besar.
+                </div>';
+                $this->session->set_flashdata('msg', $flashdata);
+
+                redirect('Admin/page_add_stock/' . $id_item);
+            }
+
+        }
+
+    }
+
     public function page_invoice($id_order)
     {
         $data = array();
@@ -332,7 +435,7 @@ class Admin extends CI_Controller
 
     }
 
-     public function readonly_invoice($id_order)
+    public function readonly_invoice($id_order)
     {
         $data = array();
 
