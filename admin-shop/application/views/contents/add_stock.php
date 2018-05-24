@@ -106,7 +106,17 @@
                                         </td>
                                         <td><?=$val['size']?></td>
                                         <td><?=$val['color']?></td>
-                                        <td><?=$val['stock']?></td>
+                                        <td>
+                                            <?=form_open('Admin/update_stock_data')?>
+                                                <input type="hidden" name="id_item" value="<?=$val['id_item']?>" />
+                                                <input type="hidden" name="color" value="<?=$val['color']?>" />
+                                                <input type="hidden" name="size" value="<?=$val['size']?>" />
+                                                <input type="number" name="stock" min="0" value="<?=$val['stock']?>" /><br/><br/>
+                                                <button type="submit" class="btn btn-primary">
+                                                    update
+                                                </button>
+                                            </form>
+                                        </td>                                        
                                         <td><?=$val['add_date']?></td>                                        
                                     </tr>
                                 <?endforeach?>

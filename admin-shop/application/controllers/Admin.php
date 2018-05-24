@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
+date_default_timezone_set('Asia/Jakarta');
 
 class Admin extends CI_Controller
 {
@@ -336,6 +337,45 @@ class Admin extends CI_Controller
 
     }
 
+    public function add_image_stock($image)
+    {
+        $image_name = '';
+        $image_db_name = '';
+
+        do {
+            $random_code = rand(0, 1000);
+            $image_name = 'stock_' . $random_code;
+            $query = "SELECT * FROM image_item WHERE image_one = '$image_name' OR
+                image_two = '$image_name' OR image_three = '$image_name' OR
+                image_four = '$image_name'";
+
+            $data = $this->Database->all_query($query);
+
+            if (count($data) < 1) {
+                break;
+            }
+        } while (true);
+
+        $config = array(
+            'file_name' => $image_name,
+            'upload_path' => '../assets/images/item_image/',
+            'max_size' => 200,
+            'allowed_types' => 'jpg|png|jpeg',
+        );
+
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload($image)) {
+            $image_db_name = 'err_image';
+        } else {
+            $image_data = $this->upload->data();
+            $image_db_name = $image_data['file_name'];
+        }
+
+        return $image_db_name;
+
+    }
+
     public function add_stock_data()
     {
         $id_item = $this->input->post('id_item');
@@ -350,6 +390,8 @@ class Admin extends CI_Controller
         $check_data = $this->Database->all_query($query);
 
         if (count($check_data) > 0) {
+            $valid = false;
+
             $flashdata = '
                 <div class="callout callout-warning">
                 <h4>Gagal!</h4>
@@ -363,6 +405,7 @@ class Admin extends CI_Controller
         } else {
             if ($_FILES['image_one']['size'] > 200000) {
                 $valid = false;
+
                 $flashdata = '
                 <div class="callout callout-warning">
                 <h4>Gagal!</h4>
@@ -375,6 +418,7 @@ class Admin extends CI_Controller
 
             if ($_FILES['image_two']['size'] > 200000) {
                 $valid = false;
+
                 $flashdata = '
                 <div class="callout callout-warning">
                 <h4>Gagal!</h4>
@@ -387,6 +431,7 @@ class Admin extends CI_Controller
 
             if ($_FILES['image_three']['size'] > 200000) {
                 $valid = false;
+
                 $flashdata = '
                 <div class="callout callout-warning">
                 <h4>Gagal!</h4>
@@ -399,6 +444,7 @@ class Admin extends CI_Controller
 
             if ($_FILES['image_four']['size'] > 200000) {
                 $valid = false;
+
                 $flashdata = '
                 <div class="callout callout-warning">
                 <h4>Gagal!</h4>
@@ -409,7 +455,128 @@ class Admin extends CI_Controller
                 redirect('Admin/page_add_stock/' . $id_item);
             }
 
+            if ($_FILES['image_one']['size'] > 0) {
+                $image = $this->add_image_stock('image_one');
+
+                $query = "SELECT * FROM image_item WHERE id_item = '$id_item' AND color = '$color'";
+                $check_data = $this->Database->all_query($query);
+
+                if (count($check_data) > 0) {
+                    $this->Database->update_data('image_item', array('image_one' => $image), array(
+                        'id_item' => $id_item,
+                        'color' => $color));
+                } else {
+                    $this->Database->create_data('image_item', array(
+                        'id_item' => $id_item,
+                        'color' => $color,
+                        'image_one' => $image,
+                    ));
+                }
+            }
+
+            if ($_FILES['image_two']['size'] > 0) {
+                $image = $this->add_image_stock('image_two');
+
+                $query = "SELECT * FROM image_item WHERE id_item = '$id_item' AND color = '$color'";
+                $check_data = $this->Database->all_query($query);
+
+                if (count($check_data) > 0) {
+                    $this->Database->update_data('image_item', array('image_two' => $image), array(
+                        'id_item' => $id_item,
+                        'color' => $color));
+                } else {
+                    $this->Database->create_data('image_item', array(
+                        'id_item' => $id_item,
+                        'color' => $color,
+                        'image_two' => $image,
+                    ));
+                }
+            }
+
+            if ($_FILES['image_three']['size'] > 0) {
+                $image = $this->add_image_stock('image_three');
+
+                $query = "SELECT * FROM image_item WHERE id_item = '$id_item' AND color = '$color'";
+                $check_data = $this->Database->all_query($query);
+
+                if (count($check_data) > 0) {
+                    $this->Database->update_data('image_item', array('image_three' => $image), array(
+                        'id_item' => $id_item,
+                        'color' => $color));
+                } else {
+                    $this->Database->create_data('image_item', array(
+                        'id_item' => $id_item,
+                        'color' => $color,
+                        'image_three' => $image,
+                    ));
+                }
+            }
+
+            if ($_FILES['image_four']['size'] > 0) {
+                $image = $this->add_image_stock('image_four');
+
+                $query = "SELECT * FROM image_item WHERE id_item = '$id_item' AND color = '$color'";
+                $check_data = $this->Database->all_query($query);
+
+                if (count($check_data) > 0) {
+                    $this->Database->update_data('image_item', array('image_four' => $image), array(
+                        'id_item' => $id_item,
+                        'color' => $color));
+                } else {
+                    $this->Database->create_data('image_item', array(
+                        'id_item' => $id_item,
+                        'color' => $color,
+                        'image_four' => $image,
+                    ));
+                }
+            }
+
+            $this->Database->create_data('stock_table', array(
+                'id_item' => $id_item,
+                'color' => $color,
+                'size' => $size,
+                'stock' => $stock,
+                'add_date' => date('Y-m-d H:i:s'),
+            ));
+
+            $flashdata = '
+                <div class="callout callout-info">
+                <h4>Sukses!</h4>
+                Stock baru berhasil ditambahkan pada database.
+                </div>';
+
+            $this->session->set_flashdata('msg', $flashdata);
+            redirect('Admin/page_add_stock/' . $id_item);
+
         }
+
+    }
+
+    public function update_stock_data()
+    {
+        $id_item = $this->input->post('id_item');
+        $color = $this->input->post('color');
+        $size = $this->input->post('size');
+        $stock = $this->input->post('stock');
+
+        $this->Database->update_data('stock_table',
+            array(
+                'stock' => $stock,
+                'add_date' => date('Y-m-d H:i:s')),
+            array(
+                'id_item' => $id_item,
+                'color' => $color,
+                'size' => $size,
+            ));
+
+        $flashdata = '
+                <div class="callout callout-info">
+                <h4>Sukses!</h4>
+                Stock berhasil diupdate.
+                </div>';
+
+        $this->session->set_flashdata('msg', $flashdata);
+        redirect('Admin/page_add_stock/' . $id_item);
 
     }
 
