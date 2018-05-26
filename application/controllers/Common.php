@@ -26,8 +26,23 @@ class Common extends CI_Controller
         switch ($page) {
             case 'home':
                 $query = "SELECT * FROM items_table INNER JOIN image_item using (id_item) ORDER BY publish_date DESC LIMIT 0, 8";
+                $data['new_item'] = $this->Database->all_query($query);
 
-                $data = $this->Database->all_query($query);
+                $query = "SELECT * FROM shop_promo WHERE id_ref = '001'";
+                $data['shop_promo_1'] = $this->Database->all_query($query);
+
+                $query = "SELECT * FROM shop_promo WHERE id_ref = '002'";
+                $data['shop_promo_2'] = $this->Database->all_query($query);
+
+                $query = "SELECT * FROM shop_promo WHERE id_ref = '003'";
+                $data['shop_promo_3'] = $this->Database->all_query($query);
+
+                $query = "SELECT * FROM shop_slider WHERE id_slider = '001'";
+                $data['shop_slider_1'] = $this->Database->all_query($query);
+
+                $query = "SELECT * FROM shop_slider WHERE id_slider = '002'";
+                $data['shop_slider_2'] = $this->Database->all_query($query);
+
                 break;
 
             case 'product_list':
@@ -188,6 +203,10 @@ class Common extends CI_Controller
             case 'sale':
                 $active_nav = 'sale';
                 $query = "SELECT * FROM items_table INNER JOIN image_item using (id_item) WHERE discount > 0";
+                break;
+
+            case 'name':
+                $query = "SELECT * FROM items_table INNER JOIN image_item using (id_item) WHERE items_table.name LIKE '%$value%'";
                 break;
         }
 

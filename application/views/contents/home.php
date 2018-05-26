@@ -10,7 +10,11 @@
   <div class="flexslider">
     <ul class="slides">
       <!-- FLEXSLIDER SLIDE -->
-      <li style="background-image: url(<?=base_url()?>assets/images/demo-content/home-slider-2.jpg); min-height: 560px">
+      <?$slider_1 = ''?>
+      <?foreach($data_content['shop_slider_1'] as $val) {
+        $slider_1 = $val['image'];
+      }?>
+      <li style="background-image: url(<?=base_url()?>assets/images/common_image/<?=$slider_1?>); min-height: 560px">
         <!-- <div class="container">
           <div class="row">
             <div class="col-sm-4 col-sm-offset-6">
@@ -33,7 +37,11 @@
       </li>
       <!-- !FLEXSLIDER SLIDE -->
       <!-- FLEXSLIDER SLIDE -->
-      <li style="background-image: url(<?=base_url()?>assets/images/demo-content/home-slider-1.jpg); min-height: 560px">
+      <?$slider_2 = ''?>      
+      <?foreach($data_content['shop_slider_2'] as $val) {
+        $slider_2 = $val['image'];
+      }?>
+      <li style="background-image: url(<?=base_url()?>assets/images/common_image/<?=$slider_2?>); min-height: 560px">
           <!-- <div class="container">
               <div class="row">
                   <div class="col-sm-5 col-sm-offset-7">
@@ -67,43 +75,6 @@
 </div>
 <!-- !container -->
 
-<div class="home-emphasis full-width section-emphasis-1">
-  <div class="container">
-    <section class="row">
-      <div class="col-md-12 text-center">
-        <!-- ICON BOX SHORT -->
-        <div class="icon-box icon-box-short">
-          <i class="fa fa-refresh"></i>
-          <h4 class="strong-header">30 Days return</h4>
-        </div>
-        <!-- !ICON BOX SHORT -->
-
-        <!-- ICON BOX SHORT -->
-        <div class="icon-box icon-box-short">
-          <i class="fa fa-truck"></i>
-          <h4 class="strong-header">Free shipping</h4>
-        </div>
-        <!-- !ICON BOX SHORT -->
-
-        <!-- ICON BOX SHORT -->
-        <div class="icon-box icon-box-short">
-          <i class="fa fa-lock"></i>
-          <h4 class="strong-header">Secure payments</h4>
-        </div>
-        <!-- !ICON BOX SHORT -->
-
-        <!-- ICON BOX SHORT -->
-        <div class="icon-box icon-box-short">
-          <i class="fa fa-gift"></i>
-          <h4 class="strong-header">New styles every day</h4>
-        </div>
-        <!-- !ICON BOX SHORT -->
-      </div>
-    </section>
-  </div>
-</div>
-<!-- !full-width -->
-
 <div class="container">
 <!-- !FULL WIDTH -->
 <!-- !SECTION EMPHASIS 1 -->
@@ -119,15 +90,17 @@
     <!-- SHOP HIGHLIGHT -->
     <!-- VERSION 1 -->
     <div class="shop-item-highlight shop-item-highlight-version-1">
-      <a href="<?=base_url()?>index.php/Common/product_list_param/gender/M">
-        <img src="<?=base_url()?>assets/images/demo-content/new_arrival.jpg" alt="Highlighted shop item">
-      </a>
+      <?foreach($data_content['shop_promo_1'] as $val):?>
+        <a href="<?=base_url()?>index.php/Common/product_list_param/name/<?=$val['ref']?>">
+          <img src="<?=base_url()?>assets/images/common_image/<?=$val['image']?>" alt="Highlighted shop item">
+        </a>
 
-      <a href="<?=base_url()?>index.php/Common/product_list_param/gender/M" class="item-info-name-data" display="none">
-        <div class="item-info-name-data-wrapper">
-          <h4>Knit dress with seaming detail</h4>          
-        </div>
-      </a>
+        <a href="<?=base_url()?>index.php/Common/product_list_param/name/<?=$val['ref']?>" class="item-info-name-data" display="none">
+          <div class="item-info-name-data-wrapper">
+            <h4><?=$val['title']?></h4>          
+          </div>
+        </a>
+      <?endforeach?>
     </div>
     <!-- !SHOP HIGHLIGHT -->
     <!-- !VERSION 1 -->
@@ -138,15 +111,17 @@
     <!-- SHOP HIGHLIGHT -->
     <!-- VERSION 1 -->
     <div class="shop-item-highlight shop-item-highlight-version-1">
-      <a href="<?=base_url()?>index.php/Common/product_list_param/gender/M">
-        <img src="<?=base_url()?>assets/images/demo-content/new_arrival2.jpg" alt="Highlighted shop item">
-      </a>
+      <?foreach($data_content['shop_promo_2'] as $val):?>
+        <a href="<?=base_url()?>index.php/Common/product_list_param/name/<?=$val['ref']?>">
+          <img src="<?=base_url()?>assets/images/common_image/<?=$val['image']?>" alt="Highlighted shop item">
+        </a>
 
-      <a href="<?=base_url()?>index.php/Common/product_list_param/gender/M" class="item-info-name-data">
-        <div class="item-info-name-data-wrapper">
-          <h4>Midi dress in tapestry print</h4>          
-        </div>
-      </a>
+        <a href="<?=base_url()?>index.php/Common/product_list_param/name/<?=$val['ref']?>" class="item-info-name-data">
+          <div class="item-info-name-data-wrapper">
+            <h4><?=$val['title']?></h4>          
+          </div>
+        </a>
+      <?endforeach?>
     </div>
     <!-- !SHOP HIGHLIGHT -->
     <!-- !VERSION 1 -->
@@ -157,15 +132,17 @@
     <!-- SHOP HIGHLIGHT -->
     <!-- VERSION 1 -->
     <div class="shop-item-highlight shop-item-highlight-version-1">
-      <a href="<?=base_url()?>index.php/Common/product_list_param/gender/M">
-        <img src="<?=base_url()?>assets/images/demo-content/new_arrival3.jpg" alt="Highlighted shop item">
-      </a>
+      <?foreach($data_content['shop_promo_3'] as $val):?>
+        <a href="<?=base_url()?>index.php/Common/product_list_param/name/<?=$val['ref']?>">
+          <img src="<?=base_url()?>assets/images/common_image/<?=$val['image']?>" alt="Highlighted shop item">
+        </a>
 
-      <a href="<?=base_url()?>index.php/Common/product_list_param/gender/M" class="item-info-name-data">
-        <div class="item-info-name-data-wrapper">
-          <h4>Denim overall in dark wash</h4>          
-        </div>
-      </a>
+        <a href="<?=base_url()?>index.php/Common/product_list_param/name/<?=$val['ref']?>" class="item-info-name-data">
+          <div class="item-info-name-data-wrapper">
+            <h4><?=$val['title']?></h4>          
+          </div>
+        </a>
+      <?endforeach?>
     </div>
     <!-- !SHOP HIGHLIGHT -->
     <!-- !VERSION 1 -->
@@ -187,7 +164,7 @@
 <div class="flexslider flexslider-nopager row">
 <ul class="slides">
   <?$counter = 0;?>
-  <?foreach ($data_content as $val): ?>
+  <?foreach ($data_content['new_item'] as $val): ?>
   <?
     $get_stock = array();
     $count_stock = 0;
@@ -265,11 +242,11 @@
       </h2>
     </div>
     <div class="col-md-12 text-center logotypes">
-      <img src="<?=base_url()?>assets/images/demo-content/brand-07.png" alt=" ">
-      <img src="<?=base_url()?>assets/images/demo-content/brand-03.png" alt=" ">
-      <img src="<?=base_url()?>assets/images/demo-content/brand-02.png" alt=" ">
-      <img src="<?=base_url()?>assets/images/demo-content/brand-06.png" alt=" ">
-      <img src="<?=base_url()?>assets/images/demo-content/brand-04.png" alt=" ">      
+      <img src="<?=base_url()?>assets/images/common_image/brand-07.png" alt=" ">
+      <img src="<?=base_url()?>assets/images/common_image/brand-03.png" alt=" ">
+      <img src="<?=base_url()?>assets/images/common_image/brand-02.png" alt=" ">
+      <img src="<?=base_url()?>assets/images/common_image/brand-06.png" alt=" ">
+      <img src="<?=base_url()?>assets/images/common_image/brand-04.png" alt=" ">      
     </div>
   </section>
 
@@ -278,47 +255,45 @@
 </div>
 <!-- !container -->
 
-<div class="full-width section-emphasis-2">
+<div class="home-emphasis full-width section-emphasis-2">
   <div class="container">
     <section class="row">
-      <div class="section-header col-xs-12">
-        <hr>
-        <h2 class="strong-header">
-          Berlangganan newsletter
-        </h2>
-      </div>
-      <div class="col-md-8 col-md-offset-2 text-center">
-        <!-- NEWSLETTER BOX -->
-        <div class="newsletter-box">
-          <div class="successMessage alert alert-success alert-dismissable" style="display: none">
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-              Thank You! E-mail was sent.
-          </div>
-          <div class="errorMessage alert alert-danger alert-dismissable" style="display: none">
-              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-              Ups! An error occured. Please try again later.
-          </div>
-
-          <form role="form" action="http://decima.html.themewoodmen.com/form/send.php" method="post" class="form-inline validateIt" data-email-subject="Newsletter Form" data-show-errors="true" data-hide-form="true">            
-            <div class="form-group">
-              <label class="sr-only" for="newsletter-widget-email-1">Your email</label>
-              <input type="email" required name="field[]" class="form-control" id="newsletter-widget-email-1" placeholder="Your email">
-            </div>
-            <input type="submit" class="btn btn-primary btn-small" value="Sign up">
-          </form>
+      <div class="col-md-12 text-center">
+        <!-- ICON BOX SHORT -->
+        <div class="icon-box icon-box-short">
+          <i class="fa fa-refresh"></i>
+          <h4 class="strong-header">30 Days return</h4>
         </div>
-        <!-- !NEWSLETTER BOX -->
+        <!-- !ICON BOX SHORT -->
 
+        <!-- ICON BOX SHORT -->
+        <div class="icon-box icon-box-short">
+          <i class="fa fa-truck"></i>
+          <h4 class="strong-header">Free shipping</h4>
+        </div>
+        <!-- !ICON BOX SHORT -->
+
+        <!-- ICON BOX SHORT -->
+        <div class="icon-box icon-box-short">
+          <i class="fa fa-lock"></i>
+          <h4 class="strong-header">Secure payments</h4>
+        </div>
+        <!-- !ICON BOX SHORT -->
+
+        <!-- ICON BOX SHORT -->
+        <div class="icon-box icon-box-short">
+          <i class="fa fa-gift"></i>
+          <h4 class="strong-header">New styles every day</h4>
+        </div>
+        <!-- !ICON BOX SHORT -->
       </div>
     </section>
-
   </div>
 </div>
 <!-- !full-width -->
 <div class="container">
   <!-- !FULL WIDTH -->
   <!-- !SECTION EMPHASIS 2 -->
-
 
 </div>
 </section>

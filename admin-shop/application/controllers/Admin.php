@@ -97,6 +97,10 @@ class Admin extends CI_Controller
                 $data = $this->Database->all_query($query);
                 break;
 
+            case 'shop_promo':
+                $page = 'shop_promo';
+                break;
+
             default:
                 echo "NOT FOUND";
                 break;
@@ -681,5 +685,96 @@ class Admin extends CI_Controller
             array('id_order' => $id_order));
 
         redirect('Admin/page_select/' . $page);
+    }
+
+    public function update_promo()
+    {
+        $id_ref = $this->input->post('id-ref');
+        $title = $this->input->post('title');
+        $ref = $this->input->post('ref');
+        $flashdata = '';
+        $query = '';
+        $get_data = array();
+
+        if ($_FILES['image']['size'] > 200000) {
+            $flashdata = '
+                <div class="callout callout-warning">
+                <h4>Gagal!</h4>
+                Gambar terlalu besar.
+                </div>';
+        } else {
+            $image_name = '';
+
+            do {
+                $random_code = rand(0, 1000);
+                $image_name = 'promo_' . $random_code;
+                $check_query = "SELECT * FROM shop_promo WHERE shop_promo.image = '$image_name'";
+                $data = $this->Database->all_query($check_query);
+
+                if (count($data) < 1) {
+                    break;
+                }
+            } while (true);
+
+            $config = array(
+                'file_name' => $image_name,
+                'upload_path' => '../assets/images/common_image/',
+                'max_size' => 200,
+                'allowed_types' => 'jpg|png|jpeg',
+            );
+
+            $this->load->library('upload', $config);
+
+            if (!$this->upload->do_upload('image')) {
+                $flashdata = '
+                <div class="callout callout-warning">
+                <h4>Gagal!</h4>'
+                . $this->upload->display_errors()
+                    . '</div>';
+
+                $this->session->set_flashdata('msg', $flashdata);
+            } else {
+                if ($id_ref == '001') {
+                    $query = "SELECT * FROM shop_promo WHERE id_ref = '001'";
+                } elseif ($id_ref == '002') {
+                    $query = "SELECT * FROM shop_promo WHERE id_ref = '002'";
+                } elseif ($id_ref == '003') {
+                    $query = "SELECT * FROM shop_promo WHERE id_ref = '003'";
+                }
+
+                $get_data = $this->Database->all_query($query);
+                $image = '';
+
+                foreach ($get_data as $val) {
+                    $image = $val['image'];
+                }
+
+                $path = '../assets/images/common_image/' . $image;
+
+                if (file_exists($path)) {
+                    unlink($path);
+                }
+
+                $image_data = $this->upload->data();
+                $this->Database->update_data('shop_promo', array(
+                    'title' => $title,
+                    'ref' => $ref,
+                    'image' => $image_data['file_name'],
+                ),
+                    array(
+                        'id_ref' => $id_ref,
+                    ));
+
+                $flashdata = '
+                <div class="callout callout-info">
+                <h4>sukses!</h4>
+                Data berhasil diupdate.
+                </div>';
+            }
+
+        }
+
+        $this->session->set_flashdata('msg', $flashdata);
+        redirect('Admin/page_select/shop_promo');
     }
 }
