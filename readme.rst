@@ -11,7 +11,7 @@ and change information about shop.
 Database
 ********
 
-This application using mySQL database system. (shop db)
+This application using mySQL database system, database name is(shop db).
 
 ***************
 Admin abilities
