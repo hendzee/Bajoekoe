@@ -101,6 +101,10 @@ class Admin extends CI_Controller
                 $page = 'shop_promo';
                 break;
 
+            case 'shop_slider';
+                $page = 'shop_slider';
+                break;
+
             default:
                 echo "NOT FOUND";
                 break;
@@ -734,13 +738,8 @@ class Admin extends CI_Controller
 
                 $this->session->set_flashdata('msg', $flashdata);
             } else {
-                if ($id_ref == '001') {
-                    $query = "SELECT * FROM shop_promo WHERE id_ref = '001'";
-                } elseif ($id_ref == '002') {
-                    $query = "SELECT * FROM shop_promo WHERE id_ref = '002'";
-                } elseif ($id_ref == '003') {
-                    $query = "SELECT * FROM shop_promo WHERE id_ref = '003'";
-                }
+
+                $query = "SELECT * FROM shop_promo WHERE id_ref = '$id_ref'";
 
                 $get_data = $this->Database->all_query($query);
                 $image = '';
@@ -776,5 +775,86 @@ class Admin extends CI_Controller
 
         $this->session->set_flashdata('msg', $flashdata);
         redirect('Admin/page_select/shop_promo');
+    }
+
+    public function update_slider()
+    {
+        $id_slider = $this->input->post('id-slider');
+        $flashdata = '';
+
+        if ($_FILES['image']['size'] > 200000) {
+            $flashdata = '
+                <div class="callout callout-warning">
+                <h4>Gagal!</h4>
+                Gambar terlalu besar.
+                </div>';
+        } else {
+            $image_name = '';
+
+            do {
+                $random_code = rand(0, 1000);
+                $image_name = 'slider_' . $random_code;
+                $check_query = "SELECT * FROM shop_slider WHERE shop_slider.image = '$image_name'";
+                $data = $this->Database->all_query($check_query);
+
+                if (count($data) < 1) {
+                    break;
+                }
+            } while (true);
+
+            $config = array(
+                'file_name' => $image_name,
+                'upload_path' => '../assets/images/common_image/',
+                'max_size' => 200,
+                'allowed_types' => 'jpg|png|jpeg',
+            );
+
+            $this->load->library('upload', $config);
+
+            if (!$this->upload->do_upload('image')) {
+                $flashdata = '
+                <div class="callout callout-warning">
+                <h4>Gagal!</h4>'
+                . $this->upload->display_errors()
+                    . '</div>';
+
+                $this->session->set_flashdata('msg', $flashdata);
+            } else {
+
+                $query = "SELECT * FROM shop_slider WHERE id_slider = '$id_slider'";
+
+                $get_data = $this->Database->all_query($query);
+                $image = '';
+
+                foreach ($get_data as $val) {
+                    $image = $val['image'];
+                }
+
+                $path = '../assets/images/common_image/' . $image;
+
+                if (file_exists($path)) {
+                    unlink($path);
+                }
+
+                $image_data = $this->upload->data();
+                $this->Database->update_data('shop_slider', array(                   
+                    'image' => $image_data['file_name'],
+                ),
+                    array(
+                        'id_slider' => $id_slider,
+                    ));
+
+                $flashdata = '
+                <div class="callout callout-info">
+                <h4>sukses!</h4>
+                Data berhasil diupdate.
+                </div>';
+            }
+
+        }
+
+        $this->session->set_flashdata('msg', $flashdata);
+        redirect('Admin/page_select/shop_slider');
+
     }
 }

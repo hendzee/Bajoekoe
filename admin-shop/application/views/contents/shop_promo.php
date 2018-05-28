@@ -33,6 +33,7 @@
                                 <input type="text" class="form-control" name="ref" placeholder="referensi..." required />
                             </div>
                             <div class="form-group">                            
+                                <label>max 200kB</label>      
                                 <input type="file" name="image" required />                                
                             </div>
                             <button type="submit" class="btn btn-primary">Simpan</button>

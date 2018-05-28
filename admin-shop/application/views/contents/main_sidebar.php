@@ -90,7 +90,12 @@
         <li class="header">TOKO</li>
         <li class="">
             <a href="<?=base_url()?>index.php/Admin/page_select/shop_promo">
-            <i class="fa fa-dashboard"></i> <span>Promo</span>            
+            <i class="fa fa-bullhorn"></i> <span>Promo</span>            
+            </a>            
+        </li>                
+        <li class="">
+            <a href="<?=base_url()?>index.php/Admin/page_select/shop_slider">
+            <i class="fa fa-clone"></i> <span>Slider</span>            
             </a>            
         </li>                
         </ul>
