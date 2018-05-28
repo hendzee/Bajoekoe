@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 17, 2018 at 01:10 AM
+-- Generation Time: May 28, 2018 at 10:45 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -136,6 +136,7 @@ CREATE TABLE `image_item` (
 --
 
 INSERT INTO `image_item` (`id_item`, `color`, `image_one`, `image_two`, `image_three`, `image_four`) VALUES
+('item_001', 'Biru', 'stock_758.jpg', 'stock_7581.jpg', 'stock_7582.jpg', 'stock_7583.jpg'),
 ('item_001', 'Hijau', 'shoes_green1.jpg', 'shoes_green2.jpg', 'shoes_green3.jpg', 'shoes_green4.jpg'),
 ('item_001', 'Hitam', 'shoes_black1.jpg', 'shoes_black2.jpg', 'shoes_black3.jpg', 'shoes_black4.jpg'),
 ('item_002', 'Biru', 'flickr-06.jpg', 'flickr-06.jpg', NULL, NULL),
@@ -201,7 +202,7 @@ CREATE TABLE `order_item` (
 --
 
 INSERT INTO `order_item` (`id_order`, `id_item`, `name`, `color`, `size`, `price`, `number_item`) VALUES
-('order_002034', 'item_001', '3Second Men Shoes', 'Hijau', 'L', 300000, 2),
+('order_002034', 'item_001', '3Second Men Shoes', 'Hijau', 'L', 300000, 3),
 ('order_002078', 'item_001', '3Second Men Shoes', 'Hijau', 'XL', 300000, 1),
 ('order_002078', 'item_004', '3Second Wave Men', 'Putih', 'XL', 272000, 3),
 ('order_002310', 'item_004', '3Second Wave Men', 'Biru', 'L', 272000, 1),
@@ -235,11 +236,11 @@ CREATE TABLE `order_list` (
 --
 
 INSERT INTO `order_list` (`id_order`, `id_customer`, `order_date`, `email_buyer`, `first_name`, `last_name`, `phone_buyer`, `ship_info`, `bill_info`, `order_status`, `order_listcol`) VALUES
-('order_002034', 'GUEST', '2018-05-12 15:51:04', 'brian@gmail.com', 'Brian', 'Angkasa', '08123380867', 'Indonesia, Malang, Jawa Timur, Rampal Jaya Blok A, No.15, 65412', NULL, 'NEW ORDER', NULL),
-('order_002078', 'mem_001498', '2018-04-12 16:14:40', 'hendras@gmail.com', 'Virginia', 'Hendras', '08565542339', 'Indonesia, Malang, Jawa Timur, Jl.Harapan, 65432', NULL, 'NEW ORDER', NULL),
-('order_002310', 'mem_001498', '2018-05-12 16:16:06', 'hendras@gmail.com', 'Virginia', 'Hendras', '08565542339', 'Indonesia, Malang, Jawa Timur, Jl.Harapan, 65432', NULL, 'NEW ORDER', NULL),
-('order_002576', 'GUEST', '2018-05-12 16:08:48', 'hendras@gmail.com', 'Virginia', 'Hendras', '08565542339', 'Indonesia, Malang, Jawa Timur, Jl.Harapan, 65432', NULL, 'SHIPPED', NULL),
-('order_00653', 'GUEST', '2018-05-12 16:12:18', 'hendras@gmail.com', 'Virginia', 'Hendras', '08565542339', 'Indonesia, Malang, Jawa Timur, Jl.Harapan, 65432', NULL, 'NEW ORDER', NULL);
+('order_002034', 'GUEST', '2018-05-20 15:51:04', 'brian@gmail.com', 'Brian', 'Angkasa', '08123380867', 'Indonesia, Malang, Jawa Timur, Rampal Jaya Blok A, No.15, 65412', NULL, 'CANCELED', NULL),
+('order_002078', 'mem_001498', '2018-05-21 16:14:40', 'hendras@gmail.com', 'Virginia', 'Hendras', '08565542339', 'Indonesia, Malang, Jawa Timur, Jl.Harapan, 65432', NULL, 'CANCELED', NULL),
+('order_002310', 'mem_001498', '2018-05-12 16:16:06', 'hendras@gmail.com', 'Virginia', 'Hendras', '08565542339', 'Indonesia, Malang, Jawa Timur, Jl.Harapan, 65432', NULL, 'PAID OFF', NULL),
+('order_002576', 'GUEST', '2018-05-19 18:08:48', 'hendras@gmail.com', 'Virginia', 'Hendras', '08565542339', 'Indonesia, Malang, Jawa Timur, Jl.Harapan, 65432', NULL, 'SHIPPED', NULL),
+('order_00653', 'GUEST', '2018-05-12 16:12:18', 'hendras@gmail.com', 'Virginia', 'Hendras', '08565542339', 'Indonesia, Malang, Jawa Timur, Jl.Harapan, 65432', NULL, 'CANCELED', NULL);
 
 -- --------------------------------------------------------
 
@@ -260,7 +261,48 @@ CREATE TABLE `payment_report` (
 --
 
 INSERT INTO `payment_report` (`id_order`, `id_buyer`, `transfer_bank`, `token_image`, `report_date`) VALUES
-('order_004018', NULL, 'BCA', 'tok_120.png', '2018-05-08 22:40:32');
+('order_002034', NULL, 'BCA', 'tok_120.png', '2018-05-08 22:40:32');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shop_promo`
+--
+
+CREATE TABLE `shop_promo` (
+  `id_ref` varchar(45) NOT NULL,
+  `title` varchar(45) NOT NULL,
+  `ref` varchar(45) DEFAULT NULL,
+  `image` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `shop_promo`
+--
+
+INSERT INTO `shop_promo` (`id_ref`, `title`, `ref`, `image`) VALUES
+('002', 'FUN SHIRT AND SHORT', 'BAJU', 'promo_949.jpg'),
+('001', 'MARVEL SHIRT SERIES', 'BAJU', 'promo_615.jpg'),
+('003', 'NEW NIKE SHOES', 'BAJU', 'promo_101.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shop_slider`
+--
+
+CREATE TABLE `shop_slider` (
+  `id_slider` varchar(10) NOT NULL,
+  `image` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `shop_slider`
+--
+
+INSERT INTO `shop_slider` (`id_slider`, `image`) VALUES
+('001', 'slider_276.jpg'),
+('002', 'slider_151.jpg');
 
 -- --------------------------------------------------------
 
@@ -304,11 +346,12 @@ CREATE TABLE `stock_table` (
 --
 
 INSERT INTO `stock_table` (`id_item`, `color`, `size`, `stock`, `add_date`) VALUES
+('item_001', 'Biru', '40', '7', '2018-05-25 05:47:48'),
 ('item_004', 'Biru', 'L', '9', '2018-03-10 07:07:56'),
 ('item_002', 'Biru', 'X', '2', '2015-03-10 07:07:56'),
 ('item_002', 'Biru', 'XL', '10', '2016-05-10 07:07:56'),
-('item_001', 'Hijau', 'L', '2', '2018-12-10 07:07:45'),
-('item_001', 'Hijau', 'XL', '42', '2013-10-10 07:07:56'),
+('item_001', 'Hijau', 'L', '5', '2018-12-10 07:07:45'),
+('item_001', 'Hijau', 'XL', '43', '2013-10-10 07:07:56'),
 ('item_006', 'Hitam', '40', '2', '2011-10-10 07:07:56'),
 ('item_005', 'Hitam', 'L', '2', '2012-10-10 07:07:56'),
 ('item_001', 'Hitam', 'S', '18', '2016-05-10 07:07:56'),
@@ -316,7 +359,7 @@ INSERT INTO `stock_table` (`id_item`, `color`, `size`, `stock`, `add_date`) VALU
 ('item_001', 'Hitam', 'XL', '19', '2016-05-10 07:07:56'),
 ('item_003', 'Hitam', 'XL', '5', '2016-05-10 07:07:56'),
 ('item_005', 'Hitam', 'XL', '3', '2016-05-10 07:07:56'),
-('item_004', 'Putih', 'XL', '7', '2016-05-10 07:07:56');
+('item_004', 'Putih', 'XL', '10', '2016-05-10 07:07:56');
 
 --
 -- Indexes for dumped tables
@@ -377,6 +420,18 @@ ALTER TABLE `order_list`
 --
 ALTER TABLE `payment_report`
   ADD PRIMARY KEY (`id_order`);
+
+--
+-- Indexes for table `shop_promo`
+--
+ALTER TABLE `shop_promo`
+  ADD PRIMARY KEY (`title`,`id_ref`);
+
+--
+-- Indexes for table `shop_slider`
+--
+ALTER TABLE `shop_slider`
+  ADD PRIMARY KEY (`id_slider`);
 
 --
 -- Indexes for table `size_table`
