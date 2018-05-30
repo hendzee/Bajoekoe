@@ -239,12 +239,13 @@ class Common extends CI_Controller
         $value = $this->input->post('value');
 
         $nav_brand = $this->Database->get_data('brand_table');
-        $nav_category = $this->Database->get_data('categories_table');
+        $nav_category = $this->Database->get_data('categories_table');                
 
         $query = "SELECT * FROM items_table INNER JOIN image_item using (id_item) WHERE items_table.name LIKE '%$value%' OR brand LIKE '%$value%'";
         $data['data_items'] = $this->Database->all_query($query);
         $data['data_category'] = $this->Database->get_data('categories_table');
         $data['data_colors'] = $this->Database->get_data('colors_table');
+        $data['data_size'] = $this->Database->get_data('size_table');
 
         $this->load->view('header/header_script');
         $this->load->view('header/header', array(

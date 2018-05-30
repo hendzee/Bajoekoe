@@ -11,7 +11,7 @@
   <!-- SHOPPING CART -->  
   <div class="shopping-cart-widget pull-right">    
     <button type="button" class="btn btn-link pull-right">
-      <span aria-hidden="true" data-icon="&#xe006;"></span> <?=$this->cart->total_items()?> barang (Rp.<?=$this->cart->total()?>) <b class="caret"></b>
+      <span aria-hidden="true" data-icon="&#xe006;"></span> <?=$this->cart->total_items()?> barang (Rp.<?=$this->cart->total()?>) 
     </button>
     <div role="complementary">
       <!-- SHOP SUMMARY ITEM -->
@@ -68,7 +68,7 @@
     <div class="navbar-collapse navbar-main-collapse" role="navigation">
       <ul class="nav navbar-nav">
         <li class="<?if($active_nav == 'product')echo'active'?> dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Produk <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Produk </a>
           <ul class="dropdown-menu">            
             <li>
               <a href="<?=base_url()?>index.php/Common/product_list_param/gender/M">
@@ -84,7 +84,7 @@
           </ul>
         </li>
         <li class="<?if($active_nav == 'brand')echo'active'?> dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Brand <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Brand </a>
           <ul class="dropdown-menu">            
             <?foreach($nav_brand as $val):?>
               <li>
@@ -96,7 +96,7 @@
           </ul>
         </li>        
         <li class="<?if($active_nav == 'category')echo'active'?> dropdown">
-          <a href="11-a-portfolio-4-columns.html" class="dropdown-toggle" data-toggle="dropdown">Jenis <b class="caret"></b></a>
+          <a href="11-a-portfolio-4-columns.html" class="dropdown-toggle" data-toggle="dropdown">Jenis </a>
           <ul class="dropdown-menu">
             <?foreach($nav_category as $val):?>
               <li>

@@ -65,21 +65,7 @@
     <hr>
     <section class="row">
       <div class="col-md-12">
-        <span class="copyright pull-left">&copy; 2018 Hendzee</span>
-        <ul class="payment-methods list-inline pull-right">
-          <li>
-            <span class="payment-visa"><span class="sr-only">Visa</span></span>
-          </li>
-          <li>
-            <span class="payment-mastercard"><span class="sr-only">MasterCard</span></span>
-          </li>
-          <li>
-            <span class="payment-paypal"><span class="sr-only">PayPal</span></span>
-          </li>
-          <li>
-            <span class="payment-americanexpress"><span class="sr-only">American Express</span></span>
-          </li>
-        </ul>
+        <span class="copyright pull-left">&copy; 2018 Hendzee</span>       
       </div>
     </section>
   </div>

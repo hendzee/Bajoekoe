@@ -5,24 +5,6 @@
   <!-- FULL WIDTH -->
 </div>
 <!-- !container -->
-<div class="full-width section-emphasis-1 page-header">
-  <div class="container">
-    <header class="row">
-      <div class="col-md-12">
-        <h1 class="strong-header pull-left">Shop</h1>
-
-        <!-- BREADCRUMBS -->
-        <ul class="breadcrumbs list-inline pull-right">
-          <li><a href="index-2.html">Home</a></li>
-          <!--
-                         -->
-          <li>Shop</li>
-        </ul>
-        <!-- !BREADCRUMBS -->
-      </div>
-    </header>
-  </div>
-</div>
 <!-- !full-width -->
 <div class="container">
 <!-- !FULL WIDTH -->

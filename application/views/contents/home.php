@@ -1,7 +1,7 @@
 <section id="Content" role="main">
 <div class="container">
 
-  <!-- FULL WIDTH -->
+<!-- FULL WIDTH -->
 </div>
 <!-- !container -->
 <div class="full-width no-space flexslider-full-width">
@@ -80,10 +80,9 @@
 <!-- !SECTION EMPHASIS 1 -->
 
 <section class="row">
-  <div class="section-header col-xs-12">
-    <hr>
+  <div class="section-header col-xs-12">   
     <h2 class="strong-header">
-      Highlights
+      Promo
     </h2>
   </div>
   <div class="col-sm-4">
@@ -154,10 +153,9 @@
 <!-- FLEXSLIDER -->
 <!-- STANDARD -->
 <section class="row">
-<div class="section-header col-xs-12">
-  <hr>
+<div class="section-header col-xs-12">  
   <h2 class="strong-header">
-    Featured items
+    Produk Baru
   </h2>
 </div>
 <div class="col-md-12">
@@ -235,8 +233,7 @@
 <!-- !FLEXSLIDER -->
 
   <section class="row">
-    <div class="section-header col-xs-12">
-      <hr>
+    <div class="section-header col-xs-12">      
       <h2 class="strong-header">
         Featured brands
       </h2>
@@ -259,33 +256,42 @@
   <div class="container">
     <section class="row">
       <div class="col-md-12 text-center">
-        <!-- ICON BOX SHORT -->
-        <div class="icon-box icon-box-short">
-          <i class="fa fa-refresh"></i>
-          <h4 class="strong-header">30 Days return</h4>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="shop-adv">
+              <span><i class="fa fa-smile-o"></i></span>
+              <h3>Mudah</h3>
+            </div>
+            <div>
+              <p>
+                Kami memberikan pengalaman kemudahan dalam berbelanja di
+                toko kami.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="shop-adv">
+              <span><i class="fa fa-heart"></i></span>
+              <h3>Return &amp; Refund</h3>
+            </div>
+            <div>
+              <p>
+                Kembalikan barang cacat dan pengembalian uang.
+              </p>
+            </div>
+          </div> 
+          <div class="col-md-4">
+            <div class="shop-adv">
+              <span><i class="fa fa-truck"></i></span>
+              <h3>Transparan</h3>
+            </div>
+            <div>
+              <p>
+                Cek status pesanan anda.
+              </p>
+            </div>
+          </div>         
         </div>
-        <!-- !ICON BOX SHORT -->
-
-        <!-- ICON BOX SHORT -->
-        <div class="icon-box icon-box-short">
-          <i class="fa fa-truck"></i>
-          <h4 class="strong-header">Free shipping</h4>
-        </div>
-        <!-- !ICON BOX SHORT -->
-
-        <!-- ICON BOX SHORT -->
-        <div class="icon-box icon-box-short">
-          <i class="fa fa-lock"></i>
-          <h4 class="strong-header">Secure payments</h4>
-        </div>
-        <!-- !ICON BOX SHORT -->
-
-        <!-- ICON BOX SHORT -->
-        <div class="icon-box icon-box-short">
-          <i class="fa fa-gift"></i>
-          <h4 class="strong-header">New styles every day</h4>
-        </div>
-        <!-- !ICON BOX SHORT -->
       </div>
     </section>
   </div>
