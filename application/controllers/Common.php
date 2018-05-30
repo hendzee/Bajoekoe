@@ -25,7 +25,8 @@ class Common extends CI_Controller
 
         switch ($page) {
             case 'home':
-                $query = "SELECT * FROM items_table INNER JOIN image_item using (id_item) ORDER BY publish_date DESC LIMIT 0, 8";
+                $query = "SELECT * FROM items_table INNER JOIN stock_table using (id_item)
+                    WHERE stock > 0 GROUP BY id_item, color ORDER BY publish_date DESC LIMIT 0, 8";
                 $data['new_item'] = $this->Database->all_query($query);
 
                 $query = "SELECT * FROM shop_promo WHERE id_ref = '001'";

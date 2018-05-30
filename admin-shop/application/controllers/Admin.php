@@ -329,7 +329,7 @@ class Admin extends CI_Controller
     {
         $data = array();
 
-        $query = "SELECT * FROM stock_table INNER JOIN items_table using(id_item)
+        $query = "SELECT * FROM stock_table RIGHT JOIN items_table using(id_item)
             WHERE id_item = '$id_item'";
         $data['data_stock'] = $this->Database->all_query($query);
 

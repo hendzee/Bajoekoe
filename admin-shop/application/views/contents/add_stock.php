@@ -36,7 +36,7 @@
                                             class="form-control" 
                                             disabled="" 
                                             <?foreach($data_content['data_stock'] as $val):?>
-                                                placeholder="<?=$val['name']?>" 
+                                                placeholder="<?=$val['name']?>"                                                
                                             <?endforeach?>
                                             name="name"/>
                                     </div>

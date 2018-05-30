@@ -164,18 +164,17 @@
   <?$counter = 0;?>
   <?foreach ($data_content['new_item'] as $val): ?>
   <?
-    $get_stock = array();
-    $count_stock = 0;
+    $get_image = array();    
     $id_item = $val['id_item'];
     $color = $val['color'];      
-    $query = "SELECT SUM(stock) AS count_stock FROM stock_table WHERE id_item='$id_item' AND color='$color'";
-    $get_stock = $this->Database->all_query($query);
+    $query = "SELECT * FROM image_item WHERE id_item='$id_item' AND color='$color'";
+    $get_image = $this->Database->all_query($query);
+    $image_item = '';
 
-    foreach($get_stock as $item_stock){
-      $count_stock = $item_stock['count_stock'];
+    foreach($get_image as $item){
+      $image_item = $item['image_one'];
     }
-  ?>                        
-  <?if($count_stock):?>
+  ?>                          
   <? if ($counter == 0 || $counter == 4) { ?>
     <li class="row">            
   <? } ?>
@@ -184,7 +183,7 @@
       <div class="shop-item shop-item-featured overlay-element">
         <div class="overlay-wrapper">
           <a href="04-shop-product-single.html">
-            <img src="<?=base_url()?>assets/images/item_image/<?=$val['image_one']?>" alt="Shop item">
+            <img src="<?=base_url()?>assets/images/item_image/<?=$image_item?>" alt="Shop item">
           </a>
 
           <div class="overlay-contents">
@@ -224,7 +223,6 @@
     </li>
   <? } ?>
   <?$counter+=1;?>
-  <?endif?>
   <?endforeach?>
 </ul>
 </div>
