@@ -155,6 +155,10 @@ h6.large-header {
 .top-info > a{
   margin-right: 9px;
   border-bottom: 0;
+  color: #fff;
+}
+.top-info>a:hover {    
+    color: #ff4757;
 }
 .top-info > a > i{
   margin-right: 3px;  
@@ -185,7 +189,7 @@ h6.large-header {
   font-weight: normal;
 }
 #MainNav section .btn-link {
-  color: #4c4c4c;
+  color: #fff;
   letter-spacing: 0;
 }
 #MainNav section .btn-link:hover {
@@ -452,7 +456,7 @@ h6.large-header {
   z-index: 0;
   content: " ";
   height: 50px;
-  background: #f2f2f2;
+  background: #2d2d2d;
   top: 0;
   left: 0;
   right: 0;
@@ -2391,18 +2395,6 @@ ul.list-icons li i.fa-circle:before {
 .shop-section-navigation ul li span {
   position: relative;
 }
-.shop-section-navigation ul li span:after {
-  content: "";
-  display: block;
-  position: absolute;
-  height: 2px;
-  left: 1px;
-  right: 1px;
-  bottom: 0;
-  background: #1a1a1a;
-  -webkit-transition: background 0.3s ease;
-  transition: background 0.3s ease;
-}
 .shop-section-navigation ul li + li {
   margin-top: 20px;
 }
@@ -3967,21 +3959,21 @@ label .chosen-container {
 .btn-default:hover,
 .btn-default:focus,
 .btn-default:active {
-  background: #ff4757;
-  border-color: #ff4757;
+  background: #1a1a1a;
+  border-color: #1a1a1a;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
 .btn-primary {
   color: #fff;
-  border-color: #1a1a1a;
-  background: #1a1a1a;
+  border-color: #ff4757;
+  background: #ff4757;
 }
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active {
-  background: #ff4757;
-  border-color: #ff4757;
+  background: #1a1a1a;
+  border-color: #1a1a1a;
 }
 .btn-large {
   font-size: 16px;
@@ -4724,16 +4716,16 @@ label .chosen-container {
 }
 @media (min-width: 1075px) {
   [class$="-12"][class^="col-"] .flexslider .flex-prev {
-    left: -36px;
+    left: -25px;
   }
   [class$="-12"][class^="col-"] .flexslider .flex-next {
-    right: -37px;
+    right: -25px;
   }
   [class$="-12"][class^="col-"] .flexslider:hover .flex-prev {
-    left: -36px;
+    left: -27px;
   }
   [class$="-12"][class^="col-"] .flexslider:hover .flex-next {
-    right: -37px;
+    right: -27px;
   }
   [class$="-12"][class^="col-"] .flexslider.flexslider-pager-inside .flex-control-paging {
     bottom: 15px;
@@ -5239,13 +5231,13 @@ body.active-sidebar .shopping-cart-widget > div {
   -webkit-appearance: none;
 }
 
-/* ======================= */
+/* ============================*/
 /* ========= PAYMENT ======== */
 .payment .strong-header{
   font-size: 24px;
 }
 
-/* ======================= */
+/* =============================*/
 /* ========= SHOP ADV ======== */
 
 .shop-adv span {
@@ -5261,4 +5253,10 @@ body.active-sidebar .shopping-cart-widget > div {
 }
 .shop-adv h3, p{
   color: #333333;
+}
+
+/* ================================ */
+/* ========= PRICE CONTENT ======== */
+span.price-content{
+  color: #ff4757;
 }

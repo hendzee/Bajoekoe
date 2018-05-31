@@ -4,7 +4,7 @@
         <!-- SECTION EMPHASIS 1 -->
         <!-- FULL WIDTH -->
     </div>
-    <!-- !container -->    
+    <!-- !container -->
     <!-- !full-width -->
     <div class="container">
         <!-- !FULL WIDTH -->
@@ -29,35 +29,25 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <td class="width20"> ID Pesan </td>
-                                <td> Tanggal Pesan </td>
-                                <td> Total </td>
-                                <td> Status </td>
-                                <td class="text-right width13"> Details </td>
+                                <td class="width20"> # </td>
+                                <td> Nama Barang </td>
+                                <td> Warna </td>
+                                <td> Ukuran </td>
+                                <td> Harga </td>
+                                <td> Jumlah </td>
+                                <td class="text-right width13"> Subtotal </td>
                             </tr>
                         </thead>
                         <tbody>
                             <?foreach($data_content as $val):?>
                                 <tr>
-                                    <td>
-                                        <a href="<?=base_url()?>index.php/Common/page_detail_order/<?=$val['id_order']?>">
-                                            <strong><?=$val['id_order']?></strong>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <?=date('F j, Y, H:i:s', strtotime($val['order_date']))?>
-                                    </td>
-                                    <td>Rp.
-                                        <?=$val['total_pay']?>
-                                    </td>
-                                    <td>
-                                        <?=$val['order_status']?>
-                                    </td>
-                                    <td class="text-right">
-                                        <a href="<?=base_url()?>index.php/Common/page_detail_order/<?=$val['id_order']?>">
-                                            Lihat
-                                        </a>
-                                    </td>
+                                    <td><?=$val['id_item']?></td>
+                                    <td><?=$val['name']?></td>
+                                    <td><?=$val['color']?></td>
+                                    <td><?=$val['size']?></td>
+                                    <td><?=$val['price']?></td>
+                                    <td><?=$val['number_item']?></td>
+                                    <td><?=$val['subtotal']?></td>
                                 </tr>
                             <?endforeach?>
                         </tbody>

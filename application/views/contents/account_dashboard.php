@@ -80,7 +80,11 @@
                         <tbody>
                             <?foreach($data_content['order_history'] as $val):?>
                                 <tr>
-                                    <td><a href="#"><strong><?=$val['id_order']?></strong></a></td>
+                                    <td>
+                                        <a href="<?=base_url()?>index.php/Common/page_detail_order/<?=$val['id_order']?>">
+                                            <strong><?=$val['id_order']?></strong>
+                                        </a>
+                                    </td>
                                     <td>
                                         <?=date('F j, Y, H:i:s', strtotime($val['order_date']))?>
                                     </td>
@@ -90,7 +94,11 @@
                                     <td>
                                         <?=$val['order_status']?>
                                     </td>
-                                    <td class="text-right"> <a href="#">Lihat</a></td>
+                                    <td class="text-right"> 
+                                        <a href="<?=base_url()?>index.php/Common/page_detail_order/<?=$val['id_order']?>">
+                                            Lihat
+                                        </a>
+                                    </td>
                                 </tr>
                             <?endforeach?>
                         </tbody>

@@ -108,7 +108,8 @@ class Common extends CI_Controller
                     $data['account'] = $this->Database->all_query($query);
 
                     $query = "SELECT *, SUM(price * number_item) AS total_pay FROM order_list INNER JOIN
-                        order_item USING(id_order) WHERE id_customer = '$member_id' GROUP BY order_item.id_order";
+                        order_item USING(id_order) WHERE id_customer = '$member_id' GROUP BY order_item.id_order
+                        ORDER BY order_date DESC LIMIT 0, 3";
                     $data['order_history'] = $this->Database->all_query($query);
 
                     $page = 'account_dashboard';
@@ -135,7 +136,8 @@ class Common extends CI_Controller
                     $member_id = $this->session->userdata('member_id');
 
                     $query = "SELECT *, SUM(price * number_item) AS total_pay FROM order_list INNER JOIN
-                        order_item USING(id_order) WHERE id_customer = '$member_id' GROUP BY order_item.id_order";
+                        order_item USING(id_order) WHERE id_customer = '$member_id' GROUP BY order_item.id_order
+                        ORDER BY order_date DESC";
                     $data = $this->Database->all_query($query);
 
                     $page = 'account_order';
@@ -209,6 +211,9 @@ class Common extends CI_Controller
             case 'name':
                 $query = "SELECT * FROM items_table INNER JOIN image_item using (id_item) WHERE items_table.name LIKE '%$value%'";
                 break;
+
+            default:
+                break;
         }
 
         $data['data_items'] = $this->Database->all_query($query);
@@ -240,7 +245,7 @@ class Common extends CI_Controller
         $value = $this->input->post('value');
 
         $nav_brand = $this->Database->get_data('brand_table');
-        $nav_category = $this->Database->get_data('categories_table');                
+        $nav_category = $this->Database->get_data('categories_table');
 
         $query = "SELECT * FROM items_table INNER JOIN image_item using (id_item) WHERE items_table.name LIKE '%$value%' OR brand LIKE '%$value%'";
         $data['data_items'] = $this->Database->all_query($query);
@@ -858,6 +863,30 @@ class Common extends CI_Controller
 
         $this->session->set_flashdata('msg', $msg);
         redirect('Common/page_select/account_profile');
+
+    }
+
+    public function page_detail_order($id_order)
+    {
+        $data = array();
+        $nav_brand = array();
+        $nav_category = array();
+        $active_nav = 'product';
+
+        $nav_brand = $this->Database->get_data('brand_table');
+        $nav_category = $this->Database->get_data('categories_table');
+        $query = "SELECT *, order_item.price * number_item AS subtotal FROM items_table INNER JOIN 
+            order_item using(id_item) WHERE id_order = '$id_order'";
+        $data = $this->Database->all_query($query);
+
+        $this->load->view('header/header_script');
+        $this->load->view('header/header', array(
+            'nav_brand' => $nav_brand,
+            'nav_category' => $nav_category,
+            'active_nav' => $active_nav));
+        $this->load->view('contents/account_detailorder', array('data_content' => $data));
+        $this->load->view('footer/footer');
+        $this->load->view('footer/footer_script');
 
     }
 }
