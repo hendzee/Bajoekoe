@@ -15,9 +15,13 @@
                 <nav class="shop-section-navigation element-emphasis-weak">
                     <ul class="list-unstyled">
                         <li><a href="<?=base_url()?>index.php/Common/page_select/account_dashboard">Dashboard</a></li>
+                        <hr>
                         <li><a href="<?=base_url()?>index.php/Common/page_select/account_profile">Profil</a></li>
+                        <hr>
                         <li class="active"><span>Pesananku</span></li>
+                        <hr>
                         <li><a href="<?=base_url()?>index.php/Common/page_select/account_shiping">Alamat Pengiriman</a></li>
+                        <hr>
                         <li><a href="<?=base_url()?>index.php/Common/logout">Logout</a></li>
                     </ul>
                 </nav>
@@ -52,6 +56,12 @@
                             <?endforeach?>
                         </tbody>
                     </table>
+                    <br>
+                    <div class="pull-right">
+                        <a href="<?=base_url()?>index.php/Common/page_select/account_order" class="btn btn-default btn-small">
+                            <i class="fa fa-back"></i> Kembali ke List
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>

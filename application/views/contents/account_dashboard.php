@@ -15,10 +15,14 @@
                 <nav class="shop-section-navigation element-emphasis-weak">
                     <ul class="list-unstyled">
                         <li class="active"><span>Dashboard</span></li>
+                        <hr>
                         <li><a href="<?=base_url()?>index.php/Common/page_select/account_profile">Profil</a></li>
+                        <hr>
                         <li><a href="<?=base_url()?>index.php/Common/page_select/account_order">Pesananku</a></li>
+                        <hr>
                         <li><a href="<?=base_url()?>index.php/Common/page_select/account_shiping">Alamat Pengiriman</a></li>
-                        <li><a href="<?=base_url()?>index.php/Common/logout">Logout</a></li>
+                        <hr>
+                        <li><a href="<?=base_url()?>index.php/Common/logout">Logout</a></li>                        
                     </ul>
                 </nav>
             </div>
@@ -95,7 +99,10 @@
                                         <?=$val['order_status']?>
                                     </td>
                                     <td class="text-right"> 
-                                        <a href="<?=base_url()?>index.php/Common/page_detail_order/<?=$val['id_order']?>">
+                                        <a 
+                                            href="<?=base_url()?>index.php/Common/page_detail_order/<?=$val['id_order']?>"
+                                            class="btn btn-primary btn-small"
+                                        >
                                             Lihat
                                         </a>
                                     </td>
@@ -104,7 +111,10 @@
                         </tbody>
                     </table>
                 </div>
-                <a href="<?=base_url()?>index.php/Common/page_select/account_order">
+                <a 
+                    href="<?=base_url()?>index.php/Common/page_select/account_order"
+                    class="btn btn-default btn-small"
+                >
                     Lihat Semua
                 </a>
             </div>
