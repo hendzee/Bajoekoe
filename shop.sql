@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 28, 2018 at 10:45 AM
+-- Generation Time: May 31, 2018 at 04:34 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -39,6 +39,7 @@ CREATE TABLE `brand_table` (
 
 INSERT INTO `brand_table` (`brand`, `logo`) VALUES
 ('3second', NULL),
+('Converse', NULL),
 ('FCM', NULL),
 ('Lea', NULL);
 
@@ -139,6 +140,7 @@ INSERT INTO `image_item` (`id_item`, `color`, `image_one`, `image_two`, `image_t
 ('item_001', 'Biru', 'stock_758.jpg', 'stock_7581.jpg', 'stock_7582.jpg', 'stock_7583.jpg'),
 ('item_001', 'Hijau', 'shoes_green1.jpg', 'shoes_green2.jpg', 'shoes_green3.jpg', 'shoes_green4.jpg'),
 ('item_001', 'Hitam', 'shoes_black1.jpg', 'shoes_black2.jpg', 'shoes_black3.jpg', 'shoes_black4.jpg'),
+('item_00127', 'Biru', 'stock_60.jpg', NULL, NULL, NULL),
 ('item_002', 'Biru', 'flickr-06.jpg', 'flickr-06.jpg', NULL, NULL),
 ('item_003', 'Hitam', 'home-latest1.jpg', 'home-latest2.jpg', NULL, NULL),
 ('item_004', 'Biru', '3second_men_wave_blue1.jpg', '3second_men_wave_blue2.jpg', '3second_men_wave_blue3.jpg', '3second_men_wave_blue4.jpg'),
@@ -173,6 +175,7 @@ CREATE TABLE `items_table` (
 
 INSERT INTO `items_table` (`id_item`, `name`, `gender`, `category`, `price`, `discount`, `description`, `weight`, `dimension`, `note`, `brand`, `publish_date`) VALUES
 ('item_001', '3Second Men Shoes', 'M', 'Sepatu', 300000, 0, 'sip', '2', '10 x 10', 'Jangan dibuang', '3second', '2018-01-10 07:07:56'),
+('item_00127', 'Converse All Star 2018', 'B', 'Sepatu', 750000, 0, 'Sepatu converse asli.', '200', '13 x 10', 'Jangan dibakar', 'Converse', '2018-05-30 23:17:38'),
 ('item_002', 'Baju Cewek Kekinian', 'F', 'Baju', 350000, 30, 'Baju unyu', NULL, NULL, NULL, '3second', '2018-02-10 07:07:56'),
 ('item_003', 'Baju dan Rok Mini Hits', 'F', 'Baju', 150000, 20, 'Tas sip', NULL, NULL, NULL, 'Lea', '2018-03-10 07:07:56'),
 ('item_004', '3Second Wave Men', 'M', 'Baju', 320000, 15, 'Baju berbentuk gelombang menyejukkan hati', NULL, NULL, NULL, '3second', '2018-04-20 07:07:56'),
@@ -208,8 +211,11 @@ INSERT INTO `order_item` (`id_order`, `id_item`, `name`, `color`, `size`, `price
 ('order_002310', 'item_004', '3Second Wave Men', 'Biru', 'L', 272000, 1),
 ('order_002576', 'item_001', '3Second Men Shoes', 'Hitam', 'XL', 300000, 1),
 ('order_002576', 'item_004', '3Second Wave Men', 'Putih', 'XL', 272000, 3),
+('order_002626', 'item_001', '3Second Men Shoes', 'Hijau', 'L', 300000, 1),
+('order_00352', 'item_00127', 'Converse All Star 2018', 'Biru', '30', 750000, 1),
 ('order_00653', 'item_001', '3Second Men Shoes', 'Hijau', 'XL', 300000, 1),
-('order_00653', 'item_004', '3Second Wave Men', 'Putih', 'XL', 272000, 3);
+('order_00653', 'item_004', '3Second Wave Men', 'Putih', 'XL', 272000, 3),
+('order_00967', 'item_00127', 'Converse All Star 2018', 'Biru', '30', 750000, 1);
 
 -- --------------------------------------------------------
 
@@ -240,7 +246,10 @@ INSERT INTO `order_list` (`id_order`, `id_customer`, `order_date`, `email_buyer`
 ('order_002078', 'mem_001498', '2018-05-21 16:14:40', 'hendras@gmail.com', 'Virginia', 'Hendras', '08565542339', 'Indonesia, Malang, Jawa Timur, Jl.Harapan, 65432', NULL, 'CANCELED', NULL),
 ('order_002310', 'mem_001498', '2018-05-12 16:16:06', 'hendras@gmail.com', 'Virginia', 'Hendras', '08565542339', 'Indonesia, Malang, Jawa Timur, Jl.Harapan, 65432', NULL, 'PAID OFF', NULL),
 ('order_002576', 'GUEST', '2018-05-19 18:08:48', 'hendras@gmail.com', 'Virginia', 'Hendras', '08565542339', 'Indonesia, Malang, Jawa Timur, Jl.Harapan, 65432', NULL, 'SHIPPED', NULL),
-('order_00653', 'GUEST', '2018-05-12 16:12:18', 'hendras@gmail.com', 'Virginia', 'Hendras', '08565542339', 'Indonesia, Malang, Jawa Timur, Jl.Harapan, 65432', NULL, 'CANCELED', NULL);
+('order_002626', 'GUEST', '2018-05-30 15:30:23', 'doraemon@gmail.com', 'Doora', 'Emon', '08780869', 'United Kingdom, Surabaya, Jawa Barat, JL. Semarang no. 19, 65415', NULL, 'NEW ORDER', NULL),
+('order_00352', 'mem_001498', '2018-05-31 13:09:58', 'bakekok@gmail.com', 'Virginia', 'Hendras', '08565542339', 'Indonesia, Malang, Jawa Timur, Jl.Harapan, 65432', NULL, 'NEW ORDER', NULL),
+('order_00653', 'GUEST', '2018-05-12 16:12:18', 'hendras@gmail.com', 'Virginia', 'Hendras', '08565542339', 'Indonesia, Malang, Jawa Timur, Jl.Harapan, 65432', NULL, 'CANCELED', NULL),
+('order_00967', 'mem_001498', '2018-05-31 13:11:26', 'bakekok@gmail.com', 'Virginia', 'Hendras', '08565542339', 'Indonesia, Malang, Jawa Timur, Jl.Harapan, 65432', NULL, 'NEW ORDER', NULL);
 
 -- --------------------------------------------------------
 
@@ -253,6 +262,7 @@ CREATE TABLE `payment_report` (
   `id_buyer` varchar(15) DEFAULT NULL,
   `transfer_bank` varchar(45) DEFAULT NULL,
   `token_image` varchar(45) DEFAULT NULL,
+  `note` text,
   `report_date` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -260,8 +270,9 @@ CREATE TABLE `payment_report` (
 -- Dumping data for table `payment_report`
 --
 
-INSERT INTO `payment_report` (`id_order`, `id_buyer`, `transfer_bank`, `token_image`, `report_date`) VALUES
-('order_002034', NULL, 'BCA', 'tok_120.png', '2018-05-08 22:40:32');
+INSERT INTO `payment_report` (`id_order`, `id_buyer`, `transfer_bank`, `token_image`, `note`, `report_date`) VALUES
+('order_002034', NULL, 'BCA', 'tok_120.png', NULL, '2018-05-08 22:40:32'),
+('order_00967', NULL, 'BCA', 'tok_814.png', 'Suda saya bayar lunas ya....', '2018-05-31 21:33:06');
 
 -- --------------------------------------------------------
 
@@ -346,11 +357,12 @@ CREATE TABLE `stock_table` (
 --
 
 INSERT INTO `stock_table` (`id_item`, `color`, `size`, `stock`, `add_date`) VALUES
-('item_001', 'Biru', '40', '7', '2018-05-25 05:47:48'),
+('item_00127', 'Biru', '30', '13', '2018-05-30 23:38:31'),
+('item_001', 'Biru', '40', '0', '2018-05-25 05:47:48'),
 ('item_004', 'Biru', 'L', '9', '2018-03-10 07:07:56'),
 ('item_002', 'Biru', 'X', '2', '2015-03-10 07:07:56'),
 ('item_002', 'Biru', 'XL', '10', '2016-05-10 07:07:56'),
-('item_001', 'Hijau', 'L', '5', '2018-12-10 07:07:45'),
+('item_001', 'Hijau', 'L', '4', '2018-12-10 07:07:45'),
 ('item_001', 'Hijau', 'XL', '43', '2013-10-10 07:07:56'),
 ('item_006', 'Hitam', '40', '2', '2011-10-10 07:07:56'),
 ('item_005', 'Hitam', 'L', '2', '2012-10-10 07:07:56'),

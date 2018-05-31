@@ -66,6 +66,10 @@
                             <label for="token-img">Bukti Pembayaran</label>
                             <input type="file" id="token-img" name="token-img" required>
                         </div>
+                        <div class="form-group">
+                            <label for="note">Catatan</label>
+                            <textarea rows="5" name="note"></textarea>
+                        </div>
                         <button type="submit" class="btn btn-primary pull-right">Kirim</button>
                         <div class="clearfix"></div>
                     </form>

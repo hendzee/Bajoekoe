@@ -634,6 +634,7 @@ class Common extends CI_Controller
     {
         $id_order = $this->input->post('id-order');
         $transfer_bank = $this->input->post('transfer-bank');
+        $note = $this->input->post('note');
         $data = array();
         $image_name = '';
         $msg = '';
@@ -685,6 +686,7 @@ class Common extends CI_Controller
                     'id_order' => $id_order,
                     'transfer_bank' => $transfer_bank,
                     'token_image' => $data_image['file_name'],
+                    'note' => $note,
                     'report_date' => date('Y-m-d H:i:s'),
                 ));
 
