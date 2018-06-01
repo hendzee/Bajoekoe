@@ -230,7 +230,7 @@
   <ul class="nav nav-tabs">
     <li class="active"><a href="#description" data-toggle="tab">Deskripsi</a></li>
     <li><a href="#info" data-toggle="tab">Info Tambahan</a></li>
-    <li><a href="#reviews" data-toggle="tab">Reviews (2)</a></li>
+    <li><a href="#reviews" data-toggle="tab">Reviews</a></li>
   </ul>
 
   <div class="tab-content">
@@ -287,8 +287,15 @@
       </article>
       <form class="review-form">
         <label class="raty-label">
-          Your rating for this item<br>
+          Berikan rating untuk produk ini<br>
           <span class="rate"></span>
+          <select class="rating-star">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
         </label>
 
         <div class="form-group">

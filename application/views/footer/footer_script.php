@@ -17,6 +17,8 @@
 
 <script src="<?=base_url()?>assets/js/jquery.prettyPhoto.js"></script>
 
+<script src="<?=base_url()?>assets/js/jquery.barrating.min.js"></script>
+
 <script src="<?=base_url()?>assets/js/chosen.jquery.min.js"></script>
 <script src="<?=base_url()?>assets/form/js/contact-form.js"></script>
 <script src="<?=base_url()?>assets/twitter/js/jquery.tweet.js"></script>

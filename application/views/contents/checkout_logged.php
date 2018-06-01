@@ -101,9 +101,9 @@
                             <input type="hidden" id="city" name="city" value="<?=$val['city']?>">
                             <input type="hidden" id="region" name="province" value="<?=$val['province']?>">
                             <input type="hidden" id="zip-code" name="zip-code" value="<?=$val['zip_code']?>">
-                            <?endforeach?>
-                            <button type="submit" class="btn btn-primary pull-right">Selesai</button>
-                            <div class="clearfix"></div>
+                        <?endforeach?>
+                        <button type="submit" class="btn btn-primary pull-right">Selesai</button>
+                        <div class="clearfix"></div>
                     </form>
                 </section>
             </div>

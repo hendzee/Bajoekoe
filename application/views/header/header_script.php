@@ -16,6 +16,9 @@
   <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/jquery-ui-1.10.3.custom.min.css">
   <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/prettyPhoto.css">
 
+  <!-- rating bar -->
+  <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/fontawesome-stars.css">
+
   <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/flexslider.css">
   <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/font-awesome.css">
   <link rel="stylesheet" type="text/css" href="<?=base_url()?>assets/css/bootstrap.css">

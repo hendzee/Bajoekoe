@@ -194,7 +194,8 @@ class Common extends CI_Controller
 
         switch ($param) {
             case 'gender':
-                $query = "SELECT * FROM items_table INNER JOIN image_item using (id_item) WHERE gender='$value'";
+                $query = "SELECT * FROM items_table INNER JOIN image_item using (id_item) WHERE gender='$value'
+                 OR gender = 'B'";
                 break;
 
             case 'brand':

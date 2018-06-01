@@ -5756,12 +5756,12 @@ label .chosen-container {
     [class$="-12"][class^="col-"] .flexslider .flex-next {
         right: -25px;
     }
-     .logotypes .flex-prev {
+    .logotypes .flex-prev {
         left: -21px;
     }
-     .logotypes .flex-next {
+    .logotypes .flex-next {
         right: -21px;
-    }    
+    }
     [class$="-12"][class^="col-"] .flexslider.flexslider-pager-inside .flex-control-paging {
         bottom: 15px;
     }
@@ -6352,25 +6352,36 @@ span.price-content {
 }
 
 /*================================*/
+
 /* ========= LOGO TYPES ======== */
+
 .logotypes li {
     background: #eee;
     margin-top: 10px;
-    border-right: 5px solid #ffffff;    
+    border-right: 5px solid #ffffff;
 }
 
-.logotypes li img{    
+.logotypes li img {
     padding: 30px;
 }
 
 /*=====================================*/
+
 /* ========= SHOP NOW BUTTON ======== */
+
 .shop-now {
     position: absolute;
     top: -10px;
     right: 11px;
 }
 
-.shop-now h2{
+.shop-now h2 {
     text-transform: uppercase;
+}
+
+/*=====================================*/
+/* ========= RATTING ======== */
+
+.raty-label .br-theme-fontawesome-stars .br-widget {
+    margin-left: -9px;
 }

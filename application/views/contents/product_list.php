@@ -170,6 +170,26 @@
 <div id="isotopeContainer" class="shop-product-list isotope">
 
 <? foreach($data_content['data_items'] as $val): ?>
+  <!-- SEARCH RATING -->
+  <?
+    $data_rating = array();
+    $r_id_item = $val['id_item'];
+    $r_color = $val['color'];
+    $rating_val = 1;
+    $query_rating = "SELECT AVG(rating) AS avg_rating FROM ratings_table
+      WHERE id_item = '$r_id_item' AND color = '$r_color'";
+    
+    $data_rating = $this->Database->all_query($query_rating);
+
+    if (COUNT($data_rating) > 0) {
+      foreach($data_rating as $rat_item) {
+        $rating_val = $rat_item['avg_rating'];
+      }
+    }
+  ?>   
+  <!-- END -->
+  
+  <!-- ISOTOPE VALUE -->
   <?
     $id = $val['id_item'];
     $color = $val['color'];    
@@ -186,7 +206,7 @@
 
     $data_isotope = $val['color'].' '.$size_arr.$val['category'];
   ?>
-  <div class="isotope-item color3 <?=$data_isotope?>" data-date="<?=date('F j, Y', strtotime($val['publish_date']))?>" data-popular="40" data-rating="4.0">
+  <div class="isotope-item color3 <?=$data_isotope?>" data-date="<?=date('F j, Y', strtotime($val['publish_date']))?>" data-popular="5.0" data-rating="<?=$rating_val?>.0">
     <?
       $get_stock = array();
       $count_stock = 0;
@@ -211,7 +231,16 @@
             </div>
           </div>
         </div>
-        <div class="item-info-name-price">
+        <div class="item-info-name-price">          
+          <!-- RATING -->
+          <select class="rating-star" name="rating" data-current-rating="<?=$rating_val?>" autocomplete="off">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          <!-- END RATING -->
           <h4><a href="#"><?=$val['name']?></a></h4>
           <? if ($val['discount'] > 0 && $val['discount'] != null){ ?>
             <?
@@ -240,8 +269,17 @@
         </div>
         </div>
         <div class="item-info-name-price">
-        <h4><a href="#"><?=$val['name']?></a></h4>
-        <?if ($val['discount'] > 0 && $val['discount'] != null):?>
+          <!-- RATING -->          
+          <select class="rating-star" name="rating" data-current-rating="<?=$rating_val?>" autocomplete="off">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          <!-- END RATING -->
+          <h4><a href="#"><?=$val['name']?></a></h4>
+          <?if ($val['discount'] > 0 && $val['discount'] != null):?>
             <?
             $dis_price = $val['price'] - ($val['price'] * $val['discount'] / 100);
             ?>

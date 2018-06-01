@@ -202,6 +202,31 @@
           </div>
         </div>
         <div class="item-info-name-price">
+          <!-- RATING -->
+          <?
+            $data_rating = array();
+            $r_id_item = $val['id_item'];
+            $r_color = $val['color'];
+            $rating_val = 1;
+            $query_rating = "SELECT AVG(rating) AS avg_rating FROM ratings_table
+              WHERE id_item = '$r_id_item' AND color = '$r_color'";
+            
+            $data_rating = $this->Database->all_query($query_rating);
+
+            if (COUNT($data_rating) > 0) {
+              foreach($data_rating as $rat_item) {
+                $rating_val = $rat_item['avg_rating'];
+              }
+            }
+          ?>          
+          <select class="rating-star" name="rating" data-current-rating="<?=$rating_val?>" autocomplete="off">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+          <!-- END RATING -->
           <h4>
             <a href="<?=base_url()?>index.php/Common/page_single_product/<?=$val['id_item']?>/<?=$val['color']?>">
               <?=$val['name']?>
@@ -217,7 +242,7 @@
           <? endif ?>
           <? if($val['discount'] > 0 && $val['discount'] != null):?>
             <span class="sale-tag"><?=$val['discount']?><sup>%</sup></span>
-          <? endif ?>
+          <? endif ?>         
         </div>
       </div>
       <!-- !SHOP FEATURED ITEM -->  

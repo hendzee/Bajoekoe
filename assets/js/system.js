@@ -70,6 +70,15 @@ $(document).ready(function(){
         maxItems: 4
     });
 
-    $('.flex-next').removeClass('flex-disabled')
+    $('.flex-next').removeClass('flex-disabled');    
+
+    $('.rating-star').each(function(){
+        currentRating = $(this).data('current-rating');
+        $(this).barrating({
+            theme: 'fontawesome-stars',
+            initialRating: currentRating,
+            readonly: true
+        });
+    });         
    
 })
