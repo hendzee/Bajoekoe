@@ -6385,3 +6385,7 @@ span.price-content {
 .raty-label .br-theme-fontawesome-stars .br-widget {
     margin-left: -9px;
 }
+
+.checkout-step-3 p{
+    color: #fff
+}

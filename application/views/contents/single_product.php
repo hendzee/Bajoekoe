@@ -119,6 +119,7 @@
     </div>
     <div class="clearfix visible-xs visible-sm"></div>
   </div>
+  <!-- GUIDE LIST -->
   <div class="size-guide-wrapper form-group visible-xs visible-sm">
     <div class="col-xs-12">
       <div id="SizeGuide">
@@ -173,6 +174,7 @@
       </div>
     </div>
   </div>
+  <!-- END GUIDE LIST -->
   <div class="form-group">
     <label class="col-xs-2" for="quantity">Qty</label>
     <div class="col-xs-3">
@@ -260,50 +262,78 @@
     </div>
     <?endforeach?>
     <section class="tab-pane fade" id="reviews">
-      <article class="review">
-        <header>
-          <span class="rating" data-score="4"></span><br>
-          <h4 class="author">Richard Doe</h4>
-          <span class="date">Aug 7, 2013</span>
-        </header>
-        <p>
-          Choupette Mulberry dark red lipstick crop button up chunky sole chambray shirt
-          maxi skirt vintage Levi shorts. Loafers 90s collar indigo denim silver collar
-          round sunglasses. Cashmere skirt peach Miu Miu Bag 'N' Noun leather shorts
-          oversized printed clashing patterns. Tulle printed jacket sheer Prada Saffiano
-          white Converse.
-        </p>
-      </article>
-      <article class="review">
-        <header>
-          <span class="rating" data-score="3"></span><br>
-          <h4 class="author">Richard Doe</h4>
-          <span class="date">Aug 3, 2013</span>
-        </header>
-        <p>
-          Leather jacket pastels backpack neutral green white. Strong eyebrows washed out
-          Chanel. leggings skinny jeans Missoni capsule clutch cotton.
-        </p>
-      </article>
-      <form class="review-form">
-        <label class="raty-label">
-          Berikan rating untuk produk ini<br>
-          <span class="rate"></span>
-          <select class="rating-star">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
-        </label>
+      <?if (COUNT($data_comment) < 1):?>
+        <p>Belum ada ulasan</p>
+      <?else:?>
+        <?foreach($data_comment as $val):?>
+        <article class="review">
+          <header>
+            <span class="rating" data-score="4"></span><br>
+            <h4 class="author"><?=$val['first_name'] . ' ' . $val['last_name']?></h4>
+            <span class="date"><?=date('F j, Y', strtotime($val['review_date']))?></span>
+          </header>
+          <p>
+            <?=$val['review']?>
+          </p>
+        </article>
+        <?endforeach?>
+      <?endif?>               
+      <?//CHECK SESSION?>
+      <?if($this->session->userdata('logged_in') == TRUE):?>
+        <?
+          $id = '';
+          $clr = '';
+          $valid = false;
 
-        <div class="form-group">
-          <label for="review">Your review</label>
-          <textarea class="form-control" id="review" name="review" rows="6"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit review</button>
-      </form>
+          foreach($data_content as $val) {
+            $id_cst = $this->session->userdata('member_id');
+            $id_itm = $val['id_item'];
+            $clr = $val['color'];            
+          }
+
+          $check_history = array();
+          $query = "SELECT * FROM order_list INNER JOIN order_item using(id_order) WHERE 
+            id_customer = '$id_cst' AND id_item = '$id_itm' AND color = '$clr' AND 
+            order_status = 'SHIPPED'";
+          $check_history = $this->Database->all_query($query);
+
+          if (COUNT($check_history) > 0) {
+            $valid = true;
+          }          
+        ?>        
+        <?if ($valid == true): ?>
+          <?=form_open('Common/add_rating', 'class="review-form"')?>
+            <?foreach($data_content as $val):?>
+              <input type="hidden" name="id-item" value="<?=$val['id_item']?>" />
+              <input type="hidden" name="color" value="<?=$val['color']?>" />          
+            <?endforeach?>
+            <label class="raty-label">
+              Berikan rating untuk produk ini<br>
+              <span class="rate"></span>
+              <select id="rating-star-review" current-rating="1" name="rating">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </select>
+            </label>
+
+            <div class="form-group">
+              <label for="review">Ulasan anda</label>
+              <textarea class="form-control" id="review" name="review" rows="6"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit review</button>
+          </form>
+        <?else:?>
+          <br>
+          <strong>Beli dan berikan ulasan anda</strong>
+        <?endif?>
+      <?else:?>
+        <br>
+        <strong>Beli dan berikan ulasan anda</strong>
+      <?endif?>
+      <?//END CHECK SESSION?>
     </section>
   </div>
 </div>

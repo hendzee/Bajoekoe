@@ -277,6 +277,7 @@ class Common extends CI_Controller
         $data_color = array();
         $data_size = array();
         $nav_brand = array();
+        $data_comment = array();
         $active_nav = 'product';
         $nav_category = array();
         $first_color = $color;
@@ -285,16 +286,17 @@ class Common extends CI_Controller
         $nav_category = $this->Database->get_data('categories_table');
 
         $query = "SELECT * FROM items_table INNER JOIN image_item using (id_item) WHERE id_item = '$id_item' AND color='$color'";
-
         $data = $this->Database->all_query($query);
 
         $query = "SELECT * FROM stock_table WHERE id_item = '$id_item' AND color != '$color' AND stock > 0 GROUP BY color ";
-
         $data_color = $this->Database->all_query($query);
 
         $query = "SELECT * FROM stock_table WHERE id_item = '$id_item' AND color = '$color' AND stock > 0 GROUP BY size";
-
         $data_size = $this->Database->all_query($query);
+
+        $query = "SELECT * FROM customer_member INNER JOIN ratings_table WHERE id_item = '$id_item' AND color = '$color'";
+        $data_comment = $this->Database->all_query($query);
+
 
         $this->load->view('header/header_script');
         $this->load->view('header/header', array(
@@ -305,9 +307,76 @@ class Common extends CI_Controller
             'first_color' => $first_color,
             'data_content' => $data,
             'data_color' => $data_color,
-            'data_size' => $data_size));
+            'data_size' => $data_size,
+            'data_comment' => $data_comment));
         $this->load->view('footer/footer');
         $this->load->view('footer/footer_script');
+    }
+
+    // ==============
+    // review product
+    // ==============
+    public function add_rating()
+    {
+        $data = array();
+        $id_item = $this->input->post('id-item');
+        $color = $this->input->post('color');
+        $rating = $this->input->post('rating');
+        $review = $this->input->post('review');
+        $email = 'hendras@gmail.com';
+        $review_date = date('Y-m-d H:i:s');
+        $msg = '';
+
+        $query = "SELECT * FROM ratings_table WHERE email = '$email'
+            AND id_item = '$id_item' AND color = '$color'";
+        $data = $this->Database->all_query($query);
+
+        if ($this->session->has_userdata('member_email')) {
+            if (COUNT($data) > 0) {
+                $this->Database->update_data('ratings_table',
+
+                    array(
+                        'rating' => $rating,
+                        'review' => $review,
+                        'review_date' => $review_date,
+                    ), array(
+                        'email' => $email,
+                        'id_item' => $id_item,
+                        'color' => $color,
+                    ));
+
+                $msg = '<div class="col-md-7">'
+                    . '<div class="alert alert-info alert-dismissable">'
+                    . 'ulasan anda telah diupdate'
+                    . '</div>'
+                    . '</div>';
+
+            } else {
+                $this->Database->create_data('ratings_table',
+
+                    array(
+                        'email' => $email,
+                        'id_item' => $id_item,
+                        'color' => $color,
+                        'rating' => $rating,
+                        'review' => $review,
+                        'review_date' => $review_date,
+                    ));
+
+                $msg = '<div class="col-md-7">'
+                    . '<div class="alert alert-info alert-dismissable">'
+                    . 'ulasan anda telah dicatat'
+                    . '</div>'
+                    . '</div>';
+
+            }
+
+            $this->session->set_flashdata('msg', $msg);
+            redirect('Common/page_single_product/' . $id_item . '/' . $color);
+
+        } else {
+            redirect('Common/page_select/home');
+        }
     }
 
     // =====================

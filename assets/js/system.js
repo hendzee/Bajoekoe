@@ -80,5 +80,12 @@ $(document).ready(function(){
             readonly: true
         });
     });         
+
+    $('#rating-star-review').barrating({
+        theme: 'fontawesome-stars',        
+        onSelect: function(value, text, event) {
+          $("#rating-star-review").val(value);
+        }
+    });   
    
 })
