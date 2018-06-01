@@ -58,5 +58,18 @@ $(document).ready(function(){
             alert("Password tidak sama dengan konfirmasi password");
         }        
     });
+
+    $('.logotypes').flexslider({        
+        animation: "slide",
+        animationLoop: true,
+        directionNav: true,
+        controlNav: false,
+        itemWidth: 210,
+        itemMargin: 0,
+        minItems: 2,
+        maxItems: 4
+    });
+
+    $('.flex-next').removeClass('flex-disabled')
    
 })

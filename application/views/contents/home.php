@@ -157,6 +157,11 @@
   <h2 class="strong-header">
     Produk Baru
   </h2>
+  <!-- SHOP NOW -->
+  <div class="shop-now">
+    <a href="<?=base_url()?>index.php/Common/page_select/product_list" class="btn btn-small btn-primary">Mulai berbelanja</a>
+  </div>
+  <!-- END SHOP NOW -->
 </div>
 <div class="col-md-12">
 <div class="flexslider flexslider-nopager row">
@@ -234,14 +239,23 @@
     <div class="section-header col-xs-12">      
       <h2 class="strong-header">
         Featured brands
-      </h2>
+      </h2>     
+      <!-- SHOP NOW -->
+      <div class="shop-now">
+        <a href="<?=base_url()?>index.php/Common/page_select/product_list" class="btn btn-small btn-primary">Mulai berbelanja</a>
+      </div>
+      <!-- END SHOP NOW -->
     </div>
-    <div class="col-md-12 text-center logotypes">
-      <img src="<?=base_url()?>assets/images/common_image/brand-07.png" alt=" ">
-      <img src="<?=base_url()?>assets/images/common_image/brand-03.png" alt=" ">
-      <img src="<?=base_url()?>assets/images/common_image/brand-02.png" alt=" ">
-      <img src="<?=base_url()?>assets/images/common_image/brand-06.png" alt=" ">
-      <img src="<?=base_url()?>assets/images/common_image/brand-04.png" alt=" ">      
+    <div class="col-md-12 text-center">      
+      <div class="logotypes">
+        <ul class="slides">
+            <li><img src="<?=base_url()?>assets/images/common_image/brand-07.png" alt=" "></li>
+            <li><img src="<?=base_url()?>assets/images/common_image/brand-03.png" alt=" "></li>
+            <li><img src="<?=base_url()?>assets/images/common_image/brand-02.png" alt=" "></li>
+            <li><img src="<?=base_url()?>assets/images/common_image/brand-06.png" alt=" "></li>
+            <li><img src="<?=base_url()?>assets/images/common_image/brand-04.png" alt=" "></li>
+        </ul>
+      </div>
     </div>
   </section>
 
