@@ -100,6 +100,10 @@ class Common extends CI_Controller
                 $page = 'payment';
                 break;
 
+            case 'order_check':
+                $page = 'order_check';
+                break;
+
             case 'account_dashboard':
                 if ($this->session->userdata('logged_in') == true) {
                     $member_id = $this->session->userdata('member_id');
@@ -702,6 +706,53 @@ class Common extends CI_Controller
         redirect('Common/page_select/payment');
     }
 
+    public function order_check()
+    {
+        $id_order = $this->input->post('id-order');
+        $email = $this->input->post('email');
+        $data = array();
+        $flashdata = '';
+
+        $query = "SELECT * FROM order_list WHERE id_order = '$id_order'
+            AND email_buyer = '$email'";
+
+        $data = $this->Database->all_query($query);
+
+        if (count($data) < 1) {
+            $msg = '<div class="col-md-7">'
+                . '<div class="alert alert-warning alert-dismissable">'
+                . 'Order ID tidak terdaftar dalam pesanan kami.'
+                . '</div>'
+                . '</div>';
+
+        } else {
+            $status = '';
+            $msg_status = '';
+
+            foreach ($data as $val) {
+                $status = $val['order_status'];
+            }
+
+            if ($status == 'CANCELED') {
+                $msg_status = 'Pesanan anda dibatalkan, silahkan hubungi kami untuk lebih jelasnya.';
+            } elseif ($status == 'PAID OFF') {
+                $msg_status = 'Pesanan anda dalam proses pemaketan.';
+            } elseif ($status == 'SHIPPED') {
+                $msg_status = 'Pesanan anda sudah kami kirim, terimakasih.';
+            }
+
+            $msg = '<div class="col-md-7">'
+                . '<div class="alert alert-info alert-dismissable">'
+                . $msg_status
+                . '</div>'
+                . '</div>';
+        }
+
+        $this->session->set_flashdata('msg', $msg);
+        redirect('Common/page_select/order_check');
+
+    }
+
     // =======================================
     // login
     // =======================================
@@ -877,7 +928,7 @@ class Common extends CI_Controller
 
         $nav_brand = $this->Database->get_data('brand_table');
         $nav_category = $this->Database->get_data('categories_table');
-        $query = "SELECT *, order_item.price * number_item AS subtotal FROM items_table INNER JOIN 
+        $query = "SELECT *, order_item.price * number_item AS subtotal FROM items_table INNER JOIN
             order_item using(id_item) WHERE id_order = '$id_order'";
         $data = $this->Database->all_query($query);
 

@@ -7,7 +7,7 @@
 <section class="col-md-12" id="TopBar"> 
   <div class="top-info pull-left">
     <a href="<?=base_url()?>index.php/Common/page_select/payment"><i class="fa fa-angle-right"></i> Pembayaran</a>    
-    <a href="<?=base_url()?>index.php/Common/page_select/payment"><i class="fa fa-angle-right"></i> Cek Pesananku</a>
+    <a href="<?=base_url()?>index.php/Common/page_select/order_check"><i class="fa fa-angle-right"></i> Cek Pesananku</a>
     <a href="<?=base_url()?>index.php/Common/page_select/payment"><i class="fa fa-angle-right"></i> Bantuan</a>
   </div>  
   <!-- SHOPPING CART -->  
