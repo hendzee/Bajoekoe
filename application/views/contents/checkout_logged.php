@@ -4,7 +4,7 @@
         <!-- SECTION EMPHASIS 1 -->
         <!-- FULL WIDTH -->
     </div>
-    <!-- !container -->    
+    <!-- !container -->
     <!-- !full-width -->
     <div class="container">
         <!-- !FULL WIDTH -->
@@ -18,8 +18,8 @@
                         Pesanan Saya
                     </h3>
                     <a href="<?=base_url()?>index.php/Common/page_select/shoping_cart" class="pull-right">
-            <i class="fa fa-shopping-cart"></i> Ubah Pesanan
-          </a>
+                        <i class="fa fa-shopping-cart"></i> Ubah Pesanan
+                    </a>
                     <div class="clearfix"></div>
                     <?foreach ($this->cart->contents() as $items):?>
                         <!-- SHOP SUMMARY ITEM -->
@@ -35,16 +35,16 @@
                                 <span class="quantity"><?=$items['qty']?></span><b>&times;</b><span class="price">Rp.<?=$items['price']?></span>
                             </header>
                         </article>
-                        <?endforeach?>
-                        <!-- !SHOP SUMMARY ITEM -->
-                        <dl class="order-summary-price">
-                            <dt>Subtotal</dt>
-                            <dd><strong>Rp.<?=$this->cart->total()?></strong></dd>
-                            <dt>Shipping</dt>
-                            <dd>$20.00</dd>
-                            <dt class="total-price">Order total</dt>
-                            <dd class="total-price"><strong>$109.00</strong></dd>
-                        </dl>
+                     <?endforeach?>
+                    <!-- !SHOP SUMMARY ITEM -->
+                    <dl class="order-summary-price">
+                        <dt>Subtotal</dt>
+                        <dd><strong>Rp.<?=$this->cart->total()?></strong></dd>
+                        <dt>Shipping</dt>
+                        <dd>-</dd>
+                        <dt class="total-price">Order total</dt>
+                        <dd class="total-price"><strong>Rp.<?=$this->cart->total()?></strong></dd>
+                    </dl>
                 </section>
             </div>
             <div class="clearfix visible-xs space-30"></div>
@@ -79,7 +79,7 @@
                         <p>
                             email:
                             <?=$val['email']?><br/> telepon:
-                            <?=$val['phone']?><br/>
+                                <?=$val['phone']?><br/>
                         </p>
                     <?endforeach?>
                 </section>
@@ -101,9 +101,9 @@
                             <input type="hidden" id="city" name="city" value="<?=$val['city']?>">
                             <input type="hidden" id="region" name="province" value="<?=$val['province']?>">
                             <input type="hidden" id="zip-code" name="zip-code" value="<?=$val['zip_code']?>">
-                        <?endforeach?>
-                        <button type="submit" class="btn btn-primary pull-right">Selesai</button>
-                        <div class="clearfix"></div>
+                            <?endforeach?>
+                            <button type="submit" class="btn btn-primary pull-right">Selesai</button>
+                            <div class="clearfix"></div>
                     </form>
                 </section>
             </div>
