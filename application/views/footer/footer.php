@@ -11,7 +11,11 @@
 
         <div class="link-widget">
           <ul class="list-unstyled">
-            <li><a href="13-pages-about.html">Tentang Kami</a></li>
+            <li>
+              <a href="<?=base_url()?>index.php/Common/page_select/about">
+                Tentang Kami
+              </a>
+            </li>
             <li><a href="#">Jobs</a></li>
             <li><a href="#">Affiliates</a></li>
             <li><a href="16-pages-contact.html">Kontak</a></li>
@@ -53,11 +57,12 @@
 
         <div class="social-widget">
           <ul class="list-inline">
-            <li><a href="#" class="fb"><span class="sr-only">Facebook</span></a></li>
-            <li><a href="#" class="tw"><span class="sr-only">Twitter</span></a></li>
-            <li><a href="#" class="gp"><span class="sr-only">Google+</span></a></li>
-            <li><a href="#" class="pt"><span class="sr-only">Pinterest</span></a></li>
-            <li><a href="#" class="in"><span class="sr-only">LinkedIn</span></a></li>
+            <?foreach($social_media as $val):?>
+              <li><a href="<?=$val['facebook']?>" target="_blank" class="fb"><span class="sr-only">Facebook</span></a></li>
+              <li><a href="<?=$val['twitter']?>" target="_blank" class="tw"><span class="sr-only">Twitter</span></a></li>
+              <li><a href="<?=$val['instagram']?>" target="_blank" class="in"><span class="sr-only">Instagram</span></a></li>
+              <li><a href="<?=$val['youtube']?>" target="_blank" class="yt"><span class="sr-only">Youtube</span></a></li>            
+            <?endforeach?>
           </ul>
         </div>
       </div>

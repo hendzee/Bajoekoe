@@ -18,10 +18,12 @@ class Common extends CI_Controller
         $data = array();
         $nav_brand = array();
         $nav_category = array();
+        $social_media = array();
         $active_nav = 'product';
 
         $nav_brand = $this->Database->get_data('brand_table');
         $nav_category = $this->Database->get_data('categories_table');
+        $social_media = $this->Database->get_data('shop_info');
 
         switch ($page) {
             case 'home':
@@ -165,6 +167,11 @@ class Common extends CI_Controller
                 }
                 break;
 
+            case 'about':
+                $page = 'about';
+                $data = $this->Database->get_data('shop_info');
+                break;
+
             default:
                 $page = 'NOT_FOUND';
                 break;
@@ -175,7 +182,7 @@ class Common extends CI_Controller
             'nav_category' => $nav_category,
             'active_nav' => $active_nav));
         $this->load->view('contents/' . $page, array('data_content' => $data));
-        $this->load->view('footer/footer');
+        $this->load->view('footer/footer', array('social_media' => $social_media));
         $this->load->view('footer/footer_script');
     }
 
@@ -188,11 +195,13 @@ class Common extends CI_Controller
         $data = array();
         $nav_brand = array();
         $nav_category = array();
+        $social_media = array();
         $active_nav = 'product';
         $query = "";
-
+        
         $nav_brand = $this->Database->get_data('brand_table');
         $nav_category = $this->Database->get_data('categories_table');
+        $social_media = $this->Database->get_data('shop_info');
 
         switch ($param) {
             case 'gender':
@@ -234,7 +243,7 @@ class Common extends CI_Controller
             'nav_category' => $nav_category,
             'active_nav' => $active_nav));
         $this->load->view('contents/product_list', array('data_content' => $data));
-        $this->load->view('footer/footer');
+        $this->load->view('footer/footer', array('social_media' => $social_media));
         $this->load->view('footer/footer_script');
     }
 
@@ -247,12 +256,14 @@ class Common extends CI_Controller
         $data = array();
         $nav_brand = array();
         $nav_category = array();
+        $social_media = array();
         $active_nav = 'product';
         $query = "";
         $value = $this->input->post('value');
-
+        
         $nav_brand = $this->Database->get_data('brand_table');
         $nav_category = $this->Database->get_data('categories_table');
+        $social_media = $this->Database->get_data('shop_info');
 
         $query = "SELECT * FROM items_table INNER JOIN image_item using (id_item) WHERE items_table.name LIKE '%$value%' OR brand LIKE '%$value%'";
         $data['data_items'] = $this->Database->all_query($query);
@@ -266,7 +277,7 @@ class Common extends CI_Controller
             'nav_category' => $nav_category,
             'active_nav' => $active_nav));
         $this->load->view('contents/product_list', array('data_content' => $data));
-        $this->load->view('footer/footer');
+        $this->load->view('footer/footer', array('social_media' => $social_media));
         $this->load->view('footer/footer_script');
     }
 
@@ -280,12 +291,14 @@ class Common extends CI_Controller
         $data_size = array();
         $nav_brand = array();
         $data_comment = array();
+        $social_media = array();
         $active_nav = 'product';
         $nav_category = array();
         $first_color = $color;
-
+        
         $nav_brand = $this->Database->get_data('brand_table');
         $nav_category = $this->Database->get_data('categories_table');
+        $social_media = $this->Database->get_data('shop_info');
 
         $query = "SELECT * FROM items_table INNER JOIN image_item using (id_item) WHERE id_item = '$id_item' AND color='$color'";
         $data = $this->Database->all_query($query);
@@ -299,7 +312,6 @@ class Common extends CI_Controller
         $query = "SELECT * FROM customer_member INNER JOIN ratings_table WHERE id_item = '$id_item' AND color = '$color'";
         $data_comment = $this->Database->all_query($query);
 
-
         $this->load->view('header/header_script');
         $this->load->view('header/header', array(
             'nav_brand' => $nav_brand,
@@ -311,7 +323,7 @@ class Common extends CI_Controller
             'data_color' => $data_color,
             'data_size' => $data_size,
             'data_comment' => $data_comment));
-        $this->load->view('footer/footer');
+        $this->load->view('footer/footer', array('social_media' => $social_media));
         $this->load->view('footer/footer_script');
     }
 
@@ -550,6 +562,7 @@ class Common extends CI_Controller
         $data_content = array();
         $nav_brand = array();
         $nav_category = array();
+        $social_media = array();
         $active_nav = 'product';
         $page = $this->input->post('page');
         $first_name = $this->input->post('first-name');
@@ -562,9 +575,10 @@ class Common extends CI_Controller
         $address = $this->input->post('address');
         $zip_code = $this->input->post('zip-code');
         $ship_info = $country . ', ' . $city . ', ' . $province . ', ' . $address . ', ' . $zip_code;
-
+        
         $nav_brand = $this->Database->get_data('brand_table');
         $nav_category = $this->Database->get_data('categories_table');
+        $social_media = $this->Database->get_data('shop_info');
 
         $data_content = array(
             'dt_first_name' => $first_name,
@@ -585,7 +599,7 @@ class Common extends CI_Controller
             'nav_category' => $nav_category,
             'active_nav' => $active_nav));
         $this->load->view('contents/' . $page, $data_content);
-        $this->load->view('footer/footer');
+        $this->load->view('footer/footer', array('social_media' => $social_media));
         $this->load->view('footer/footer_script');
     }
 
@@ -679,10 +693,12 @@ class Common extends CI_Controller
         $data = array();
         $nav_brand = array();
         $nav_category = array();
+        $social_media = array();
         $active_nav = 'product';
-
+        
         $nav_brand = $this->Database->get_data('brand_table');
         $nav_category = $this->Database->get_data('categories_table');
+        $social_media = $this->Database->get_data('shop_info');
 
         if ($this->cart->total_items() < 1) {
             redirect('Common/page_select/empty_cart');
@@ -698,7 +714,7 @@ class Common extends CI_Controller
                 'data_id' => $id_order,
                 'data_date' => $date_order,
                 'data_payment' => $total_payment));
-            $this->load->view('footer/footer');
+            $this->load->view('footer/footer', array('social_media' => $social_media));
             $this->load->view('footer/footer_script');
         }
     }
@@ -990,6 +1006,10 @@ class Common extends CI_Controller
         redirect('Common/page_select/account_profile');
 
     }
+
+    // =============================
+    // Detail order on user history
+    // =============================
 
     public function page_detail_order($id_order)
     {

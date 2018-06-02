@@ -1581,16 +1581,12 @@ input[type="submit"].update-cart {
     content: "\f099";
 }
 
-.social-widget ul li a.gp:before {
-    content: "\f0d4";
-}
-
-.social-widget ul li a.pt:before {
-    content: "\f0d2";
-}
-
 .social-widget ul li a.in:before {
-    content: "\f0e1";
+    content: "\f16d";
+}
+
+.social-widget ul li a.yt:before {
+    content: "\f16a";
 }
 
 .social-widget a {
@@ -6379,7 +6375,7 @@ span.price-content {
     text-transform: uppercase;
 }
 
-/*=====================================*/
+/*=============================*/
 /* ========= RATTING ======== */
 
 .raty-label .br-theme-fontawesome-stars .br-widget {
@@ -6388,4 +6384,10 @@ span.price-content {
 
 .checkout-step-3 p{
     color: #fff
+}
+
+/*==============================*/
+/* ========= ABOUT US ======== */
+.team img {
+    max-width: 916px;
 }
