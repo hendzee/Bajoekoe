@@ -274,11 +274,13 @@
     <div class="col-md-12 text-center">      
       <div class="logotypes">
         <ul class="slides">
-            <li><img src="<?=base_url()?>assets/images/common_image/brand-07.png" alt=" "></li>
-            <li><img src="<?=base_url()?>assets/images/common_image/brand-03.png" alt=" "></li>
-            <li><img src="<?=base_url()?>assets/images/common_image/brand-02.png" alt=" "></li>
-            <li><img src="<?=base_url()?>assets/images/common_image/brand-06.png" alt=" "></li>
-            <li><img src="<?=base_url()?>assets/images/common_image/brand-04.png" alt=" "></li>
+            <?foreach($data_content['show_brand'] as $val):?>
+            <li>
+              <a href="<?=base_url()?>index.php/Common/product_list_param/brand/<?=$val['brand']?>">
+                <img src="<?=base_url()?>assets/images/common_image/<?=$val['logo']?>" alt=" ">
+              </a>
+            </li>
+            <?endforeach?>            
         </ul>
       </div>
     </div>

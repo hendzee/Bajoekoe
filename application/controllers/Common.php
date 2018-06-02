@@ -44,6 +44,8 @@ class Common extends CI_Controller
                 $query = "SELECT * FROM shop_slider WHERE id_slider = '002'";
                 $data['shop_slider_2'] = $this->Database->all_query($query);
 
+                $data['show_brand'] = $this->Database->get_data('brand_table');
+
                 break;
 
             case 'product_list':
