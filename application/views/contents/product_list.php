@@ -169,9 +169,9 @@
 <!-- ISOTOPE GALLERY -->
 <div id="isotopeContainer" class="shop-product-list isotope">
 
-<? foreach($data_content['data_items'] as $val): ?>
-  <!-- SEARCH RATING -->
+<? foreach($data_content['data_items'] as $val): ?>  
   <?
+    /*=============RATING VALUE==============*/
     $data_rating = array();
     $r_id_item = $val['id_item'];
     $r_color = $val['color'];
@@ -186,11 +186,11 @@
         $rating_val = $rat_item['avg_rating'];
       }
     }
-  ?>   
-  <!-- END -->
-  
-  <!-- ISOTOPE VALUE -->
+    /*=============RATING VALUE END==============*/
+  ?>     
+    
   <?
+    /*=============ISOTOPE VALUE==============*/
     $id = $val['id_item'];
     $color = $val['color'];    
     $size_arr = '';
@@ -205,11 +205,29 @@
     }
 
     $data_isotope = $val['color'].' '.$size_arr.$val['category'];
+    /*=============ISOTOPE VALUE END==============*/
+
   ?>
-  <div 
+
+  <?
+    $id_itm = $val['id_item'];
+    $bseler_data = array();
+    $bseler_query = "SELECT COUNT(number_item) AS data_popular FROM order_list 
+      INNER JOIN order_item using(id_order) WHERE id_item = '$id_itm' AND
+      order_status = 'SHIPPED'";
+    $bseler_data = $this->Database->all_query($bseler_query);
+    $data_popular = 0;
+
+    foreach($bseler_data as $item_popular) {
+      $data_popular = $item_popular['data_popular'];
+    }
+  ?>
+
+  <!-- ISOTOPE VALUE -->
+  <div     
     class="isotope-item color3 <?=$data_isotope?>" 
     data-date="<?=date('F j, Y', strtotime($val['publish_date']))?>" 
-    data-popular="5.0" 
+    data-popular="<?=$data_popular?>.0" 
     data-rating="<?=$rating_val?>.0"
     >
     <?
