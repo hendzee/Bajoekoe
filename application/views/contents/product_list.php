@@ -206,7 +206,12 @@
 
     $data_isotope = $val['color'].' '.$size_arr.$val['category'];
   ?>
-  <div class="isotope-item color3 <?=$data_isotope?>" data-date="<?=date('F j, Y', strtotime($val['publish_date']))?>" data-popular="5.0" data-rating="<?=$rating_val?>.0">
+  <div 
+    class="isotope-item color3 <?=$data_isotope?>" 
+    data-date="<?=date('F j, Y', strtotime($val['publish_date']))?>" 
+    data-popular="5.0" 
+    data-rating="<?=$rating_val?>.0"
+    >
     <?
       $get_stock = array();
       $count_stock = 0;
@@ -262,7 +267,10 @@
         <a href="<?=base_url()?>index.php/Common/page_single_product/<?=$val['id_item']?>/<?=$val['color']?>"><img src="<?=base_url()?>assets/images/item_image/<?=$val['image_one']?>" alt=" "></a>
         <div class="overlay-contents">
             <div class="shop-item-actions">            
-            <a href="<?=base_url()?>index.php/Common/page_single_product/<?=$val['id_item']?>/<?=$val['color']?>" class="btn btn-primary btn-block">
+            <a 
+              href="<?=base_url()?>index.php/Common/page_single_product/<?=$val['id_item']?>/<?=$val['color']?>" 
+              class="btn btn-primary btn-block"
+              >
                 Lihat
             </a>
             </div>
@@ -278,7 +286,11 @@
             <option value="5">5</option>
           </select>
           <!-- END RATING -->
-          <h4><a href="#"><?=$val['name']?></a></h4>
+          <h4>
+            <a href="<?=base_url()?>index.php/Common/page_single_product/<?=$val['id_item']?>/<?=$val['color']?>">
+              <?=$val['name']?>
+            </a>
+          </h4>
           <?if ($val['discount'] > 0 && $val['discount'] != null):?>
             <?
             $dis_price = $val['price'] - ($val['price'] * $val['discount'] / 100);
