@@ -22,6 +22,8 @@
                         <hr>
                         <li><a href="<?=base_url()?>index.php/Common/page_select/account_shiping">Alamat Pengiriman</a></li>
                         <hr>
+                        <li><a href="<?=base_url()?>index.php/Common/page_select/account_wishlist">My Wishlist</a></li>
+                        <hr>
                         <li><a href="<?=base_url()?>index.php/Common/logout">Logout</a></li>                        
                     </ul>
                 </nav>

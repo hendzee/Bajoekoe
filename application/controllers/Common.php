@@ -167,6 +167,23 @@ class Common extends CI_Controller
                 }
                 break;
 
+            case 'account_wishlist':
+                if ($this->session->userdata('logged_in') == true) {
+                    $member_id = $this->session->userdata('member_id');
+
+                    $query = $query = "SELECT wishlist_table.id_item, wishlist_table.color,
+                    brand, items_table.name, price, wishlist_table.color FROM items_table
+                    INNER JOIN wishlist_table using(id_item) INNER JOIN stock_table
+                    using(id_item) WHERE id_customer = '$member_id' AND stock > 0
+                    GROUP BY color, items_table.name";
+                    $data = $this->Database->all_query($query);
+
+                    $page = 'account_wishlist';
+                } else {
+                    $page = 'NOT_FOUND';
+                }
+                break;
+
             case 'about':
                 $page = 'about';
                 $data = $this->Database->get_data('shop_info');
@@ -198,7 +215,7 @@ class Common extends CI_Controller
         $social_media = array();
         $active_nav = 'product';
         $query = "";
-        
+
         $nav_brand = $this->Database->get_data('brand_table');
         $nav_category = $this->Database->get_data('categories_table');
         $social_media = $this->Database->get_data('shop_info');
@@ -260,7 +277,7 @@ class Common extends CI_Controller
         $active_nav = 'product';
         $query = "";
         $value = $this->input->post('value');
-        
+
         $nav_brand = $this->Database->get_data('brand_table');
         $nav_category = $this->Database->get_data('categories_table');
         $social_media = $this->Database->get_data('shop_info');
@@ -295,7 +312,7 @@ class Common extends CI_Controller
         $active_nav = 'product';
         $nav_category = array();
         $first_color = $color;
-        
+
         $nav_brand = $this->Database->get_data('brand_table');
         $nav_category = $this->Database->get_data('categories_table');
         $social_media = $this->Database->get_data('shop_info');
@@ -511,6 +528,56 @@ class Common extends CI_Controller
         echo json_encode($data);
     }
 
+    // =================
+    // add wishlist item
+    // =================
+    public function ajax_wishlist()
+    {
+        $id_customer = $this->session->userdata('member_id');
+        $id_item = $this->input->post('id_item');
+        $color = $this->input->post('color_item');
+        $check_data = array();
+        $response = '';
+
+        $query = "SELECT * FROM wishlist_table WHERE id_customer = '$id_customer' AND
+            id_item = '$id_item' AND color = '$color'";
+
+        $check_data = $this->Database->all_query($query);
+
+        if (COUNT($check_data) > 0) {
+            $response = 'item sudah ada di wishlist anda';
+        } else {
+            $this->Database->create_data('wishlist_table',
+                array(
+                    'id_customer' => $id_customer,
+                    'id_item' => $id_item,
+                    'color' => $color,
+                ));
+            $response = 'item ditambahkan pada wishlist anda';
+        }
+
+        echo json_encode($response);
+
+    }
+
+    // =================
+    // delete wishlist item
+    // =================
+    public function delete_wishlist($id_item, $color)
+    {
+        $id_customer = $this->session->userdata('member_id');                
+
+        $this->Database->delete_data('wishlist_table', array(
+            'id_customer' => $id_customer,
+            'id_item' => $id_item,
+            'color' => $color,
+        ));        
+
+        $this->session->set_flashdata('msg', $msg);
+
+        redirect('Common/page_select/account_wishlist');
+    }
+
     // ============================
     // change quantity item on cart
     // ============================
@@ -575,7 +642,7 @@ class Common extends CI_Controller
         $address = $this->input->post('address');
         $zip_code = $this->input->post('zip-code');
         $ship_info = $country . ', ' . $city . ', ' . $province . ', ' . $address . ', ' . $zip_code;
-        
+
         $nav_brand = $this->Database->get_data('brand_table');
         $nav_category = $this->Database->get_data('categories_table');
         $social_media = $this->Database->get_data('shop_info');
@@ -695,7 +762,7 @@ class Common extends CI_Controller
         $nav_category = array();
         $social_media = array();
         $active_nav = 'product';
-        
+
         $nav_brand = $this->Database->get_data('brand_table');
         $nav_category = $this->Database->get_data('categories_table');
         $social_media = $this->Database->get_data('shop_info');

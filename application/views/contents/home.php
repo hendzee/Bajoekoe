@@ -187,6 +187,7 @@
       <!-- SHOP FEATURED ITEM -->
       <div class="shop-item shop-item-featured overlay-element">
         <div class="overlay-wrapper">
+          <span class="brand-tag"><?=$val['brand']?></span>
           <a href="04-shop-product-single.html">
             <img src="<?=base_url()?>assets/images/item_image/<?=$image_item?>" alt="Shop item">
           </a>

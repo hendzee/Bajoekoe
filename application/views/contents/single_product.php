@@ -182,11 +182,19 @@
     </div>    
   </div>
   <button type="submit" class="btn btn-primary">Ambil</button>
-  <!--
-                            -->
-  <button type="button" class="btn btn-default">Add to wishlist</button>
-  <div class="clearfix"></div>
+  <!-- WISHLIST -->
+  <?if($this->session->userdata('logged_in') == true):?>
+  <button type="button" id="add-wishlist" class="btn btn-default">
+    <?foreach($data_content as $val): ?>
+      <input type="hidden" id="id-item" value="<?=$val['id_item']?>" />
+      <input type="hidden" id="color-item" value="<?=$val['color']?>" />
+    <?endforeach?>
+    <i class="fa fa-heart"></i> Tambahkan ke wishlist
+  </button>
+  <?endif?>
+  <!-- WISHLIST END -->
 </form>
+  <div class="clearfix"></div>
 <div class="shop-product-single-social">
   <span class="social-label pull-left">Share this product</span>
 
@@ -211,20 +219,10 @@
            onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530'); return false;"
            rel="nofollow"
            title="Google+"
-           class="gp">
-          <span class="sr-only">Google+</span>
+           class="in">
+          <span class="sr-only">Instagram</span>
         </a>
-      </li>
-      <li>
-        <a href="https://www.pinterest.com/pin/create/button/?url=http://www.createit.pl/&amp;media=http://www.createit.pl/images/frontend/logo.png&amp;description=CreateIT" onclick="window.open(this.href, 'pinterest-share', 'width=770,height=320'); return false;" rel="nofollow" title="Pinterest" class="pt">
-          <span class="sr-only">Pinterest</span>
-        </a>
-      </li>
-      <li>
-        <a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=http://developer.linkedin.com&amp;title=LinkedIn%20Developer%20Network&amp;summary=My%20favorite%20developer%20program&amp;source=LinkedIn" onclick="window.open(this.href, 'linkedin-share', 'width=600,height=439'); return false;" rel="nofollow" title="LinkedIn" class="in">
-          <span class="sr-only">LinkedIn</span>
-        </a>
-      </li>
+      </li>      
     </ul>
   </div>
 </div>

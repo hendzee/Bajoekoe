@@ -21,6 +21,11 @@ class Database extends CI_Model
         return $get_data->result_array();
     }
 
+    public function delete_data($table, $where)
+    {
+        return $this->db->delete($table, $where);
+    }
+
     public function all_query($query)
     {
         $get_data = $this->db->query($query);

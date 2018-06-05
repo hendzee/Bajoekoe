@@ -911,7 +911,7 @@ input[type="submit"].update-cart {
 }
 
 .shop-item.shop-item-wishlist h4 {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: normal;
     white-space: nowrap;
     min-height: 8px;
@@ -4829,12 +4829,16 @@ label .chosen-container {
 }
 
 .btn-default:hover,
-.btn-default:focus,
 .btn-default:active {
     background: #1a1a1a;
     border-color: #1a1a1a;
     -webkit-box-shadow: none;
     box-shadow: none;
+}
+
+.btn-default:focus {
+    background: #fff;
+    color: 1a1a1a;
 }
 
 .btn-primary {
@@ -6390,4 +6394,15 @@ span.price-content {
 /* ========= ABOUT US ======== */
 .team img {
     max-width: 916px;
+}
+
+/*==============================*/
+/* ========= WISHLIST ======== */
+.shop-item-wishlist img {
+    width: 213px;
+    height: 240px;
+}
+
+.wishlist-item {
+    position: relative;
 }

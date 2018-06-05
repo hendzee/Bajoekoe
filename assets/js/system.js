@@ -59,6 +59,9 @@ $(document).ready(function(){
         }        
     });
 
+    // ===================================
+    // slider brand on homepage
+    // ===================================
     $('.logotypes').flexslider({        
         animation: "slide",
         animationLoop: true,
@@ -72,6 +75,9 @@ $(document).ready(function(){
 
     $('.flex-next').removeClass('flex-disabled');    
 
+    // ===================================
+    // rating-star product
+    // ===================================
     $('.rating-star').each(function(){
         currentRating = $(this).data('current-rating');
         $(this).barrating({
@@ -87,5 +93,25 @@ $(document).ready(function(){
           $("#rating-star-review").val(value);
         }
     });   
-   
+
+    // ===================================
+    // add wishlist item
+    // ===================================
+    $('#add-wishlist').click(function(){
+        let id_item = $('#id-item').val();
+        let color_item = $('#color-item').val();
+        const base_url = window.location.origin;        
+        const method_url = base_url + "/shop/index.php/Common/ajax_wishlist"; 
+
+        $.ajax({
+            url: method_url,
+            type: 'POST',
+            dataType: 'json',
+            data: { id_item: id_item, color_item: color_item },
+
+            success: function(response) {
+                alert(response);
+            }
+        });
+   });
 })
