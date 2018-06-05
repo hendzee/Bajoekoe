@@ -23,6 +23,8 @@
                             <hr>
                             <li class="active"><span>Alamat Pengiriman</span></li>
                             <hr>
+                            <li><a href="<?=base_url()?>index.php/Common/page_select/account_wishlist">My Wishlist</a></li>
+                            <hr>
                             <li><a href="<?=base_url()?>index.php/Common/logout">Logout</a></li>                            
                         </ul>
                     </nav>

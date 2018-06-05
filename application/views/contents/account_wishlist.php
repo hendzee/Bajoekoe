@@ -12,12 +12,17 @@
             <div class="col-sm-3">
                 <nav class="shop-section-navigation element-emphasis-weak">
                     <ul class="list-unstyled">
-                        <li><a href="09-a-shop-account-dashboard.html">Account dashboard</a></li>
-                        <li><a href="09-b-shop-account-information.html">Account information</a></li>
-                        <li><a href="09-c-shop-account-my-orders.html">My orders</a></li>
-                        <li><a href="09-d-shop-account-address-book.html">Address book</a></li>
-                        <li><span>My wishlist</span></li>
-                        <li><a href="index-2.html">Logout</a></li>
+                        <li><a href="<?=base_url()?>index.php/Common/page_select/account_dashboard"><span>Dashboard</span></a></li>
+                        <hr>
+                        <li><a href="<?=base_url()?>index.php/Common/page_select/account_profile">Profil</a></li>
+                        <hr>
+                        <li><a href="<?=base_url()?>index.php/Common/page_select/account_order">Pesananku</a></li>
+                        <hr>
+                        <li><a href="<?=base_url()?>index.php/Common/page_select/account_shiping">Alamat Pengiriman</a></li>
+                        <hr>
+                        <li class="active"><span>My Wishlist</span></li>
+                        <hr>
+                        <li><a href="<?=base_url()?>index.php/Common/logout">Logout</a></li>                        
                     </ul>
                 </nav>
             </div>
