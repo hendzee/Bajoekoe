@@ -98,7 +98,7 @@
           </ul>
         </li>        
         <li class="<?if($active_nav == 'category')echo'active'?> dropdown">
-          <a href="11-a-portfolio-4-columns.html" class="dropdown-toggle" data-toggle="dropdown">Jenis </a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Jenis </a>
           <ul class="dropdown-menu">
             <?foreach($nav_category as $val):?>
               <li>
@@ -126,7 +126,7 @@
           </span>
         </button>
       </form>
-      <div class="navbar-right" id="navbar-login">
+      <div class="navbar-right" id="navbar-login">         
         <?if($this->session->userdata('logged_in') == TRUE):?>
           <a href="<?=base_url()?>index.php/Common/page_select/account_dashboard">
             Halo, <?=$this->session->userdata('member_name')?>
