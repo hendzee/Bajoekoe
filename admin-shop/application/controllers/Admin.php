@@ -19,11 +19,12 @@ class Admin extends CI_Controller
                 $page = 'dashboard';
 
                 $query = "SELECT *, SUM(price * number_item) AS total_pay FROM order_list INNER JOIN
-                    order_item USING(id_order) GROUP BY order_item.id_order ORDER BY order_date DESC LIMIT 0, 7";
+                    order_item USING(id_order) GROUP BY order_item.id_order ORDER BY order_date DESC LIMIT 0, 8";
                 $data['latest_order'] = $this->Database->all_query($query);
 
-                $query = "SELECT * FROM items_table INNER JOIN stock_table using(id_item) INNER JOIN image_item
-					using(id_item) GROUP BY image_item.image_one ORDER BY add_date DESC LIMIT 0, 4";
+                $query = "SELECT items_table.name, items_table.id_item, price, discount, items_table.description, 
+                    stock_table.color, stock_table.size, stock FROM items_table INNER JOIN stock_table 
+                    using(id_item) ORDER BY add_date DESC LIMIT 0, 4 ";
                 $data['recent_stock'] = $this->Database->all_query($query);
 
                 $data['num_member'] = count($this->Database->get_data('customer_member'));

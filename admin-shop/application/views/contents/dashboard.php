@@ -242,8 +242,18 @@
                   </thead>
                   <tbody>
                   <?foreach($data_content['latest_order'] as $val):?>
-                  <tr>
-                    <td><a href="pages/examples/invoice.html"><?=$val['id_order']?></a></td>
+                  <tr>                  
+                    <td>
+                      <?if($val['order_status'] == 'CANCELED'):?>
+                      <a href="<?=base_url()?>index.php/Admin/readonly_invoice/<?=$val['id_order']?>">
+                        <?=$val['id_order']?>
+                      </a>
+                      <?else:?>
+                      <a href="<?=base_url()?>index.php/Admin/page_invoice/<?=$val['id_order']?>">
+                        <?=$val['id_order']?>
+                      </a>
+                      <?endif?>
+                    </td>
                     <td><?=date('F j, H:i:s', strtotime($val['order_date']))?></td>
                     <td><?=$val['total_pay']?></td>
                     <td><span class="label label-success"><?=$val['order_status']?></span></td>
@@ -255,9 +265,8 @@
               <!-- /.table-responsive -->
             </div>
             <!-- /.box-body -->
-            <div class="box-footer clearfix">
-              <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-left">Place New Order</a>
-              <a href="javascript:void(0)" class="btn btn-sm btn-default btn-flat pull-right">View All Orders</a>
+            <div class="box-footer clearfix">              
+              <a href="<?=base_url()?>index.php/Admin/page_select/table_order" class="btn btn-sm btn-default btn-flat pull-right">View All Orders</a>
             </div>
             <!-- /.box-footer -->
           </div>
@@ -281,9 +290,23 @@
             <div class="box-body">
               <ul class="products-list product-list-in-box">
                 <?foreach($data_content['recent_stock'] as $val):?>
+                <?
+                  //get image
+                  $img_data = array();
+                  $id = $val['id_item'];
+                  $clr = $val['color'];
+                  
+                  $query = "SELECT image_one FROM image_item WHERE id_item = '$id' AND color = '$clr'";
+                  $img_data = $this->Database->all_query($query);
+                  $img = '';
+
+                  foreach($img_data as $item){
+                    $img = $item['image_one'];
+                  }
+                ?>
                 <li class="item">
                   <div class="product-img">
-                    <img src="<?=base_url()?>../assets/images/item_image/<?=$val['image_one']?>" alt="Product Image">
+                    <img src="<?=base_url()?>../assets/images/item_image/<?=$img?>" alt="Product Image">
                   </div>
                   <div class="product-info">
                     <a href="javascript:void(0)" class="product-title"><?=$val['name']?>
@@ -291,12 +314,12 @@
                             <?if($val['discount'] <= 0):?>
                                 Rp.<?=$val['price']?>
                             <?else:?>
-                                Rp.<?=($val['price'] * $val['discount'] / 100)?>
+                                Rp.<?=($val['price'] - ($val['price'] * $val['discount'] / 100))?>
                             <?endif?>
                         </span>
                     </a>
                     <span class="product-description">
-                        <?=$val['description']?>
+                        <?=$val['color'] . ', ' . $val['size']?>
                     </span>
                     <span>stock: <?=$val['stock']?></span>
                   </div>
@@ -307,7 +330,7 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer text-center">
-              <a href="javascript:void(0)" class="uppercase">View All Products</a>
+              <a href="<?=base_url()?>index.php/Admin/page_select/table_stock" class="uppercase">View All Products</a>
             </div>
             <!-- /.box-footer -->
           </div>
