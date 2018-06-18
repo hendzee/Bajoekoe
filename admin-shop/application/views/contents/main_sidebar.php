@@ -97,6 +97,11 @@
             <a href="<?=base_url()?>index.php/Admin/page_select/shop_slider">
             <i class="fa fa-clone"></i> <span>Slider</span>            
             </a>            
+        </li>
+        <li class="">
+            <a href="<?=base_url()?>index.php/Admin/page_select/shop_info">
+            <i class="fa fa-pencil"></i> <span>Info</span>            
+            </a>            
         </li>                
         </ul>
     </section>

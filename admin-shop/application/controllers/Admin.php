@@ -22,8 +22,8 @@ class Admin extends CI_Controller
                     order_item USING(id_order) GROUP BY order_item.id_order ORDER BY order_date DESC LIMIT 0, 8";
                 $data['latest_order'] = $this->Database->all_query($query);
 
-                $query = "SELECT items_table.name, items_table.id_item, price, discount, items_table.description, 
-                    stock_table.color, stock_table.size, stock FROM items_table INNER JOIN stock_table 
+                $query = "SELECT items_table.name, items_table.id_item, price, discount, items_table.description,
+                    stock_table.color, stock_table.size, stock FROM items_table INNER JOIN stock_table
                     using(id_item) ORDER BY add_date DESC LIMIT 0, 4 ";
                 $data['recent_stock'] = $this->Database->all_query($query);
 
@@ -104,6 +104,10 @@ class Admin extends CI_Controller
 
             case 'shop_slider';
                 $page = 'shop_slider';
+                break;
+
+            case 'shop_info':
+                $page = 'shop_info';
                 break;
 
             default:
@@ -838,7 +842,7 @@ class Admin extends CI_Controller
                 }
 
                 $image_data = $this->upload->data();
-                $this->Database->update_data('shop_slider', array(                   
+                $this->Database->update_data('shop_slider', array(
                     'image' => $image_data['file_name'],
                 ),
                     array(
@@ -857,5 +861,36 @@ class Admin extends CI_Controller
         $this->session->set_flashdata('msg', $flashdata);
         redirect('Admin/page_select/shop_slider');
 
+    }
+
+    public function update_info()
+    {
+        $description = $this->input->post('description');
+        $video = $this->input->post('video');
+        $facebook = $this->input->post('fb-link');
+        $twitter = $this->input->post('tw-link');
+        $youtube = $this->input->post('yt-link');
+        $instagram = $this->input->post('ig-link');
+        $flashdata = '';
+
+        $this->Database->update_data('shop_info', array(
+            'description' => $description,
+            'video_about' => $video,
+            'facebook' => $facebook,
+            'twitter' => $twitter,
+            'youtube' => $youtube,
+            'instagram' => $instagram,
+        ), array(
+            'id_sinfo' => '001',
+        ));
+
+        $flashdata = '
+            <div class="callout callout-info">
+            <h4>sukses!</h4>
+            Data berhasil diupdate.
+            </div>';
+
+        $this->session->set_flashdata('msg', $flashdata);
+        redirect('Admin/page_select/shop_info');
     }
 }
